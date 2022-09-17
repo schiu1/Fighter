@@ -218,6 +218,8 @@ GameObject:
   - component: {fileID: 1293614173}
   - component: {fileID: 1293614177}
   - component: {fileID: 1293614178}
+  - component: {fileID: 1293614179}
+  - component: {fileID: 1293614180}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -338,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1d168627e5ea947a8e51d1e15367a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJumping: 0
   canMove: 1
 --- !u!61 &1293614178
 BoxCollider2D:
@@ -365,6 +368,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1442157, y: 0.0823791}
   m_EdgeRadius: 0
+--- !u!95 &1293614179
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293614172}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f080622a92c207f49a5f79ac91908244, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1293614180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293614172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097b551f2844b054290f18a39bf892e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Solvers: []
+  m_Weight: 1
+  m_SolverEditorData: []
 --- !u!1 &1632212455
 GameObject:
   m_ObjectHideFlags: 0
