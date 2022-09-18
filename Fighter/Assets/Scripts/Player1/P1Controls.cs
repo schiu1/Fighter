@@ -23,8 +23,8 @@ public class P1Controls : MonoBehaviour
     {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
-        speed = 5f;
-        maxSpeed = 5f;
+        speed = 3f;
+        maxSpeed = 4f;
         jumpForce = 20f;
         isJumping = false;
         facingRight = true;
