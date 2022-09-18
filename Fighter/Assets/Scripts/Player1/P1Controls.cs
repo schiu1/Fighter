@@ -9,12 +9,14 @@ public class P1Controls : MonoBehaviour
 
     float speed;
     float maxSpeed;
-    float jumpForce;
-    public bool isJumping;
     float moveHorizontal;
     float moveVertical;
-    bool facingRight;
 
+    float jumpForce;
+    float fallMultiplier;
+    public bool isJumping;
+
+    bool facingRight;
     [HideInInspector]
     public bool canMove = true; // temp set to true until i implement GameManager
 
@@ -26,6 +28,7 @@ public class P1Controls : MonoBehaviour
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
+        fallMultiplier = 7f;
         isJumping = false;
         facingRight = true;
     }
@@ -49,6 +52,8 @@ public class P1Controls : MonoBehaviour
                 Flip();
             }
 
+            
+
             //dash
 
             //crouch  
@@ -65,6 +70,11 @@ public class P1Controls : MonoBehaviour
         if (moveVertical > 0.1f && !isJumping)
         {
             rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
+        }
+        //falling helper
+        if (rb2D.velocity.y < 0)
+        {
+            rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
