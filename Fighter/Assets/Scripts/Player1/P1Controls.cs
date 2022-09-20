@@ -16,6 +16,12 @@ public class P1Controls : MonoBehaviour
     float fallMultiplier;
     public bool isJumping;
 
+    float firstPress;
+    bool dash;
+    float dashForce;
+    float dashCooldown;
+    float direction;
+
     bool facingRight;
     [HideInInspector]
     public bool canMove = true; // temp set to true until i implement GameManager
@@ -28,9 +34,17 @@ public class P1Controls : MonoBehaviour
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
+
         fallMultiplier = 7f;
         isJumping = false;
+
         facingRight = true;
+
+        firstPress = 0f;
+        dash = false;
+        dashForce = 30f;
+        dashCooldown = 0f;
+        direction = 0f;
     }
 
     // Update is called once per frame
@@ -38,6 +52,9 @@ public class P1Controls : MonoBehaviour
     {
         if (canMove)
         {
+            
+
+
             //wrap these two around if notjumping
             moveHorizontal = Input.GetAxisRaw("P1_Horizontal");
             moveVertical = Input.GetAxisRaw("P1_Vertical");
@@ -52,10 +69,23 @@ public class P1Controls : MonoBehaviour
                 Flip();
             }
 
-            
-
             //dash
-
+            if(Time.time > firstPress + 0.5f)
+            {
+                firstPress = 0f;
+                direction = 0f;
+            }
+            if(firstPress == 0f && Input.GetButtonDown("P1_Horizontal"))
+            {
+                firstPress = Time.time;
+                direction = moveHorizontal;
+            }
+            else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Horizontal"))
+            {
+                dash = true;
+                firstPress = 0f;
+                direction = 0f;
+            }
             //crouch  
         }
     }
@@ -67,8 +97,17 @@ public class P1Controls : MonoBehaviour
             rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
         }
 
+        if(dash == true)
+        {
+            dash = false;
+            //dash anim
+            rb2D.AddForce(new Vector2(moveHorizontal * dashForce, 0f), ForceMode2D.Impulse);
+            Debug.Log("dash");
+        }
+
         if (moveVertical > 0.1f && !isJumping)
         {
+            //jump anim
             rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
         }
         //falling helper
@@ -76,6 +115,8 @@ public class P1Controls : MonoBehaviour
         {
             rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+
+        
     }
 
     void Flip()
