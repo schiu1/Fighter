@@ -70,7 +70,7 @@ public class P1Controls : MonoBehaviour
             }
 
             //dash
-            if(Time.time > firstPress + 0.5f)
+            if(Time.time > firstPress + 0.5f || direction == -moveHorizontal)
             {
                 firstPress = 0f;
                 direction = 0f;
