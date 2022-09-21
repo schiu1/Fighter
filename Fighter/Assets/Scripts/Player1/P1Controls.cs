@@ -100,14 +100,14 @@ public class P1Controls : MonoBehaviour
         if(dash == true)
         {
             dash = false;
-            //dash anim
+            animator.SetTrigger("Dash");
             rb2D.AddForce(new Vector2(moveHorizontal * dashForce, 0f), ForceMode2D.Impulse);
             Debug.Log("dash");
         }
 
         if (moveVertical > 0.1f && !isJumping)
         {
-            //jump anim
+            animator.SetTrigger("Jump");
             rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
         }
         //falling helper
@@ -132,6 +132,7 @@ public class P1Controls : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             isJumping = false;
+            animator.SetBool("InAir", false);
         }
     }
 
@@ -140,6 +141,7 @@ public class P1Controls : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isJumping = true;
+            animator.SetBool("InAir", true);
         }
     }
 }
