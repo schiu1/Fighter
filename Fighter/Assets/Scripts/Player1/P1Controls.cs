@@ -6,6 +6,7 @@ public class P1Controls : MonoBehaviour
 {
     Rigidbody2D rb2D;
     Animator animator;
+    CapsuleCollider2D capCollider;
 
     float speed;
     float maxSpeed;
@@ -19,18 +20,20 @@ public class P1Controls : MonoBehaviour
     float firstPress;
     bool dash;
     float dashForce;
-    float dashCooldown;
     float direction;
 
     bool facingRight;
     [HideInInspector]
     public bool canMove = true; // temp set to true until i implement GameManager
+    public bool canCrouch = true;
+    public bool isCrouching = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
+        capCollider = gameObject.GetComponent<CapsuleCollider2D>();
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
@@ -43,21 +46,22 @@ public class P1Controls : MonoBehaviour
         firstPress = 0f;
         dash = false;
         dashForce = 30f;
-        dashCooldown = 0f;
         direction = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isCrouching == true)
+        {
+            canMove = false;
+        }
+
         if (canMove)
         {
-            
-
-
             //wrap these two around if notjumping
-            moveHorizontal = Input.GetAxisRaw("P1_Horizontal");
-            moveVertical = Input.GetAxisRaw("P1_Vertical");
+            moveHorizontal = Input.GetAxisRaw("P1_Walk");
+            moveVertical = Input.GetAxisRaw("P1_Jump");
             animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
 
             if (moveHorizontal > 0 && !facingRight)
@@ -75,18 +79,32 @@ public class P1Controls : MonoBehaviour
                 firstPress = 0f;
                 direction = 0f;
             }
-            if(firstPress == 0f && Input.GetButtonDown("P1_Horizontal"))
+            if(firstPress == 0f && Input.GetButtonDown("P1_Walk"))
             {
                 firstPress = Time.time;
                 direction = moveHorizontal;
             }
-            else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Horizontal"))
+            else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
             {
                 dash = true;
                 firstPress = 0f;
                 direction = 0f;
             }
-            //crouch  
+        }
+        if (canCrouch)
+        {
+            if (Input.GetKeyDown(KeyCode.S) && isJumping == false)
+            {
+                //animation
+                isCrouching = true;
+                crouch();
+            }
+            else if(Input.GetKeyUp(KeyCode.S) && isCrouching == true)
+            {
+                unCrouch();
+                isCrouching = false;
+            }
+
         }
     }
 
@@ -125,6 +143,22 @@ public class P1Controls : MonoBehaviour
         Vector2 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
+    }
+
+    void crouch()
+    {
+        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.54259f); 
+        capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y - 0.27437781f);
+        canMove = false;
+        Debug.Log("crouch");
+    }
+
+    void unCrouch()
+    {
+        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f); 
+        capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
+        canMove = true;
+        Debug.Log("unCrouch");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
