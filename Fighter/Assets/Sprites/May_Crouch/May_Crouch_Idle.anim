@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: May_Crouch
+  m_Name: May_Crouch_Idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,16 +20,14 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 8076e1ce3d0bb4445ba949fd34b6820c, type: 3}
-    - time: 0.083333336
       value: {fileID: 21300000, guid: a0f9e8583e29fd24e8585bc28d8a3fdf, type: 3}
-    - time: 0.16666667
+    - time: 0.083333336
       value: {fileID: 21300000, guid: 16b6159611a83564d8676ff38ceffc2c, type: 3}
-    - time: 0.25
+    - time: 0.16666667
       value: {fileID: 21300000, guid: 7041627ef37f74d42ae8e813ee0f4e48, type: 3}
-    - time: 0.33333334
+    - time: 0.25
       value: {fileID: 21300000, guid: 3cb482d6a1763a949966bb3fa5c171ba, type: 3}
-    - time: 0.41666666
+    - time: 0.33333334
       value: {fileID: 21300000, guid: 79826a9017ac4b4419c770a0ec24d47c, type: 3}
     attribute: m_Sprite
     path: 
@@ -50,7 +48,6 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 8076e1ce3d0bb4445ba949fd34b6820c, type: 3}
     - {fileID: 21300000, guid: a0f9e8583e29fd24e8585bc28d8a3fdf, type: 3}
     - {fileID: 21300000, guid: 16b6159611a83564d8676ff38ceffc2c, type: 3}
     - {fileID: 21300000, guid: 7041627ef37f74d42ae8e813ee0f4e48, type: 3}
@@ -61,12 +58,12 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.4166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0

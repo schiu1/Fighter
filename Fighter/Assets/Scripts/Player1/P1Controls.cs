@@ -91,16 +91,20 @@ public class P1Controls : MonoBehaviour
                 direction = 0f;
             }
         }
-        if (canCrouch)
+        if (canCrouch) //issue with player still moving when pressing crouch while walking
         {
-            if (Input.GetKeyDown(KeyCode.S) && isJumping == false)
+            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false)
             {
-                //animation
+                animator.SetTrigger("Crouch");
+                animator.SetBool("IsCrouching", true);
                 isCrouching = true;
                 crouch();
+                stopMovement();
             }
-            else if(Input.GetKeyUp(KeyCode.S) && isCrouching == true)
+            else if(Input.GetButtonUp("P1_Crouch") && isCrouching == true)
             {
+                animator.SetBool("IsCrouching", false);
+                startMovement();
                 unCrouch();
                 isCrouching = false;
             }
@@ -143,6 +147,17 @@ public class P1Controls : MonoBehaviour
         Vector2 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
+    }
+
+    void stopMovement()
+    {
+        rb2D.isKinematic = true;
+        rb2D.velocity = Vector2.zero;
+    }
+
+    void startMovement()
+    {
+        rb2D.isKinematic = false;
     }
 
     void crouch()
