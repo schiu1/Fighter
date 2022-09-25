@@ -21,6 +21,7 @@ public class P1Controls : MonoBehaviour
     bool dash;
     float dashForce;
     float direction;
+    int airDash = 0;
 
     bool facingRight;
     [HideInInspector]
@@ -79,7 +80,7 @@ public class P1Controls : MonoBehaviour
                 firstPress = 0f;
                 direction = 0f;
             }
-            if(firstPress == 0f && Input.GetButtonDown("P1_Walk"))
+            if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
             {
                 firstPress = Time.time;
                 direction = moveHorizontal;
@@ -124,6 +125,10 @@ public class P1Controls : MonoBehaviour
             dash = false;
             animator.SetTrigger("Dash");
             rb2D.AddForce(new Vector2(moveHorizontal * dashForce, 0f), ForceMode2D.Impulse);
+            if(isJumping == true)
+            {
+                airDash += 1;
+            }
             Debug.Log("dash");
         }
 
@@ -182,6 +187,10 @@ public class P1Controls : MonoBehaviour
         {
             isJumping = false;
             animator.SetBool("InAir", false);
+            if(airDash != 0)
+            {
+                airDash = 0;
+            }
         }
     }
 
