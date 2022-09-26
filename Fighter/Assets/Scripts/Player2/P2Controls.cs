@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P1Controls : MonoBehaviour
+public class P2Controls : MonoBehaviour
 {
     Rigidbody2D rb2D;
     Animator animator;
@@ -23,7 +23,7 @@ public class P1Controls : MonoBehaviour
     float direction;
     int airDash = 0;
 
-    bool facingRight;
+    bool facingLeft;
     [HideInInspector]
     public bool canMove = true; // temp set to true until i implement GameManager
     public bool canCrouch = true;
@@ -42,7 +42,7 @@ public class P1Controls : MonoBehaviour
         fallMultiplier = 7f;
         isJumping = false;
 
-        facingRight = true;
+        facingLeft = true;
 
         firstPress = 0f;
         dash = false;
@@ -61,31 +61,31 @@ public class P1Controls : MonoBehaviour
         if (canMove)
         {
             //wrap these two around if notjumping
-            moveHorizontal = Input.GetAxisRaw("P1_Walk");
-            moveVertical = Input.GetAxisRaw("P1_Jump");
+            moveHorizontal = Input.GetAxisRaw("P2_Walk");
+            moveVertical = Input.GetAxisRaw("P2_Jump");
             animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
 
-            if (moveHorizontal > 0 && !facingRight)
+            if (moveHorizontal > 0 && facingLeft)
             {
                 Flip();
             }
-            else if (moveHorizontal < 0 && facingRight)
+            else if (moveHorizontal < 0 && !facingLeft)
             {
                 Flip();
             }
 
             //dash
-            if(Time.time > firstPress + 0.5f || direction == -moveHorizontal)
+            if (Time.time > firstPress + 0.5f || direction == -moveHorizontal)
             {
                 firstPress = 0f;
                 direction = 0f;
             }
-            if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
+            if (firstPress == 0f && Input.GetButtonDown("P2_Walk") && airDash == 0)
             {
                 firstPress = Time.time;
                 direction = moveHorizontal;
             }
-            else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+            else if (Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P2_Walk"))
             {
                 dash = true;
                 firstPress = 0f;
@@ -94,7 +94,7 @@ public class P1Controls : MonoBehaviour
         }
         if (canCrouch) //issue with player still moving when pressing crouch while walking
         {
-            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false)
+            if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false)
             {
                 animator.SetTrigger("Crouch");
                 animator.SetBool("IsCrouching", true);
@@ -102,7 +102,7 @@ public class P1Controls : MonoBehaviour
                 crouch();
                 stopMovement();
             }
-            else if(Input.GetButtonUp("P1_Crouch") && isCrouching == true)
+            else if (Input.GetButtonUp("P2_Crouch") && isCrouching == true)
             {
                 animator.SetBool("IsCrouching", false);
                 startMovement();
@@ -120,12 +120,12 @@ public class P1Controls : MonoBehaviour
             rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
         }
 
-        if(dash == true)
+        if (dash == true)
         {
             dash = false;
             animator.SetTrigger("Dash");
             rb2D.AddForce(new Vector2(moveHorizontal * dashForce, 0f), ForceMode2D.Impulse);
-            if(isJumping == true)
+            if (isJumping == true)
             {
                 airDash += 1;
             }
@@ -142,12 +142,12 @@ public class P1Controls : MonoBehaviour
             rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        
+
     }
 
     void Flip()
     {
-        facingRight = !facingRight;
+        facingLeft = !facingLeft;
         Vector2 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
@@ -166,25 +166,25 @@ public class P1Controls : MonoBehaviour
 
     void crouch()
     {
-        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.54259f); 
+        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.54259f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y - 0.27437781f);
         canMove = false;
     }
 
     void unCrouch()
     {
-        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f); 
+        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
         canMove = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isJumping = false;
             animator.SetBool("InAir", false);
-            if(airDash != 0)
+            if (airDash != 0)
             {
                 airDash = 0;
             }
