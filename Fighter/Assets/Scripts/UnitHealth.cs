@@ -43,9 +43,16 @@ public class UnitHealth
     //methods
     public void dmgUnit(int dmg)
     {
-        if(_currentHealth < 0)
+        if(_currentHealth > 0)
         {
-        _currentHealth -= dmg;
+            if(_currentHealth - dmg < 0)
+            {
+                _currentHealth = 0;
+            }
+            else
+            {
+                _currentHealth -= dmg;
+            }
         }
     }
 
