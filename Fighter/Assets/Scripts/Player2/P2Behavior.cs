@@ -5,6 +5,7 @@ using UnityEngine;
 public class P2Behavior : MonoBehaviour
 {
     UnitHealth p2Health;
+    [SerializeField] Healthbar _healthbar = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,10 +31,12 @@ public class P2Behavior : MonoBehaviour
     void Player2Dmg(int dmg)
     {
         p2Health.dmgUnit(dmg);
+        _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
     }
 
     void Player2Heal(int heal)
     {
         p2Health.healUnit(heal);
+        _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
     }
 }

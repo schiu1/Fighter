@@ -5,7 +5,7 @@ using UnityEngine;
 public class P1Behavior : MonoBehaviour
 {
     UnitHealth p1Health;
-    [SerializeField] Healthbar _healthbar;
+    [SerializeField] Healthbar _healthbar = null;
     // Start is called before the first frame update
     void Start()
     {
