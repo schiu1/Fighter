@@ -28,13 +28,13 @@ public class P2Behavior : MonoBehaviour
         }
     }
 
-    void Player2Dmg(int dmg)
+    public void Player2Dmg(int dmg)
     {
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
     }
 
-    void Player2Heal(int heal)
+    public void Player2Heal(int heal)
     {
         p2Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
