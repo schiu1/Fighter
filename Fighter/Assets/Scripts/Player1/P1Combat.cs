@@ -5,9 +5,10 @@ using UnityEngine;
 public class P1Combat : MonoBehaviour
 {
     Animator anim;
-    [SerializeField] Transform attackPoint;
-    float punchAttackRange = 0.5f;
-    [SerializeField] LayerMask enemyLayers;
+
+    [SerializeField] Transform punchAttackPoint = null;
+    [SerializeField] Vector2 punchAttackRange = Vector2.zero; //0.5583461f, 0.6071799f
+    [SerializeField] LayerMask enemyLayers = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -25,17 +26,14 @@ public class P1Combat : MonoBehaviour
         if (Input.GetButtonDown("P1_Kick"))
         {
             //anim calls kick animation
-            kick();
         }
         if (Input.GetButtonDown("P1_Slash"))
         {
             //anim calls slash animation
-            slash();
         }
         if (Input.GetButtonDown("P1_HeavySlash"))
         {
             //anim calls HS animation
-            heavySlash();
         }
     }
 
@@ -44,12 +42,12 @@ public class P1Combat : MonoBehaviour
     {
 
         //get enemies in range of attack
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoint.position, new Vector2(0.5583461f, 0.6071799f), enemyLayers);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(punchAttackPoint.position, punchAttackRange, 0, enemyLayers);
 
         //apply damage to enemy
         foreach(Collider2D enemy in enemies)
         {
-            //issue here
+            Debug.Log("player1 hit: " + enemy.name);
             enemy.GetComponent<P2Behavior>().Player2Dmg(10);
         }
     }
@@ -69,4 +67,9 @@ public class P1Combat : MonoBehaviour
 
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(punchAttackPoint.position, punchAttackRange);
+    }
 }
