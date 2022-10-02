@@ -6,7 +6,7 @@ public class P1Combat : MonoBehaviour
 {
     Animator anim;
     [SerializeField] Transform attackPoint;
-    //[SerializeField] float attackRange = 0.5f;
+    float punchAttackRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
 
     // Start is called before the first frame update
@@ -68,4 +68,5 @@ public class P1Combat : MonoBehaviour
     {
 
     }
+
 }
