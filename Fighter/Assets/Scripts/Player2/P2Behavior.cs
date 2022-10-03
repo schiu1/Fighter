@@ -26,6 +26,8 @@ public class P2Behavior : MonoBehaviour
             Player2Heal(10);
             Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
         }
+
+        //if player reaches 0 health, call Die()
     }
 
     public void Player2Dmg(int dmg)

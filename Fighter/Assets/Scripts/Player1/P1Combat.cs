@@ -10,6 +10,9 @@ public class P1Combat : MonoBehaviour
     [SerializeField] Vector2 punchAttackRange = Vector2.zero; //0.5583461f, 0.6071799f
     [SerializeField] LayerMask enemyLayers = 0;
 
+    [SerializeField] Transform slashAttackPoint = null;
+    [SerializeField] Vector2 slashAttackRange = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class P1Combat : MonoBehaviour
         }
         if (Input.GetButtonDown("P1_Slash"))
         {
-            //anim calls slash animation
+            anim.SetTrigger("Slash");
         }
         if (Input.GetButtonDown("P1_HeavySlash"))
         {
@@ -40,7 +43,6 @@ public class P1Combat : MonoBehaviour
     //put these methods in attack anim as events
     void punch()
     {
-
         //get enemies in range of attack
         Collider2D[] enemies = Physics2D.OverlapBoxAll(punchAttackPoint.position, punchAttackRange, 0, enemyLayers);
 
@@ -59,7 +61,15 @@ public class P1Combat : MonoBehaviour
 
     void slash()
     {
+        //get enemies in range of attack
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(slashAttackPoint.position, slashAttackRange, 0, enemyLayers);
 
+        //apply damage to enemy
+        foreach (Collider2D enemy in enemies)
+        {
+            Debug.Log("player1 hit: " + enemy.name);
+            enemy.GetComponent<P2Behavior>().Player2Dmg(20);
+        }
     }
 
     void heavySlash()
@@ -71,5 +81,6 @@ public class P1Combat : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(punchAttackPoint.position, punchAttackRange);
+        Gizmos.DrawWireCube(slashAttackPoint.position, slashAttackRange);
     }
 }
