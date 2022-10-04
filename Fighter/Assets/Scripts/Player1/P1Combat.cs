@@ -5,6 +5,9 @@ using UnityEngine;
 public class P1Combat : MonoBehaviour
 {
     Animator anim;
+    P1Controls p1Controls;
+    float lastAttack = 0f;
+    float attackCD = 0f;
 
     [SerializeField] Transform punchAttackPoint = null;
     [SerializeField] Vector2 punchAttackRange = Vector2.zero; //0.5583461f, 0.6071799f
@@ -17,24 +20,36 @@ public class P1Combat : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+        p1Controls = gameObject.GetComponent<P1Controls>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("P1_Punch"))
+        //checks CD of attacking
+        if(Time.time > lastAttack + attackCD)
+        {
+            lastAttack = 0f;
+            attackCD = 0f;
+        }
+
+        if (Input.GetButtonDown("P1_Punch") && (p1Controls.isJumping == false) && (attackCD == 0))
         {
             anim.SetTrigger("Punch");
+            lastAttack = Time.time;
+            attackCD = 0.5f;
         }
-        if (Input.GetButtonDown("P1_Kick"))
+        if (Input.GetButtonDown("P1_Kick") && p1Controls.isJumping == false)
         {
             //anim calls kick animation
         }
-        if (Input.GetButtonDown("P1_Slash"))
+        if (Input.GetButtonDown("P1_Slash") && p1Controls.isJumping == false && (attackCD == 0))
         {
             anim.SetTrigger("Slash");
+            lastAttack = Time.time;
+            attackCD = 0.9f;
         }
-        if (Input.GetButtonDown("P1_HeavySlash"))
+        if (Input.GetButtonDown("P1_HeavySlash") && p1Controls.isJumping == false)
         {
             //anim calls HS animation
         }
