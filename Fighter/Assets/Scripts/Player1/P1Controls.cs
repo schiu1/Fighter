@@ -7,7 +7,7 @@ public class P1Controls : MonoBehaviour
     Rigidbody2D rb2D;
     Animator animator;
     CapsuleCollider2D capCollider;
-
+    P1Combat p1combat;
     float speed;
     float maxSpeed;
     float moveHorizontal;
@@ -35,6 +35,7 @@ public class P1Controls : MonoBehaviour
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
+        p1combat = gameObject.GetComponent<P1Combat>();
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
@@ -94,7 +95,7 @@ public class P1Controls : MonoBehaviour
         }
         if (canCrouch) //issue with player still moving when pressing crouch while walking
         {
-            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false)
+            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
             {
                 animator.SetTrigger("Crouch");
                 animator.SetBool("IsCrouching", true);
@@ -155,12 +156,14 @@ public class P1Controls : MonoBehaviour
 
     void stopMovement()
     {
+        canMove = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
     }
 
     void startMovement()
     {
+        canMove = true;
         rb2D.isKinematic = false;
     }
 

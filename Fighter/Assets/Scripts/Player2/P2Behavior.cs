@@ -34,6 +34,7 @@ public class P2Behavior : MonoBehaviour
     {
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
+        Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
     }
 
     public void Player2Heal(int heal)
