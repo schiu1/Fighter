@@ -20,6 +20,9 @@ public class P1Combat : MonoBehaviour
     [SerializeField] Transform heavyAttackPoint = null;
     [SerializeField] Vector2 heavyAttackRange = Vector2.zero;
 
+    [SerializeField] Transform kickAttackPoint = null;
+    [SerializeField] Vector2 kickAttackRange = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,30 +41,36 @@ public class P1Combat : MonoBehaviour
             attacking = false;
         }
 
-        if (Input.GetButtonDown("P1_Punch") && (p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
+        if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
         {
-            attacking = true;
-            anim.SetTrigger("Punch");
-            lastAttack = Time.time;
-            attackCD = 0.5f;
-        }
-        if (Input.GetButtonDown("P1_Kick") && p1Controls.isJumping == false)
-        {
-            //anim calls kick animation
-        }
-        if (Input.GetButtonDown("P1_Slash") && p1Controls.isJumping == false && (attackCD == 0) && (p1Controls.isCrouching == false))
-        {
-            attacking = true;
-            anim.SetTrigger("Slash");
-            lastAttack = Time.time;
-            attackCD = 0.8f;
-        }
-        if (Input.GetButtonDown("P1_HeavySlash") && p1Controls.isJumping == false && (attackCD == 0) && (p1Controls.isCrouching == false))
-        {
-            attacking = true;
-            anim.SetTrigger("Heavy");
-            lastAttack = Time.time;
-            attackCD = 0.75f;
+            if (Input.GetButtonDown("P1_Punch"))
+            {
+                attacking = true;
+                anim.SetTrigger("Punch");
+                lastAttack = Time.time;
+                attackCD = 0.5f;
+            }
+            if (Input.GetButtonDown("P1_Kick"))
+            {
+                attacking = true;
+                anim.SetTrigger("Kick");
+                lastAttack = Time.time;
+                attackCD = 0.8f;
+            }
+            if (Input.GetButtonDown("P1_Slash"))
+            {
+                attacking = true;
+                anim.SetTrigger("Slash");
+                lastAttack = Time.time;
+                attackCD = 0.8f;
+            }
+            if (Input.GetButtonDown("P1_HeavySlash"))
+            {
+                attacking = true;
+                anim.SetTrigger("Heavy");
+                lastAttack = Time.time;
+                attackCD = 0.75f;
+            }
         }
     }
 
@@ -81,7 +90,15 @@ public class P1Combat : MonoBehaviour
 
     void kick()
     {
+        //get enemies in range of attack
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(kickAttackPoint.position, kickAttackRange, 0, enemyLayers);
 
+        //apply damage to enemy
+        foreach (Collider2D enemy in enemies)
+        {
+            Debug.Log("player1 hit: " + enemy.name);
+            enemy.GetComponent<P2Behavior>().Player2Dmg(5);
+        }
     }
 
     void slash()
@@ -101,7 +118,7 @@ public class P1Combat : MonoBehaviour
     {
         //get enemies in range of attack
         Collider2D[] enemies = Physics2D.OverlapBoxAll(heavyAttackPoint.position, heavyAttackRange, 0, enemyLayers);
-        Debug.Log(enemies.Length);
+
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
@@ -116,5 +133,6 @@ public class P1Combat : MonoBehaviour
         Gizmos.DrawWireCube(punchAttackPoint.position, punchAttackRange);
         Gizmos.DrawWireCube(slashAttackPoint.position, slashAttackRange);
         Gizmos.DrawWireCube(heavyAttackPoint.position, heavyAttackRange);
+        Gizmos.DrawWireCube(kickAttackPoint.position, kickAttackRange);
     }
 }
