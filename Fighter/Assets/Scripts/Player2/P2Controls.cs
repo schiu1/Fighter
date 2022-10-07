@@ -25,7 +25,7 @@ public class P2Controls : MonoBehaviour
 
     bool facingLeft;
     [HideInInspector]
-    public bool canMove = true; // temp set to true until i implement GameManager
+    public bool p2CanMove = true; // temp set to true until i implement GameManager
     public bool canCrouch = true;
     public bool isCrouching = false;
 
@@ -55,10 +55,10 @@ public class P2Controls : MonoBehaviour
     {
         if (isCrouching == true)
         {
-            canMove = false;
+            p2CanMove = false;
         }
 
-        if (canMove)
+        if (p2CanMove)
         {
             //wrap these two around if notjumping
             moveHorizontal = Input.GetAxisRaw("P2_Walk");
@@ -155,12 +155,14 @@ public class P2Controls : MonoBehaviour
 
     void stopMovement()
     {
+        p2CanMove = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
     }
 
     void startMovement()
     {
+        p2CanMove = true;
         rb2D.isKinematic = false;
     }
 
@@ -168,14 +170,14 @@ public class P2Controls : MonoBehaviour
     {
         capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.54259f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y - 0.27437781f);
-        canMove = false;
+        p2CanMove = false;
     }
 
     void unCrouch()
     {
         capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
-        canMove = true;
+        p2CanMove = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
