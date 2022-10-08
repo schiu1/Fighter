@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class P2Behavior : MonoBehaviour
 {
+    P2Controls p2controls;
+    Animator anim;
     UnitHealth p2Health;
     [SerializeField] Healthbar _healthbar = null;
     // Start is called before the first frame update
     void Start()
     {
         p2Health = GameManager.gameManager._p2Health;
+        anim = gameObject.GetComponent<Animator>();
+        p2controls = gameObject.GetComponent<P2Controls>();
     }
 
     // Update is called once per frame
@@ -28,10 +32,15 @@ public class P2Behavior : MonoBehaviour
         }
 
         //if player reaches 0 health, call Die()
+        if(p2Health.Health <= 0)
+        {
+            Die();
+        }
     }
 
     public void Player2Dmg(int dmg)
     {
+        anim.SetTrigger("Flinch");
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
         Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
@@ -42,4 +51,16 @@ public class P2Behavior : MonoBehaviour
         p2Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
     }
+
+    void Die()
+    {
+        Debug.Log("p2 killed");
+        anim.SetBool("IsKO", true);
+        p2controls.p2CanMove = false;
+        p2controls.canCrouch = false;
+        //add prevent attacking when time comes
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        this.enabled = false;
+    }
+
 }
