@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class P1Behavior : MonoBehaviour
 {
+    Animator anim;
+    P1Controls p1controls;
+    P1Combat p1combat;
     UnitHealth p1Health;
     [SerializeField] Healthbar _healthbar = null;
     // Start is called before the first frame update
     void Start()
     {
         p1Health = GameManager.gameManager._p1Health;
+        anim = gameObject.GetComponent<Animator>();
+        p1controls = gameObject.GetComponent<P1Controls>();
+        p1combat = gameObject.GetComponent<P1Combat>();
     }
 
     // Update is called once per frame
@@ -27,10 +33,16 @@ public class P1Behavior : MonoBehaviour
             Player1Heal(10);
             Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
         }
+
+        if(p1Health.Health <= 0)
+        {
+            Die();
+        }
     }
 
     void Player1Dmg(int dmg)
     {
+        anim.SetTrigger("Flinch");
         p1Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
     }
@@ -39,5 +51,16 @@ public class P1Behavior : MonoBehaviour
     {
         p1Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
+    }
+
+    void Die()
+    {
+        Debug.Log("p2 killed");
+        anim.SetBool("IsKO", true);
+        p1controls.p1CanMove = false;
+        p1controls.canCrouch = false;
+        p1combat.p1CanAttack = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        this.enabled = false;
     }
 }

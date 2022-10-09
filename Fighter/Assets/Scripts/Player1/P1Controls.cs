@@ -95,7 +95,7 @@ public class P1Controls : MonoBehaviour
         }
         if (canCrouch) //issue with player still moving when pressing crouch while walking
         {
-            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
+            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.p1Attacking == false)
             {
                 animator.SetTrigger("Crouch");
                 animator.SetBool("IsCrouching", true);

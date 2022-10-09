@@ -8,7 +8,8 @@ public class P1Combat : MonoBehaviour
     P1Controls p1Controls;
     float lastAttack = 0f;
     float attackCD = 0f;
-    public bool attacking = false;
+    public bool p1Attacking = false;
+    public bool p1CanAttack = true;
     [SerializeField] LayerMask enemyLayers = 0;
 
     [SerializeField] Transform punchAttackPoint = null;
@@ -33,45 +34,49 @@ public class P1Combat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //checks CD of attacking
+        //checks CD of p1Attacking
         if(Time.time > lastAttack + attackCD)
         {
             lastAttack = 0f;
             attackCD = 0f;
-            attacking = false;
+            p1Attacking = false;
         }
 
-        if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
+        if (p1CanAttack)
         {
-            if (Input.GetButtonDown("P1_Punch"))
+            if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
             {
-                attacking = true;
-                anim.SetTrigger("Punch");
-                lastAttack = Time.time;
-                attackCD = 0.5f;
-            }
-            if (Input.GetButtonDown("P1_Kick"))
-            {
-                attacking = true;
-                anim.SetTrigger("Kick");
-                lastAttack = Time.time;
-                attackCD = 0.8f;
-            }
-            if (Input.GetButtonDown("P1_Slash"))
-            {
-                attacking = true;
-                anim.SetTrigger("Slash");
-                lastAttack = Time.time;
-                attackCD = 0.8f;
-            }
-            if (Input.GetButtonDown("P1_HeavySlash"))
-            {
-                attacking = true;
-                anim.SetTrigger("Heavy");
-                lastAttack = Time.time;
-                attackCD = 0.75f;
+                if (Input.GetButtonDown("P1_Punch"))
+                {
+                    p1Attacking = true;
+                    anim.SetTrigger("Punch");
+                    lastAttack = Time.time;
+                    attackCD = 0.5f;
+                }
+                if (Input.GetButtonDown("P1_Kick"))
+                {
+                    p1Attacking = true;
+                    anim.SetTrigger("Kick");
+                    lastAttack = Time.time;
+                    attackCD = 0.8f;
+                }
+                if (Input.GetButtonDown("P1_Slash"))
+                {
+                    p1Attacking = true;
+                    anim.SetTrigger("Slash");
+                    lastAttack = Time.time;
+                    attackCD = 0.8f;
+                }
+                if (Input.GetButtonDown("P1_HeavySlash"))
+                {
+                    p1Attacking = true;
+                    anim.SetTrigger("Heavy");
+                    lastAttack = Time.time;
+                    attackCD = 0.75f;
+                }
             }
         }
+
     }
 
     //put these methods in attack anim as events
