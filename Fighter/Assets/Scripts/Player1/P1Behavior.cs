@@ -40,14 +40,14 @@ public class P1Behavior : MonoBehaviour
         }
     }
 
-    void Player1Dmg(int dmg)
+    public void Player1Dmg(int dmg)
     {
         anim.SetTrigger("Flinch");
         p1Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
     }
 
-    void Player1Heal(int heal)
+    public void Player1Heal(int heal)
     {
         p1Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);

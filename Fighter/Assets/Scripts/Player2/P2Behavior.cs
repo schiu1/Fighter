@@ -5,6 +5,7 @@ using UnityEngine;
 public class P2Behavior : MonoBehaviour
 {
     P2Controls p2controls;
+    P2Combat p2combat;
     Animator anim;
     UnitHealth p2Health;
     [SerializeField] Healthbar _healthbar = null;
@@ -14,6 +15,7 @@ public class P2Behavior : MonoBehaviour
         p2Health = GameManager.gameManager._p2Health;
         anim = gameObject.GetComponent<Animator>();
         p2controls = gameObject.GetComponent<P2Controls>();
+        p2combat = gameObject.GetComponent<P2Combat>();
     }
 
     // Update is called once per frame
@@ -58,7 +60,7 @@ public class P2Behavior : MonoBehaviour
         anim.SetBool("IsKO", true);
         p2controls.p2CanMove = false;
         p2controls.canCrouch = false;
-        //add prevent attacking when time comes
+        p2combat.p2CanAttack = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
         this.enabled = false;
     }
