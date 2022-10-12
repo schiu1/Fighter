@@ -8,6 +8,8 @@ public class P1Controls : MonoBehaviour
     Animator animator;
     CapsuleCollider2D capCollider;
     P1Combat p1combat;
+    GameObject p2;
+
     float speed;
     float maxSpeed;
     float moveHorizontal;
@@ -36,6 +38,7 @@ public class P1Controls : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
         p1combat = gameObject.GetComponent<P1Combat>();
+        p2 = GameObject.Find("Player2");
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
@@ -191,6 +194,7 @@ public class P1Controls : MonoBehaviour
             {
                 airDash = 0;
             }
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), false);
         }
     }
 
@@ -200,6 +204,8 @@ public class P1Controls : MonoBehaviour
         {
             isJumping = true;
             animator.SetBool("InAir", true);
+            //might want to change this somehow in the future to ignore collision only on jump start and not entire jump anim
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), true);
         }
     }
 }

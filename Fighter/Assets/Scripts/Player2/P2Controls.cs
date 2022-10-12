@@ -7,6 +7,8 @@ public class P2Controls : MonoBehaviour
     Rigidbody2D rb2D;
     Animator animator;
     CapsuleCollider2D capCollider;
+    P2Combat p2combat;
+    GameObject p1;
 
     float speed;
     float maxSpeed;
@@ -35,6 +37,8 @@ public class P2Controls : MonoBehaviour
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
+        p2combat = gameObject.GetComponent<P2Combat>();
+        p1 = GameObject.Find("Player1");
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
@@ -94,7 +98,7 @@ public class P2Controls : MonoBehaviour
         }
         if (canCrouch) //issue with player still moving when pressing crouch while walking
         {
-            if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false)
+            if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && p2combat.p2Attacking == false)
             {
                 animator.SetTrigger("Crouch");
                 animator.SetBool("IsCrouching", true);
@@ -190,6 +194,7 @@ public class P2Controls : MonoBehaviour
             {
                 airDash = 0;
             }
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p1.GetComponent<CapsuleCollider2D>(), false);
         }
     }
 
@@ -199,6 +204,8 @@ public class P2Controls : MonoBehaviour
         {
             isJumping = true;
             animator.SetBool("InAir", true);
+            //might want to change this somehow in the future to ignore collision only on jump start and not entire jump anim
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p1.GetComponent<CapsuleCollider2D>(), true);
         }
     }
 }
