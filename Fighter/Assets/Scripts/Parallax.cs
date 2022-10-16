@@ -6,7 +6,7 @@ public class Parallax : MonoBehaviour
 {
     float startPos;
     GameObject camObj;
-    [SerializeField] float parallaxEffect;
+    [SerializeField] float parallaxEffect = 0;
 
     // Start is called before the first frame update
     void Start()

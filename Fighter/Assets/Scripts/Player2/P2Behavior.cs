@@ -62,6 +62,7 @@ public class P2Behavior : MonoBehaviour
         p2controls.canCrouch = false;
         p2combat.p2CanAttack = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
+        GameManager.gameManager.endRound();
         this.enabled = false;
     }
 

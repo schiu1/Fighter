@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public int p1Score = 0;
     public int p2Score = 0;
-
+    //maybe keep track of number of rounds here and CanvasScript will look at this field to say "Round #", wait 2 sec, "FIGHT"
 
     void Awake()
     {
@@ -37,17 +38,46 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_p1Health.Health <= 0)
-        {
-            p2Score += 1;
-            //determine if roundwin or gamewin and call endround with that as arguement
-        }
-        else if(_p2Health.Health <= 0)
-        {
-            p2Score += 1;
-        }
 
     }
 
-    
+    public void endRound()
+    {
+        if (_p1Health.Health <= 0)
+        {
+            p2Score += 1;
+            
+        }
+        else if (_p2Health.Health <= 0)
+        {
+            p1Score += 1;
+        }
+
+        if(p1Score == 2 || p2Score == 2)
+        {
+            StartCoroutine(Reset("game"));
+        }
+        else
+        {
+            StartCoroutine(Reset("round"));
+        }
+    }
+
+    IEnumerator Reset(string type)
+    {
+        if(type == "game")
+        {
+            Debug.Log("game end");
+            //wait for player input to restart
+        }
+        else if(type == "round")
+        {
+            Debug.Log("round end");
+            yield return new WaitForSeconds(3);
+            _p1Health.Health = _p1Health.MaxHealth;
+            _p2Health.Health = _p2Health.MaxHealth;
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+    }
 }

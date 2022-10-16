@@ -61,6 +61,7 @@ public class P1Behavior : MonoBehaviour
         p1controls.canCrouch = false;
         p1combat.p1CanAttack = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
+        GameManager.gameManager.endRound();
         this.enabled = false;
     }
 }
