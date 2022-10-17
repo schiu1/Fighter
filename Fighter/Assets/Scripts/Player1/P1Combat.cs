@@ -8,8 +8,8 @@ public class P1Combat : MonoBehaviour
     P1Controls p1Controls;
     float lastAttack = 0f;
     float attackCD = 0f;
-    public bool p1Attacking = false;
-    public bool p1CanAttack = true;
+    public bool p1Attacking;
+    public bool p1CanAttack;
     [SerializeField] LayerMask enemyLayers = 0;
 
     [SerializeField] Transform punchAttackPoint = null;
@@ -29,6 +29,9 @@ public class P1Combat : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator>();
         p1Controls = gameObject.GetComponent<P1Controls>();
+
+        p1Attacking = false;
+        p1CanAttack = false;
     }
 
     // Update is called once per frame

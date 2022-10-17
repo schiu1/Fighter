@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int p1Score = 0;
     public int p2Score = 0;
     //maybe keep track of number of rounds here and CanvasScript will look at this field to say "Round #", wait 2 sec, "FIGHT"
+    public int round = 1;
 
     void Awake()
     {
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(3);
             _p1Health.Health = _p1Health.MaxHealth;
             _p2Health.Health = _p2Health.MaxHealth;
+            round += 1;
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         }

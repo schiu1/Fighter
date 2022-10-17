@@ -9,6 +9,9 @@ public class P2Behavior : MonoBehaviour
     Animator anim;
     UnitHealth p2Health;
     [SerializeField] Healthbar _healthbar = null;
+
+    float startTime;
+    bool started;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +19,22 @@ public class P2Behavior : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         p2controls = gameObject.GetComponent<P2Controls>();
         p2combat = gameObject.GetComponent<P2Combat>();
+
+        startTime = Time.time;
+        started = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.time - startTime >= 3f && !started)
+        {
+            started = true;
+            p2controls.p2CanMove = true;
+            p2controls.canCrouch = true;
+            p2combat.p2CanAttack = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
             Player2Dmg(10);

@@ -27,9 +27,9 @@ public class P1Controls : MonoBehaviour
 
     bool facingRight;
     [HideInInspector]
-    public bool p1CanMove = true; // temp set to true until i implement GameManager
-    public bool canCrouch = true;
-    public bool isCrouching = false;
+    public bool p1CanMove; // temp set to true until i implement GameManager
+    public bool canCrouch;
+    public bool isCrouching;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +52,10 @@ public class P1Controls : MonoBehaviour
         dash = false;
         dashForce = 30f;
         direction = 0f;
+
+        p1CanMove = false;
+        canCrouch = false;
+        isCrouching = false;
     }
 
     // Update is called once per frame

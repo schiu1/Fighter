@@ -7,25 +7,49 @@ public class CanvasScript : MonoBehaviour
 {
     Text p1ScoreUI;
     Text p2ScoreUI;
+
     GameManager gm;
-    GameObject roundBanner;
+
+    Text roundStartNumber;
+    GameObject fightBanner;
+
+    GameObject roundEndBanner;
     GameObject gameBanner;
+
+    float startTime;
+    bool started;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gameManager;
+
         p1ScoreUI = transform.Find("P1_Score").GetComponent<Text>();
         p2ScoreUI = transform.Find("P2_Score").GetComponent<Text>();
-        roundBanner = transform.Find("RoundOver").gameObject;
-        gameBanner = transform.Find("GameOver").gameObject;
         p1ScoreUI.text = gm.p1Score.ToString();
         p2ScoreUI.text = gm.p2Score.ToString();
+
+        roundEndBanner = transform.Find("RoundOver").gameObject;
+        gameBanner = transform.Find("GameOver").gameObject;
+
+        roundStartNumber = transform.Find("RoundStart").GetComponent<Text>();
+        roundStartNumber.text = "ROUND " + gm.round.ToString();
+
+        fightBanner = transform.Find("Fight").gameObject;
+
+        startTime = Time.time;
+        started = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Time.time - startTime >= 3f && !started)
+        {
+            started = true;
+            StartCoroutine(StartBanners());
+        }
+
         if (gm.p1Score.ToString() != p1ScoreUI.text)
         {
             p1ScoreUI.text = gm.p1Score.ToString();
@@ -40,6 +64,14 @@ public class CanvasScript : MonoBehaviour
         
     }
 
+    IEnumerator StartBanners()
+    {
+        roundStartNumber.gameObject.SetActive(false);
+        fightBanner.SetActive(true);
+        yield return new WaitForSeconds(1);
+        fightBanner.SetActive(false);
+    }
+
     void ShowBanner()
     {
         if (gm.p1Score == 2 || gm.p2Score == 2)
@@ -48,7 +80,7 @@ public class CanvasScript : MonoBehaviour
         }
         else
         {
-            roundBanner.SetActive(true);
+            roundEndBanner.SetActive(true);
         }
     }
 }
