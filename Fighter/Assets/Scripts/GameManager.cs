@@ -14,8 +14,10 @@ public class GameManager : MonoBehaviour
 
     public int p1Score = 0;
     public int p2Score = 0;
-    //maybe keep track of number of rounds here and CanvasScript will look at this field to say "Round #", wait 2 sec, "FIGHT"
+
     public int round = 1;
+
+    public bool timedOut = false;
 
     void Awake()
     {
@@ -37,24 +39,34 @@ public class GameManager : MonoBehaviour
     //if round win, GameManager will wait 5 sec, then reset scene
     //if game win, GameManager will wait for user input
 
-    void Update()
+    public void endRound(string endType)
     {
-
-    }
-
-    public void endRound()
-    {
-        if (_p1Health.Health <= 0)
+        if(endType == "player")
         {
-            p2Score += 1;
+            if (_p1Health.Health <= 0)
+            {
+                p2Score += 1;
             
+            }
+            else if (_p2Health.Health <= 0)
+            {
+                p1Score += 1;
+            }
         }
-        else if (_p2Health.Health <= 0)
+        else if (endType == "timer")
         {
-            p1Score += 1;
+            timedOut = true;
+            if(_p1Health.Health > _p2Health.Health)
+            {
+                p1Score += 1;
+            }
+            else if (_p2Health.Health > _p1Health.Health)
+            {
+                p2Score += 1;
+            }
         }
 
-        if(p1Score == 2 || p2Score == 2)
+        if (p1Score == 2 || p2Score == 2)
         {
             StartCoroutine(Reset("game"));
         }
@@ -78,6 +90,7 @@ public class GameManager : MonoBehaviour
             _p1Health.Health = _p1Health.MaxHealth;
             _p2Health.Health = _p2Health.MaxHealth;
             round += 1;
+            timedOut = false;
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         }

@@ -19,6 +19,10 @@ public class CanvasScript : MonoBehaviour
     float startTime;
     bool started;
 
+    Text timerUI;
+    float currentTime;
+    bool timerStarted;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,11 @@ public class CanvasScript : MonoBehaviour
 
         fightBanner = transform.Find("Fight").gameObject;
 
+        currentTime = 10f;
+        timerUI = transform.Find("Timer").GetComponent<Text>();
+        timerUI.text = currentTime.ToString();
+        timerStarted = false;
+
         startTime = Time.time;
         started = false;
     }
@@ -47,7 +56,21 @@ public class CanvasScript : MonoBehaviour
         if(Time.time - startTime >= 3f && !started)
         {
             started = true;
+            timerStarted = true;
             StartCoroutine(StartBanners());
+        }
+
+        if (timerStarted)
+        {
+            currentTime -= Time.deltaTime;
+            timerUI.text = currentTime.ToString();
+            if (currentTime <= 0)
+            {
+                timerStarted = false;
+                currentTime = 0;
+                timerUI.text = currentTime.ToString();
+                GameManager.gameManager.endRound("timer");
+            }
         }
 
         if (gm.p1Score.ToString() != p1ScoreUI.text)
