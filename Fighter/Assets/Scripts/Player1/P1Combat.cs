@@ -45,6 +45,11 @@ public class P1Combat : MonoBehaviour
             p1Attacking = false;
         }
 
+        if(GameManager.gameManager.timedOut == true)
+        {
+            p1CanAttack = false;
+        }
+
         if (p1CanAttack)
         {
             if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))

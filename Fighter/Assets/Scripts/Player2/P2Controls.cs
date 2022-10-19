@@ -66,6 +66,27 @@ public class P2Controls : MonoBehaviour
             p2CanMove = false;
         }
 
+        if (GameManager.gameManager.timedOut == true)
+        {
+            //prevent walking/jumping/crouching from activating
+            p2CanMove = false;
+            canCrouch = false;
+
+            //make character stand still
+            moveHorizontal = 0f;
+            moveVertical = 0f;
+            animator.SetFloat("Speed", 0);
+
+            //if they are crouching when times out, similar to uncrouch()
+            if (isCrouching == true)
+            {
+                isCrouching = false;
+                animator.SetBool("IsCrouching", false);
+                capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
+                capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
+            }
+        }
+
         if (p2CanMove)
         {
             //wrap these two around if notjumping
@@ -100,7 +121,7 @@ public class P2Controls : MonoBehaviour
                 direction = 0f;
             }
         }
-        if (canCrouch) //issue with player still moving when pressing crouch while walking
+        if (canCrouch)
         {
             if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && p2combat.p2Attacking == false)
             {

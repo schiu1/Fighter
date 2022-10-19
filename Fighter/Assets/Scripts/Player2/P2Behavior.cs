@@ -35,13 +35,6 @@ public class P2Behavior : MonoBehaviour
             p2combat.p2CanAttack = true;
         }
 
-        if (GameManager.gameManager.timedOut == true)
-        {
-            p2controls.p2CanMove = false;
-            p2controls.canCrouch = false;
-            p2combat.p2CanAttack = false;
-        }
-
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
             Player2Dmg(10);

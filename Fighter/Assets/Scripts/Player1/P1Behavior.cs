@@ -34,13 +34,6 @@ public class P1Behavior : MonoBehaviour
             p1combat.p1CanAttack = true;
         }
 
-        if (GameManager.gameManager.timedOut == true)
-        {
-            p1controls.p1CanMove = false;
-            p1controls.canCrouch = false;
-            p1combat.p1CanAttack = false;
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Player1Dmg(10);
