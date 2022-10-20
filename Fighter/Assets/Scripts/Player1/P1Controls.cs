@@ -66,7 +66,7 @@ public class P1Controls : MonoBehaviour
             p1CanMove = false;
         }
 
-        if (GameManager.gameManager.timedOut == true)
+        if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
         {
             //prevent walking/jumping/crouching from activating
             p1CanMove = false;

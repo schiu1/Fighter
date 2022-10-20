@@ -75,11 +75,13 @@ public class CanvasScript : MonoBehaviour
 
         if (gm.p1Score.ToString() != p1ScoreUI.text)
         {
+            timerStarted = false;
             p1ScoreUI.text = gm.p1Score.ToString();
             ShowBanner();
         }
         else if (gm.p2Score.ToString() != p2ScoreUI.text)
         {
+            timerStarted = false;
             p2ScoreUI.text = gm.p2Score.ToString();
             ShowBanner();
         }

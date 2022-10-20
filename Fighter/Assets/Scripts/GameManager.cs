@@ -81,7 +81,24 @@ public class GameManager : MonoBehaviour
         if(type == "game")
         {
             Debug.Log("game end");
-            //wait for player input to restart
+            //extend time before this happens later to show sprite win/lose animations
+            bool done = false;
+            while (!done)
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    _p1Health.Health = _p1Health.MaxHealth;
+                    _p2Health.Health = _p2Health.MaxHealth;
+                    p1Score = 0;
+                    p2Score = 0;
+                    round = 1;
+                    timedOut = false;
+                    Scene scene = SceneManager.GetActiveScene();
+                    SceneManager.LoadScene(scene.name);
+                    done = true;
+                }
+                yield return null;
+            }
         }
         else if(type == "round")
         {

@@ -45,7 +45,7 @@ public class P2Combat : MonoBehaviour
             p2Attacking = false;
         }
 
-        if (GameManager.gameManager.timedOut == true)
+        if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p1Health.Health == 0)
         {
             p2CanAttack = false;
         }
