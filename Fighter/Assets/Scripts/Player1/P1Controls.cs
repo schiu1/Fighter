@@ -13,7 +13,7 @@ public class P1Controls : MonoBehaviour
     float speed;
     float maxSpeed;
     float moveHorizontal;
-    float moveVertical;
+    bool moveVertical;
 
     float jumpForce;
     float fallMultiplier;
@@ -74,7 +74,7 @@ public class P1Controls : MonoBehaviour
             
             //make character stand still
             moveHorizontal = 0f;
-            moveVertical = 0f;
+            moveVertical = false;
             animator.SetFloat("Speed", 0);
 
             //if they are crouching when times out, similar to uncrouch()
@@ -91,7 +91,11 @@ public class P1Controls : MonoBehaviour
         {
             //wrap these two around if notjumping
             moveHorizontal = Input.GetAxisRaw("P1_Walk");
-            moveVertical = Input.GetAxisRaw("P1_Jump");
+            if (Input.GetButtonDown("P1_Jump") && !isJumping)
+            {
+                moveVertical = true;
+            }
+            
             animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
 
             if (moveHorizontal > 0 && !facingRight)
@@ -160,10 +164,11 @@ public class P1Controls : MonoBehaviour
             }
         }
 
-        if (moveVertical > 0.1f && !isJumping)
+        if (moveVertical == true && !isJumping)
         {
             animator.SetTrigger("Jump");
-            rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
+            rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            moveVertical = false;
         }
         //falling helper
         if (rb2D.velocity.y < 0)

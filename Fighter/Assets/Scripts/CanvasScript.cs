@@ -20,7 +20,7 @@ public class CanvasScript : MonoBehaviour
     bool started;
 
     Text timerUI;
-    float currentTime;
+    [SerializeField] float currentTime;
     bool timerStarted;
 
     // Start is called before the first frame update
@@ -41,9 +41,9 @@ public class CanvasScript : MonoBehaviour
 
         fightBanner = transform.Find("Fight").gameObject;
 
-        currentTime = 10f;
+        //currentTime = 10f;
         timerUI = transform.Find("Timer").GetComponent<Text>();
-        timerUI.text = currentTime.ToString();
+        timerUI.text = currentTime.ToString("f1");
         timerStarted = false;
 
         startTime = Time.time;
@@ -63,7 +63,7 @@ public class CanvasScript : MonoBehaviour
         if (timerStarted)
         {
             currentTime -= Time.deltaTime;
-            timerUI.text = currentTime.ToString();
+            timerUI.text = currentTime.ToString("f1");
             if (currentTime <= 0)
             {
                 timerStarted = false;
@@ -83,6 +83,10 @@ public class CanvasScript : MonoBehaviour
         {
             timerStarted = false;
             p2ScoreUI.text = gm.p2Score.ToString();
+            ShowBanner();
+        }
+        else if (currentTime == 0 &&  gm._p1Health.Health == gm._p2Health.Health)
+        {
             ShowBanner();
         }
 

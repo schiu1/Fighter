@@ -97,7 +97,7 @@ public class P2Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player2 hit: " + enemy.name);
-            enemy.GetComponent<P1Behavior>().Player1Dmg(10);
+            enemy.GetComponent<P1Behavior>().Player1Dmg(5);
         }
     }
 
@@ -110,7 +110,7 @@ public class P2Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player2 hit: " + enemy.name);
-            enemy.GetComponent<P1Behavior>().Player1Dmg(5);
+            enemy.GetComponent<P1Behavior>().Player1Dmg(10);
         }
     }
 
@@ -123,7 +123,7 @@ public class P2Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player2 hit: " + enemy.name);
-            enemy.GetComponent<P1Behavior>().Player1Dmg(20);
+            enemy.GetComponent<P1Behavior>().Player1Dmg(15);
         }
     }
 
@@ -136,7 +136,7 @@ public class P2Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player2 hit: " + enemy.name);
-            enemy.GetComponent<P1Behavior>().Player1Dmg(30);
+            enemy.GetComponent<P1Behavior>().Player1Dmg(20);
         }
     }
 
