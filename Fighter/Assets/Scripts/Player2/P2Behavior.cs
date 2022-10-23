@@ -37,7 +37,7 @@ public class P2Behavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
-            Player2Dmg(10);
+            Player2Dmg(10, "flinch");
             Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
         }
 
@@ -54,9 +54,12 @@ public class P2Behavior : MonoBehaviour
         }
     }
 
-    public void Player2Dmg(int dmg)
+    public void Player2Dmg(int dmg, string pushType)
     {
-        anim.SetTrigger("Flinch");
+        if(pushType == "flinch")
+        {
+            anim.SetTrigger("Flinch");
+        }
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
         Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
