@@ -54,15 +54,23 @@ public class P2Behavior : MonoBehaviour
         }
     }
 
+    //for pushing back player when hit,
+    //need to first determine where the enemy is by using transform.playerposition - transform.enemyposition
+    //if negative, that means enemy is on the right
+    //if positive, that means enemy is on the left
+    //so push direction will be opposite of the direction of the enemy
+    //now get some sort of pushForce value and use it in AddForce(vector2, Impulse) on the player
+    //while AddForce is called, trigger pushback animation and prevent movement and attack from player
+
     public void Player2Dmg(int dmg, string pushType)
     {
+        p2Health.dmgUnit(dmg);
+        _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
+        Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
         if(pushType == "flinch")
         {
             anim.SetTrigger("Flinch");
         }
-        p2Health.dmgUnit(dmg);
-        _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
-        Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
     }
 
     public void Player2Heal(int heal)
