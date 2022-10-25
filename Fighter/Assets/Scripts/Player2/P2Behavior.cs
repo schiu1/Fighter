@@ -9,6 +9,7 @@ public class P2Behavior : MonoBehaviour
     Animator anim;
     UnitHealth p2Health;
     [SerializeField] Healthbar _healthbar = null;
+    Transform player1;
 
     float startTime;
     bool started;
@@ -19,6 +20,7 @@ public class P2Behavior : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         p2controls = gameObject.GetComponent<P2Controls>();
         p2combat = gameObject.GetComponent<P2Combat>();
+        player1 = GameObject.Find("Player1").transform;
 
         startTime = Time.time;
         started = false;
@@ -67,9 +69,23 @@ public class P2Behavior : MonoBehaviour
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
         Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
-        if(pushType == "flinch")
+
+        if (pushType == "flinch")
         {
             anim.SetTrigger("Flinch");
+        }
+        else if (pushType == "pushback")
+        {
+            anim.SetTrigger("Push");
+            p2controls.p2CanMove = false;
+            if (gameObject.transform.position.x - player1.position.x > 0 && !p2controls.facingLeft)
+            {
+                p2controls.Flip();
+            }
+            else if (gameObject.transform.position.x - player1.position.x < 0 && p2controls.facingLeft)
+            {
+                p2controls.Flip();
+            }
         }
     }
 

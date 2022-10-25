@@ -1257,6 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJumping: 0
+  facingLeft: 0
   p2CanMove: 1
   canCrouch: 1
   isCrouching: 0

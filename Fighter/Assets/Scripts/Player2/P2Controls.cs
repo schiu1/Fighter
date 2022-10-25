@@ -25,7 +25,7 @@ public class P2Controls : MonoBehaviour
     float direction;
     int airDash = 0;
 
-    bool facingLeft;
+    public bool facingLeft;
     [HideInInspector]
     public bool p2CanMove; // temp set to true until i implement GameManager
     public bool canCrouch;
@@ -179,7 +179,7 @@ public class P2Controls : MonoBehaviour
 
     }
 
-    void Flip()
+    public void Flip()
     {
         facingLeft = !facingLeft;
         Vector2 currentScale = gameObject.transform.localScale;
