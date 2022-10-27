@@ -9,7 +9,6 @@ public class P2Behavior : MonoBehaviour
     Animator anim;
     UnitHealth p2Health;
     [SerializeField] Healthbar _healthbar = null;
-    Transform player1;
 
     float startTime;
     bool started;
@@ -20,7 +19,6 @@ public class P2Behavior : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         p2controls = gameObject.GetComponent<P2Controls>();
         p2combat = gameObject.GetComponent<P2Combat>();
-        player1 = GameObject.Find("Player1").transform;
 
         startTime = Time.time;
         started = false;
@@ -39,7 +37,7 @@ public class P2Behavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
-            Player2Dmg(10, "flinch");
+            Player2Dmg(10);
             Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
         }
 
@@ -66,33 +64,11 @@ public class P2Behavior : MonoBehaviour
     while AddForce is called, trigger pushback animation and prevent movement and attack from player
     */
 
-    public void Player2Dmg(int dmg, string pushType)
+    public void Player2Dmg(int dmg)
     {
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
-        Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);
-
-        if (pushType == "flinch")
-        {
-            anim.SetTrigger("Flinch");
-        }
-        else if (pushType == "pushback")
-        {
-            anim.SetTrigger("Push");
-            p2controls.p2CanMove = false;
-            if (gameObject.transform.position.x - player1.position.x > 0 && !p2controls.facingLeft)
-            {
-                //if !p2controls.facingLeft
-                p2controls.Flip();
-                //call p2controls.pushback to the right direction
-            }
-            else if (gameObject.transform.position.x - player1.position.x < 0 && p2controls.facingLeft)
-            {
-                //if p2controls.facingLeft
-                p2controls.Flip();
-                //call p2controls.pushback to the left direction
-            }
-        }
+        Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);    
     }
 
     public void Player2Heal(int heal)

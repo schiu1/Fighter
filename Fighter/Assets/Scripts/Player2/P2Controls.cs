@@ -31,6 +31,9 @@ public class P2Controls : MonoBehaviour
     public bool canCrouch;
     public bool isCrouching;
 
+    bool pushLeft;
+    bool pushRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,9 @@ public class P2Controls : MonoBehaviour
         p2CanMove = false;
         canCrouch = false;
         isCrouching = false;
+
+        pushLeft = false;
+        pushRight = false;
     }
 
     // Update is called once per frame
@@ -148,6 +154,19 @@ public class P2Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (pushLeft)
+        {
+            Debug.Log("pushing left");
+            rb2D.AddForce(new Vector2(-15f, 0), ForceMode2D.Impulse);
+            pushLeft = false;
+        }
+        else if (pushRight)
+        {
+            Debug.Log("pushing right");
+            rb2D.AddForce(new Vector2(15f, 0), ForceMode2D.Impulse);
+            pushRight = false;
+        }
+
         if ((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed))
         {
             rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
@@ -185,6 +204,27 @@ public class P2Controls : MonoBehaviour
      * set a bool maybe to true to trigger pushback?
      * 
      */
+     public void Pushback(string pushType)
+    {
+        if (pushType == "flinch")
+        {
+            animator.SetTrigger("Flinch");
+        }
+        else if (pushType == "push")
+        {
+            animator.SetTrigger("Push");
+            if (gameObject.transform.position.x - p1.transform.position.x > 0)
+            {
+                if (!facingLeft) { Flip(); }
+                pushRight = true;
+            }
+            else if (gameObject.transform.position.x - p1.transform.position.x < 0)
+            {
+                if (facingLeft) { Flip(); }
+                pushLeft = true;
+            }
+        }
+    }
 
     public void Flip()
     {
@@ -206,6 +246,13 @@ public class P2Controls : MonoBehaviour
         p2CanMove = true;
         rb2D.isKinematic = false;
     }
+
+    void pushStart()
+    {
+        p2CanMove = false;
+        rb2D.velocity = Vector2.zero;
+    }
+    void pushEnd() { p2CanMove = true; }
 
     void crouch()
     {

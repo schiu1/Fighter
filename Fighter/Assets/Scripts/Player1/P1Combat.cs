@@ -97,7 +97,8 @@ public class P1Combat : MonoBehaviour
         foreach(Collider2D enemy in enemies)
         {
             Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(5, "flinch");
+            enemy.GetComponent<P2Behavior>().Player2Dmg(5);
+            enemy.GetComponent<P2Controls>().Pushback("flinch");
         }
     }
 
@@ -110,7 +111,8 @@ public class P1Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(10, "pushback");
+            enemy.GetComponent<P2Behavior>().Player2Dmg(10);
+            enemy.GetComponent<P2Controls>().Pushback("flinch");
         }
     }
 
@@ -123,7 +125,8 @@ public class P1Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(15, "flinch");
+            enemy.GetComponent<P2Behavior>().Player2Dmg(15);
+            enemy.GetComponent<P2Controls>().Pushback("flinch");
         }
     }
 
@@ -136,7 +139,8 @@ public class P1Combat : MonoBehaviour
         foreach (Collider2D enemy in enemies)
         {
             Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(20, "pushback");
+            enemy.GetComponent<P2Behavior>().Player2Dmg(20);
+            enemy.GetComponent<P2Controls>().Pushback("push");
         }
     }
 
