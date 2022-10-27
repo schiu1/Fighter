@@ -56,13 +56,15 @@ public class P2Behavior : MonoBehaviour
         }
     }
 
-    //for pushing back player when hit,
-    //need to first determine where the enemy is by using transform.playerposition - transform.enemyposition
-    //if negative, that means enemy is on the right
-    //if positive, that means enemy is on the left
-    //so push direction will be opposite of the direction of the enemy
-    //now get some sort of pushForce value and use it in AddForce(vector2, Impulse) on the player
-    //while AddForce is called, trigger pushback animation and prevent movement and attack from player
+    /*
+    for pushing back player when hit,
+    need to first determine where the enemy is by using transform.playerposition - transform.enemyposition
+    if negative, that means enemy is on the right
+    if positive, that means enemy is on the left
+    so push direction will be opposite of the direction of the enemy
+    now get some sort of pushForce value and use it in AddForce(vector2, Impulse) on the player
+    while AddForce is called, trigger pushback animation and prevent movement and attack from player
+    */
 
     public void Player2Dmg(int dmg, string pushType)
     {
@@ -80,11 +82,15 @@ public class P2Behavior : MonoBehaviour
             p2controls.p2CanMove = false;
             if (gameObject.transform.position.x - player1.position.x > 0 && !p2controls.facingLeft)
             {
+                //if !p2controls.facingLeft
                 p2controls.Flip();
+                //call p2controls.pushback to the right direction
             }
             else if (gameObject.transform.position.x - player1.position.x < 0 && p2controls.facingLeft)
             {
+                //if p2controls.facingLeft
                 p2controls.Flip();
+                //call p2controls.pushback to the left direction
             }
         }
     }

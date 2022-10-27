@@ -179,6 +179,13 @@ public class P2Controls : MonoBehaviour
 
     }
 
+    /*
+     * pushback method
+     * takes left or right as arguement
+     * set a bool maybe to true to trigger pushback?
+     * 
+     */
+
     public void Flip()
     {
         facingLeft = !facingLeft;
