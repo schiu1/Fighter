@@ -131,6 +131,7 @@ public class P2Controls : MonoBehaviour
                 direction = 0f;
             }
         }
+
         if (canCrouch)
         {
             if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && p2combat.p2Attacking == false)
@@ -154,20 +155,23 @@ public class P2Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+
         if (pushLeft)
         {
             Debug.Log("pushing left");
-            rb2D.AddForce(new Vector2(-15f, 0), ForceMode2D.Impulse);
+            rb2D.velocity = Vector2.zero;
+            rb2D.AddForce(new Vector2(-20f, 0), ForceMode2D.Impulse);
             pushLeft = false;
         }
         else if (pushRight)
         {
             Debug.Log("pushing right");
-            rb2D.AddForce(new Vector2(15f, 0), ForceMode2D.Impulse);
+            rb2D.velocity = Vector2.zero;
+            rb2D.AddForce(new Vector2(20f, 0), ForceMode2D.Impulse);
             pushRight = false;
         }
 
-        if ((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed))
+        if (((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed)) && !pushLeft && !pushRight)
         {
             rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
         }
@@ -213,6 +217,7 @@ public class P2Controls : MonoBehaviour
         else if (pushType == "push")
         {
             animator.SetTrigger("Push");
+            p2CanMove = false;
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
             {
                 if (!facingLeft) { Flip(); }
@@ -239,6 +244,8 @@ public class P2Controls : MonoBehaviour
         p2CanMove = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
+        moveHorizontal = 0f;
+        animator.SetFloat("Speed", 0);
     }
 
     void startMovement()
@@ -247,12 +254,14 @@ public class P2Controls : MonoBehaviour
         rb2D.isKinematic = false;
     }
 
+    /*for pushback
     void pushStart()
     {
         p2CanMove = false;
         rb2D.velocity = Vector2.zero;
     }
     void pushEnd() { p2CanMove = true; }
+    */
 
     void crouch()
     {
