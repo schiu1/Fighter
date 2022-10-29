@@ -160,14 +160,14 @@ public class P2Controls : MonoBehaviour
         {
             Debug.Log("pushing left");
             rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(-20f, 0), ForceMode2D.Impulse);
+            rb2D.AddForce(new Vector2(-15f, 0), ForceMode2D.Impulse);
             pushLeft = false;
         }
         else if (pushRight)
         {
             Debug.Log("pushing right");
             rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(20f, 0), ForceMode2D.Impulse);
+            rb2D.AddForce(new Vector2(15f, 0), ForceMode2D.Impulse);
             pushRight = false;
         }
 
@@ -202,22 +202,18 @@ public class P2Controls : MonoBehaviour
 
     }
 
-    /*
-     * pushback method
-     * takes left or right as arguement
-     * set a bool maybe to true to trigger pushback?
-     * 
-     */
      public void Pushback(string pushType)
-    {
+     {
         if (pushType == "flinch")
         {
             animator.SetTrigger("Flinch");
         }
         else if (pushType == "push")
         {
-            animator.SetTrigger("Push");
             p2CanMove = false;
+            moveHorizontal = 0;
+            p2combat.p2CanAttack = false;
+            animator.SetTrigger("Push");
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
             {
                 if (!facingLeft) { Flip(); }
@@ -229,7 +225,7 @@ public class P2Controls : MonoBehaviour
                 pushLeft = true;
             }
         }
-    }
+     }
 
     public void Flip()
     {
@@ -237,6 +233,13 @@ public class P2Controls : MonoBehaviour
         Vector2 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
+    }
+
+    void PushEnd()
+    {
+        p2CanMove = true;
+        rb2D.isKinematic = false; // for if player is hit between stopmovement and startmovement like during attack 
+        p2combat.p2CanAttack = true;
     }
 
     void stopMovement()
@@ -253,15 +256,6 @@ public class P2Controls : MonoBehaviour
         p2CanMove = true;
         rb2D.isKinematic = false;
     }
-
-    /*for pushback
-    void pushStart()
-    {
-        p2CanMove = false;
-        rb2D.velocity = Vector2.zero;
-    }
-    void pushEnd() { p2CanMove = true; }
-    */
 
     void crouch()
     {
