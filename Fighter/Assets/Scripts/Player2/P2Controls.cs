@@ -213,6 +213,7 @@ public class P2Controls : MonoBehaviour
             p2CanMove = false;
             moveHorizontal = 0;
             p2combat.p2CanAttack = false;
+            rb2D.isKinematic = false;
             animator.SetTrigger("Push");
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
             {
@@ -254,7 +255,7 @@ public class P2Controls : MonoBehaviour
     void startMovement()
     {
         p2CanMove = true;
-        rb2D.isKinematic = false;
+        rb2D.isKinematic = false; //for allowing player to move once again in general cases
     }
 
     void crouch()
