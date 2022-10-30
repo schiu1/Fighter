@@ -31,8 +31,8 @@ public class P2Controls : MonoBehaviour
     public bool canCrouch;
     public bool isCrouching;
 
-    bool pushLeft;
-    bool pushRight;
+    bool pushback;
+    float pushForce;
 
     // Start is called before the first frame update
     void Start()
@@ -60,8 +60,8 @@ public class P2Controls : MonoBehaviour
         canCrouch = false;
         isCrouching = false;
 
-        pushLeft = false;
-        pushRight = false;
+        pushback = false;
+        pushForce = 0f;
     }
 
     // Update is called once per frame
@@ -155,23 +155,15 @@ public class P2Controls : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (pushLeft)
+        if (pushback)
         {
-            Debug.Log("pushing left");
             rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(-15f, 0), ForceMode2D.Impulse);
-            pushLeft = false;
-        }
-        else if (pushRight)
-        {
-            Debug.Log("pushing right");
-            rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(15f, 0), ForceMode2D.Impulse);
-            pushRight = false;
+            rb2D.AddForce(new Vector2(pushForce, 0), ForceMode2D.Impulse);
+            pushForce = 0;
+            pushback = false;
         }
 
-        if (((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed)) && !pushLeft && !pushRight)
+        if (((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed)) && !pushback)
         {
             rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
         }
@@ -218,12 +210,16 @@ public class P2Controls : MonoBehaviour
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
             {
                 if (!facingLeft) { Flip(); }
-                pushRight = true;
+                pushForce = 15f;
+                pushback = true;
+                Debug.Log("pushing right");
             }
             else if (gameObject.transform.position.x - p1.transform.position.x < 0)
             {
                 if (facingLeft) { Flip(); }
-                pushLeft = true;
+                pushForce = -15f;
+                pushback = true;
+                Debug.Log("pushing left");
             }
         }
      }
