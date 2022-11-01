@@ -24,6 +24,8 @@ public class P1Combat : MonoBehaviour
     [SerializeField] Transform kickAttackPoint = null;
     [SerializeField] Vector2 kickAttackRange = Vector2.zero;
 
+    [SerializeField] AudioSource hitSoundEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -162,6 +164,7 @@ public class P1Combat : MonoBehaviour
             Debug.Log("player1 hit: " + enemy.name);
             enemy.GetComponent<P2Behavior>().Player2Dmg(20);
             enemy.GetComponent<P2Controls>().Pushback("push");
+            hitSoundEffect.Play();
         }
     }
 
