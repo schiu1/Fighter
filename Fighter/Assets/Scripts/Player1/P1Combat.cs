@@ -24,7 +24,7 @@ public class P1Combat : MonoBehaviour
     [SerializeField] Transform kickAttackPoint = null;
     [SerializeField] Vector2 kickAttackRange = Vector2.zero;
 
-    [SerializeField] AudioSource hitSoundEffect;
+    [SerializeField] AudioSource hitSoundEffect = null;
 
     // Start is called before the first frame update
     void Start()
