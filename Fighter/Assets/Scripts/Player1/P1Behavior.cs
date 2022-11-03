@@ -55,7 +55,6 @@ public class P1Behavior : MonoBehaviour
 
     public void Player1Dmg(int dmg)
     {
-        anim.SetTrigger("Flinch");
         p1Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
     }
@@ -69,6 +68,8 @@ public class P1Behavior : MonoBehaviour
     void Die()
     {
         Debug.Log("p2 killed");
+        p1controls.GetComponent<Rigidbody2D>().isKinematic = true;
+        p1controls.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         anim.SetBool("IsKO", true);
         p1controls.p1CanMove = false;
         p1controls.canCrouch = false;

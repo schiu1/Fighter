@@ -31,6 +31,9 @@ public class P1Controls : MonoBehaviour
     public bool canCrouch;
     public bool isCrouching;
 
+    bool pushback;
+    float pushForce;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,9 @@ public class P1Controls : MonoBehaviour
         p1CanMove = false;
         canCrouch = false;
         isCrouching = false;
+
+        pushback = false;
+        pushForce = 0f;
     }
 
     // Update is called once per frame
@@ -148,6 +154,15 @@ public class P1Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (pushback)
+        {
+            Debug.Log("in pushback");
+            rb2D.velocity = Vector2.zero;
+            rb2D.AddForce(new Vector2(pushForce, 0), ForceMode2D.Impulse);
+            pushForce = 0;
+            pushback = false;
+        }
+
         if ((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed))
         {
             rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
@@ -179,6 +194,36 @@ public class P1Controls : MonoBehaviour
         
     }
 
+    public void Pushback(string pushType)
+    {
+        if(pushType == "flinch")
+        {
+            animator.SetTrigger("Flinch");
+        }
+        else if (pushType == "push")
+        {
+            p1CanMove = false;
+            moveHorizontal = 0;
+            p1combat.p1CanAttack = false;
+            rb2D.isKinematic = false;
+            animator.SetTrigger("Push");
+            if(gameObject.transform.position.x - p2.transform.position.x > 0)
+            {
+                if (facingRight) { Flip(); }
+                pushForce = 15f;
+                pushback = true;
+                Debug.Log("pushing right");
+            }
+            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            {
+                if (!facingRight) { Flip(); }
+                pushForce = -15f;
+                pushback = true;
+                Debug.Log("pushing left");
+            }
+        }
+    }
+
     void Flip()
     {
         facingRight = !facingRight;
@@ -187,11 +232,20 @@ public class P1Controls : MonoBehaviour
         gameObject.transform.localScale = currentScale;
     }
 
+    void PushEnd()
+    {
+        p1CanMove = true;
+        rb2D.isKinematic = false; // for if player is hit between stopmovement and startmovement like during attack 
+        p1combat.p1CanAttack = true;
+    }
+
     void stopMovement()
     {
         p1CanMove = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
+        moveHorizontal = 0f;
+        animator.SetFloat("Speed", 0);
     }
 
     void startMovement()
