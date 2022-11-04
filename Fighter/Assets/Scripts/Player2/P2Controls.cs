@@ -222,6 +222,13 @@ public class P2Controls : MonoBehaviour
                 Debug.Log("pushing left");
             }
         }
+        /* knockdown here
+         * same flip logic as push
+         * maybe have KDAir and KDGround bools to trigger each anim
+         * if KDAir == true call trigger to animator for falling anim and set to false
+         * when player hits ground (use isJumping i guess) and KDGround == true, call trigger
+         * KDGround will always come after KDAir in animator
+         */
      }
 
     public void Flip()

@@ -106,6 +106,7 @@ public class P1Combat : MonoBehaviour
             }
             else
             {
+                //put knockdown here instead
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
         }
@@ -127,6 +128,7 @@ public class P1Combat : MonoBehaviour
             }
             else
             {
+                //put knockdown here instead
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
         }
@@ -148,6 +150,7 @@ public class P1Combat : MonoBehaviour
             }
             else
             {
+                //put knockdown here instead
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
         }
