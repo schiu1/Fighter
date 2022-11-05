@@ -33,6 +33,7 @@ public class P2Controls : MonoBehaviour
 
     bool pushback;
     float pushForce;
+    bool KDGround;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,7 @@ public class P2Controls : MonoBehaviour
 
         pushback = false;
         pushForce = 0f;
+        KDGround = false;
     }
 
     // Update is called once per frame
@@ -155,6 +157,11 @@ public class P2Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isJumping == false && KDGround == true)
+        {
+            animator.SetTrigger("KDGround");
+            KDGround = false;
+        }
         if (pushback)
         {
             rb2D.velocity = Vector2.zero;
@@ -220,6 +227,30 @@ public class P2Controls : MonoBehaviour
                 pushForce = -15f;
                 pushback = true;
                 Debug.Log("pushing left");
+            }
+        }
+        else if (pushType == "knockdown") //very similar to push code, might merge this later
+        {
+            p2CanMove = false;
+            moveHorizontal = 0;
+            p2combat.p2CanAttack = false;
+            rb2D.isKinematic = false;
+            animator.SetTrigger("KDAir");
+            if (gameObject.transform.position.x - p1.transform.position.x > 0)
+            {
+                if (!facingLeft) { Flip(); }
+                pushForce = 15f;
+                pushback = true;
+                KDGround = true;
+                Debug.Log("KD right");
+            }
+            else if (gameObject.transform.position.x - p1.transform.position.x < 0)
+            {
+                if (facingLeft) { Flip(); }
+                pushForce = -15f;
+                pushback = true;
+                KDGround = true;
+                Debug.Log("KD left");
             }
         }
         /* knockdown here

@@ -102,11 +102,10 @@ public class P1Combat : MonoBehaviour
             enemy.GetComponent<P2Behavior>().Player2Dmg(5);
             if (enemy.GetComponent<P2Controls>().isJumping)
             {
-                enemy.GetComponent<P2Controls>().Pushback("push");
+                enemy.GetComponent<P2Controls>().Pushback("knockdown");
             }
             else
             {
-                //put knockdown here instead
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
         }
@@ -124,11 +123,10 @@ public class P1Combat : MonoBehaviour
             enemy.GetComponent<P2Behavior>().Player2Dmg(10);
             if (enemy.GetComponent<P2Controls>().isJumping)
             {
-                enemy.GetComponent<P2Controls>().Pushback("push");
+                enemy.GetComponent<P2Controls>().Pushback("knockdown");
             }
             else
             {
-                //put knockdown here instead
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
         }
@@ -146,11 +144,10 @@ public class P1Combat : MonoBehaviour
             enemy.GetComponent<P2Behavior>().Player2Dmg(15);
             if (enemy.GetComponent<P2Controls>().isJumping)
             {
-                enemy.GetComponent<P2Controls>().Pushback("push");
+                enemy.GetComponent<P2Controls>().Pushback("knockdown");
             }
             else
             {
-                //put knockdown here instead
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
         }
@@ -166,7 +163,14 @@ public class P1Combat : MonoBehaviour
         {
             Debug.Log("player1 hit: " + enemy.name);
             enemy.GetComponent<P2Behavior>().Player2Dmg(20);
-            enemy.GetComponent<P2Controls>().Pushback("push");
+            if (enemy.GetComponent<P2Controls>().isJumping)
+            {
+                enemy.GetComponent<P2Controls>().Pushback("knockdown");
+            }
+            else
+            {
+                enemy.GetComponent<P2Controls>().Pushback("push");
+            }
             hitSoundEffect.Play();
         }
     }
