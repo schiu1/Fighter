@@ -32,7 +32,8 @@ public class P2Controls : MonoBehaviour
     public bool isCrouching;
 
     bool pushback;
-    float pushForce;
+    float pushForceX;
+    float pushForceY;
     bool KDGround;
 
     // Start is called before the first frame update
@@ -62,7 +63,8 @@ public class P2Controls : MonoBehaviour
         isCrouching = false;
 
         pushback = false;
-        pushForce = 0f;
+        pushForceX = 0f;
+        pushForceY = 0f;
         KDGround = false;
     }
 
@@ -165,8 +167,9 @@ public class P2Controls : MonoBehaviour
         if (pushback)
         {
             rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(pushForce, 0), ForceMode2D.Impulse);
-            pushForce = 0;
+            rb2D.AddForce(new Vector2(pushForceX, pushForceY), ForceMode2D.Impulse);
+            pushForceX = 0;
+            pushForceY = 0;
             pushback = false;
         }
 
@@ -217,19 +220,18 @@ public class P2Controls : MonoBehaviour
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
             {
                 if (!facingLeft) { Flip(); }
-                pushForce = 15f;
-                pushback = true;
+                pushForceX = 15f;
                 Debug.Log("pushing right");
             }
             else if (gameObject.transform.position.x - p1.transform.position.x < 0)
             {
                 if (facingLeft) { Flip(); }
-                pushForce = -15f;
-                pushback = true;
+                pushForceX = -15f;
                 Debug.Log("pushing left");
             }
+            pushback = true;
         }
-        else if (pushType == "knockdown") //very similar to push code, might merge this later
+        else if (pushType == "knockdown") //very similar to push code, might change this later
         {
             p2CanMove = false;
             moveHorizontal = 0;
@@ -239,19 +241,18 @@ public class P2Controls : MonoBehaviour
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
             {
                 if (!facingLeft) { Flip(); }
-                pushForce = 15f;
-                pushback = true;
-                KDGround = true;
+                pushForceX = 15f;
                 Debug.Log("KD right");
             }
             else if (gameObject.transform.position.x - p1.transform.position.x < 0)
             {
                 if (facingLeft) { Flip(); }
-                pushForce = -15f;
-                pushback = true;
-                KDGround = true;
+                pushForceX = -15f;
                 Debug.Log("KD left");
             }
+            pushForceY = 5f;
+            pushback = true;
+            KDGround = true;
         }
         /* knockdown here
          * same flip logic as push
