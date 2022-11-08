@@ -95,6 +95,18 @@ public class P2Controls : MonoBehaviour
                 capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
                 capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
             }
+            //check who wins
+            //if this is winner, set Win to true
+            if(GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
+            {
+                animator.SetBool("Win", true);
+            }
+            else if (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health)
+            {
+                animator.SetBool("Lost", true);
+            }
+            //if this is loser, set Lost to true
+
         }
 
         if (p2CanMove)
