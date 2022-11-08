@@ -95,18 +95,21 @@ public class P2Controls : MonoBehaviour
                 capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
                 capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
             }
-            //check who wins
-            //if this is winner, set Win to true
+            
+            //do win or lose anim
             if(GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
             {
+                //the Win bool as true will make the player go to look at friend on the right anim
                 animator.SetBool("Win", true);
+                //spawn an object to the right of the player with the sprite 
+                //make new object move left, towards the player
+                //when they collide, new object dissapear and set bool Friend to true
+                //this will make the player looking at friend to spin with friend
             }
             else if (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health)
             {
                 animator.SetBool("Lost", true);
             }
-            //if this is loser, set Lost to true
-
         }
 
         if (p2CanMove)

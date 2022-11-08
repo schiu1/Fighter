@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         else if(type == "round")
         {
             Debug.Log("round end");
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(6);
             _p1Health.Health = _p1Health.MaxHealth;
             _p2Health.Health = _p2Health.MaxHealth;
             round += 1;
