@@ -36,6 +36,10 @@ public class P2Controls : MonoBehaviour
     float pushForceY;
     bool KDGround;
 
+    [SerializeField]
+    GameObject pirate;
+    bool winAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +70,8 @@ public class P2Controls : MonoBehaviour
         pushForceX = 0f;
         pushForceY = 0f;
         KDGround = false;
+
+        winAnim = false;
     }
 
     // Update is called once per frame
@@ -97,14 +103,12 @@ public class P2Controls : MonoBehaviour
             }
             
             //do win or lose anim
-            if(GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
+            if((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health) && !winAnim)
             {
                 //the Win bool as true will make the player go to look at friend on the right anim
                 animator.SetBool("Win", true);
-                //spawn an object to the right of the player with the sprite 
-                //make new object move left, towards the player
-                //when they collide, new object dissapear and set bool Friend to true
-                //this will make the player looking at friend to spin with friend
+                StartCoroutine(WinAnimation());
+                winAnim = true;
             }
             else if (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health)
             {
@@ -219,7 +223,21 @@ public class P2Controls : MonoBehaviour
 
     }
 
-     public void Pushback(string pushType)
+    IEnumerator WinAnimation()
+    {
+        //spawn an object to the right of the player with the sprite
+        yield return new  WaitForSeconds(1.2f);
+
+        float x = gameObject.transform.position.x;
+        float y = gameObject.transform.position.y;
+
+        GameObject pirateObject = Instantiate(pirate, new Vector2(x + 3, y), Quaternion.identity);
+        //make new object move left, towards the player
+        //when they collide, new object dissapear and set bool Friend to true
+        //this will make the player looking at friend to spin with friend
+    }
+
+    public void Pushback(string pushType)
      {
         if (pushType == "flinch")
         {
@@ -269,13 +287,6 @@ public class P2Controls : MonoBehaviour
             pushback = true;
             KDGround = true;
         }
-        /* knockdown here
-         * same flip logic as push
-         * maybe have KDAir and KDGround bools to trigger each anim
-         * if KDAir == true call trigger to animator for falling anim and set to false
-         * when player hits ground (use isJumping i guess) and KDGround == true, call trigger
-         * KDGround will always come after KDAir in animator
-         */
      }
 
     public void Flip()

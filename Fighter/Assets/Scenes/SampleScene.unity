@@ -1261,6 +1261,7 @@ MonoBehaviour:
   p2CanMove: 1
   canCrouch: 1
   isCrouching: 0
+  pirate: {fileID: 89396882432325939, guid: 967d25c9a2ac1444bb791f7f693ac2f1, type: 3}
 --- !u!114 &1136429161
 MonoBehaviour:
   m_ObjectHideFlags: 0
