@@ -37,7 +37,7 @@ public class P2Controls : MonoBehaviour
     bool KDGround;
 
     [SerializeField]
-    GameObject pirate;
+    GameObject pirate = null;
     bool winAnim;
 
     // Start is called before the first frame update
