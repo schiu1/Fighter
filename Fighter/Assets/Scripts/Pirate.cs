@@ -43,12 +43,16 @@ public class Pirate : MonoBehaviour
             && collision.gameObject.tag == "Player1")
         {
             Destroy(gameObject);
+            GameObject p1 = GameObject.Find("Player1");
+            //p1.GetComponent<P1Controls>().WinAnimSpin();
         }
 
         else if ((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
             && collision.gameObject.tag == "Player2")
         {
             Destroy(gameObject);
+            GameObject p2 = GameObject.Find("Player2");
+            p2.GetComponent<P2Controls>().WinAnimSpin();
         }
     }
 }

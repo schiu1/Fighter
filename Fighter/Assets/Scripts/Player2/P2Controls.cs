@@ -106,7 +106,6 @@ public class P2Controls : MonoBehaviour
             if((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health) && !winAnim)
             {
                 //the Win bool as true will make the player go to look at friend on the right anim
-                animator.SetBool("Win", true);
                 StartCoroutine(WinAnimation());
                 winAnim = true;
             }
@@ -226,15 +225,29 @@ public class P2Controls : MonoBehaviour
     IEnumerator WinAnimation()
     {
         //spawn an object to the right of the player with the sprite
+        //make new object move left, towards the player
+        //when they collide, new object dissapear and set bool Friend to true
+        //this will make the player looking at friend to spin with friend
         yield return new  WaitForSeconds(1.2f);
 
         float x = gameObject.transform.position.x;
         float y = gameObject.transform.position.y;
 
-        GameObject pirateObject = Instantiate(pirate, new Vector2(x + 3, y), Quaternion.identity);
-        //make new object move left, towards the player
-        //when they collide, new object dissapear and set bool Friend to true
-        //this will make the player looking at friend to spin with friend
+        animator.SetBool("Win", true);
+        GameObject pirateObject = Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
+    }
+
+    void WinAnimFaceRight()
+    {
+        if (!facingLeft)
+        {
+            Flip();
+        }
+    }
+
+    public void WinAnimSpin()
+    {
+        animator.SetTrigger("WinSpin");
     }
 
     public void Pushback(string pushType)
