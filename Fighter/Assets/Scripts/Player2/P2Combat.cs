@@ -100,7 +100,7 @@ public class P2Combat : MonoBehaviour
             enemy.GetComponent<P1Behavior>().Player1Dmg(5);
             if (enemy.GetComponent<P1Controls>().isJumping)
             {
-                enemy.GetComponent<P1Controls>().Pushback("push");
+                enemy.GetComponent<P1Controls>().Pushback("knockdown");
             }
             else
             {
@@ -121,7 +121,7 @@ public class P2Combat : MonoBehaviour
             enemy.GetComponent<P1Behavior>().Player1Dmg(10);
             if (enemy.GetComponent<P1Controls>().isJumping)
             {
-                enemy.GetComponent<P1Controls>().Pushback("push");
+                enemy.GetComponent<P1Controls>().Pushback("knockdown");
             }
             else
             {
@@ -142,7 +142,7 @@ public class P2Combat : MonoBehaviour
             enemy.GetComponent<P1Behavior>().Player1Dmg(15);
             if (enemy.GetComponent<P1Controls>().isJumping)
             {
-                enemy.GetComponent<P1Controls>().Pushback("push");
+                enemy.GetComponent<P1Controls>().Pushback("knockdown");
             }
             else
             {
@@ -161,7 +161,14 @@ public class P2Combat : MonoBehaviour
         {
             Debug.Log("player2 hit: " + enemy.name);
             enemy.GetComponent<P1Behavior>().Player1Dmg(20);
-            enemy.GetComponent<P1Controls>().Pushback("push");
+            if (enemy.GetComponent<P1Controls>().isJumping)
+            {
+                enemy.GetComponent<P1Controls>().Pushback("knockdown");
+            }
+            else
+            {
+                enemy.GetComponent<P1Controls>().Pushback("push");
+            }
         }
     }
 

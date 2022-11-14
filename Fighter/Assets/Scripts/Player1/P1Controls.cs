@@ -32,7 +32,13 @@ public class P1Controls : MonoBehaviour
     public bool isCrouching;
 
     bool pushback;
-    float pushForce;
+    float pushForceX;
+    float pushForceY;
+    bool KDGround;
+
+    [SerializeField]
+    GameObject pirate = null;
+    bool winAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +67,8 @@ public class P1Controls : MonoBehaviour
         isCrouching = false;
 
         pushback = false;
-        pushForce = 0f;
+        pushForceX = 0f;
+        pushForceY = 0f;
     }
 
     // Update is called once per frame
@@ -154,12 +161,18 @@ public class P1Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isJumping == false && KDGround == true)
+        {
+            animator.SetTrigger("KDGround");
+            KDGround = false;
+        }
         if (pushback)
         {
             Debug.Log("in pushback");
             rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(pushForce, 0), ForceMode2D.Impulse);
-            pushForce = 0;
+            rb2D.AddForce(new Vector2(pushForceX, pushForceY), ForceMode2D.Impulse);
+            pushForceX = 0;
+            pushForceY = 0;
             pushback = false;
         }
 
@@ -210,17 +223,39 @@ public class P1Controls : MonoBehaviour
             if(gameObject.transform.position.x - p2.transform.position.x > 0)
             {
                 if (facingRight) { Flip(); }
-                pushForce = 15f;
-                pushback = true;
+                pushForceX = 15f;
                 Debug.Log("pushing right");
             }
             else if (gameObject.transform.position.x - p2.transform.position.x < 0)
             {
                 if (!facingRight) { Flip(); }
-                pushForce = -15f;
-                pushback = true;
+                pushForceX = -15f;
                 Debug.Log("pushing left");
             }
+            pushback = true;
+        }
+        else if (pushType == "knockdown")
+        {
+            p1CanMove = false;
+            moveHorizontal = 0;
+            p1combat.p1CanAttack = false;
+            rb2D.isKinematic = false;
+            animator.SetTrigger("KDAir");
+            if(gameObject.transform.position.x - p2.transform.position.x > 0)
+            {
+                if (facingRight) { Flip(); }
+                pushForceX = 15f;
+                Debug.Log("KD right");
+            }
+            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            {
+                if (!facingRight) { Flip(); }
+                pushForceX = -15f;
+                Debug.Log("KD left");
+            }
+            pushForceY = 5f;
+            pushback = true;
+            KDGround = true;
         }
     }
 

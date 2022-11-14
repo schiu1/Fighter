@@ -67,14 +67,11 @@ public class P1Behavior : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("p2 killed");
-        p1controls.GetComponent<Rigidbody2D>().isKinematic = true;
-        p1controls.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Debug.Log("p1 killed");
         anim.SetBool("IsKO", true);
         p1controls.p1CanMove = false;
         p1controls.canCrouch = false;
         p1combat.p1CanAttack = false;
-        GetComponent<CapsuleCollider2D>().enabled = false;
         GameManager.gameManager.endRound("player");
         this.enabled = false;
     }
