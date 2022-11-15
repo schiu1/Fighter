@@ -69,6 +69,8 @@ public class P1Controls : MonoBehaviour
         pushback = false;
         pushForceX = 0f;
         pushForceY = 0f;
+
+        winAnim = false;
     }
 
     // Update is called once per frame
@@ -98,7 +100,19 @@ public class P1Controls : MonoBehaviour
                 capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
                 capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
             }
+
+            //do win or lose anim
+            if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
+            {
+                StartCoroutine(WinAnimation());
+                winAnim = true;
+            }
+            else if (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
+            {
+                animator.SetBool("Lost", true);
+            }
         }
+
 
         if (p1CanMove)
         {
@@ -205,6 +219,31 @@ public class P1Controls : MonoBehaviour
         }
 
         
+    }
+
+    IEnumerator WinAnimation()
+    {
+        yield return new WaitForSeconds(1.2f);
+
+        float x = gameObject.transform.position.x;
+        float y = gameObject.transform.position.y;
+
+        animator.SetBool("Win", true);
+
+        Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
+    }
+
+    void WinAnimFaceRight()
+    {
+        if (facingRight)
+        {
+            Flip();
+        }
+    }
+
+    public void WinAnimSpin()
+    {
+        animator.SetTrigger("WinSpin");
     }
 
     public void Pushback(string pushType)

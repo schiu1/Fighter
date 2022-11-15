@@ -234,7 +234,7 @@ public class P2Controls : MonoBehaviour
         float y = gameObject.transform.position.y;
 
         animator.SetBool("Win", true);
-        GameObject pirateObject = Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
+        Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
     }
 
     void WinAnimFaceRight()

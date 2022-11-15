@@ -44,7 +44,7 @@ public class Pirate : MonoBehaviour
         {
             Destroy(gameObject);
             GameObject p1 = GameObject.Find("Player1");
-            //p1.GetComponent<P1Controls>().WinAnimSpin();
+            p1.GetComponent<P1Controls>().WinAnimSpin();
         }
 
         else if ((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
