@@ -5,6 +5,24 @@ public class AudioManager : MonoBehaviour
 {
     //make this a singleton so that Theme is persistent in Start()
 
+    public static AudioManager audioManager;
+
+    [SerializeField]
+    Sound[] sounds;
+    
+    void Awake()
+    {
+        if(audioManager != null && audioManager != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            audioManager = this;
+            DontDestroyOnLoad(audioManager);
+        }
+    }
+
     //when calling to play a sound clip, it gets it from an AudioSource component of same name
     //so instead of creating AudioSource components manually, spamming the gameobject, we use this to automate it
     //this script will automatically create an AudioSource in the same gameobject for each Sound type object in the Sound[] clips array
