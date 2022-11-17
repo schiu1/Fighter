@@ -8,10 +8,11 @@ public class AudioManager : MonoBehaviour
     public static AudioManager audioManager;
 
     [SerializeField]
-    Sound[] sounds;
+    Sound[] sounds = null;
     
     void Awake()
     {
+        //check to see if original AudioManager
         if(audioManager != null && audioManager != this)
         {
             Destroy(this);
@@ -21,8 +22,37 @@ public class AudioManager : MonoBehaviour
             audioManager = this;
             DontDestroyOnLoad(audioManager);
         }
+
+        //for each sound in array, 
+        foreach (Sound s in sounds)
+        {
+            //assign the AudioSource variable in Sound an instance of AudioSource
+            //and assign the properties saved in Sound obj to the AudioSource obj
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.name = s.soundName;
+            s.source.volume = s.volume;
+            s.source.clip = s.clip;
+            s.source.loop = s.loop;
+        }
     }
 
+    public void PlaySound(string name)
+    {
+        Sound found = null;
+        foreach (Sound s in sounds)
+        {
+            if (s.soundName == name)
+            {
+                found = s;
+            }
+        }
+        if(found == null)
+        {
+            Debug.Log("Sound with " + name + " was not found");
+            return;
+        }
+        found.source.Play();
+    }
     //when calling to play a sound clip, it gets it from an AudioSource component of same name
     //so instead of creating AudioSource components manually, spamming the gameobject, we use this to automate it
     //this script will automatically create an AudioSource in the same gameobject for each Sound type object in the Sound[] clips array
