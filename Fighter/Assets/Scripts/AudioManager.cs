@@ -36,6 +36,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        PlaySound("Theme");
+    }
+
     public void PlaySound(string name)
     {
         Sound found = null;

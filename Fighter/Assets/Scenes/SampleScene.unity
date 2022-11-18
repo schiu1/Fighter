@@ -1022,9 +1022,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - soundName: Test
-    clip: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
-    volume: 0.123
+  - soundName: Theme
+    clip: {fileID: 8300000, guid: 26364aaf1f64b40c1a047b0bacfbd10e, type: 3}
+    volume: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - soundName: Punch
+    clip: {fileID: 8300000, guid: 40cda279da2faea43ad6582184440a70, type: 3}
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - soundName: Kick
+    clip: {fileID: 8300000, guid: 0e289649262c65c42a4c04f1a9cec8b3, type: 3}
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - soundName: Slash
+    clip: {fileID: 8300000, guid: 80151380c0f818243b66a78ef69c9fcd, type: 3}
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - soundName: HeavySlash
+    clip: {fileID: 8300000, guid: 5f81bdff582c2fc4488e1129bc037245, type: 3}
+    volume: 0.5
     loop: 0
     source: {fileID: 0}
 --- !u!4 &912549911
@@ -3158,4 +3178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff5c8e1af8e6e747bda8a0ffcca4e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTime: 10
+  currentTime: 99

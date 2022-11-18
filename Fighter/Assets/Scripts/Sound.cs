@@ -14,16 +14,4 @@ public class Sound
 
     [HideInInspector] //needs to be public so that AudioManager can access it
     public AudioSource source;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
