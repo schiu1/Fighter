@@ -106,6 +106,7 @@ public class P2Combat : MonoBehaviour
             {
                 enemy.GetComponent<P1Controls>().Pushback("flinch");
             }
+            AudioManager.audioManager.PlaySound("Punch");
         }
     }
 
@@ -127,6 +128,7 @@ public class P2Combat : MonoBehaviour
             {
                 enemy.GetComponent<P1Controls>().Pushback("flinch");
             }
+            AudioManager.audioManager.PlaySound("Kick");
         }
     }
 
@@ -148,6 +150,7 @@ public class P2Combat : MonoBehaviour
             {
                 enemy.GetComponent<P1Controls>().Pushback("flinch");
             }
+            AudioManager.audioManager.PlaySound("Slash");
         }
     }
 
@@ -169,6 +172,7 @@ public class P2Combat : MonoBehaviour
             {
                 enemy.GetComponent<P1Controls>().Pushback("push");
             }
+            AudioManager.audioManager.PlaySound("HeavySlash");
         }
     }
 
