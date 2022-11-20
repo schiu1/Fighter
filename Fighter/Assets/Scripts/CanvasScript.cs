@@ -8,6 +8,9 @@ public class CanvasScript : MonoBehaviour
     Text p1ScoreUI;
     Text p2ScoreUI;
 
+    Text p1WinsUI;
+    Text p2WinsUI;
+
     GameManager gm;
 
     Text roundStartNumber;
@@ -32,6 +35,9 @@ public class CanvasScript : MonoBehaviour
         p2ScoreUI = transform.Find("P2_Score").GetComponent<Text>();
         p1ScoreUI.text = gm.p1Score.ToString();
         p2ScoreUI.text = gm.p2Score.ToString();
+
+        p1WinsUI = transform.Find("P1_Wins").GetComponent<Text>();
+        p2WinsUI = transform.Find("P2_Wins").GetComponent<Text>();
 
         roundEndBanner = transform.Find("RoundOver").gameObject;
         gameBanner = transform.Find("GameOver").gameObject;

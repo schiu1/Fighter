@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public int p1Score = 0;
     public int p2Score = 0;
 
+    public int p1Wins = 0;
+    public int p2Wins = 0;
+
     public int round = 1;
 
     public bool timedOut = false;
@@ -66,8 +69,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (p1Score == 2 || p2Score == 2)
+        if (p1Score == 2)
         {
+            p1Wins += 1;
+            StartCoroutine(Reset("game"));
+        }
+        else if (p2Score == 2)
+        {
+            p2Wins += 1;
             StartCoroutine(Reset("game"));
         }
         else
