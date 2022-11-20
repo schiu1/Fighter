@@ -38,6 +38,8 @@ public class CanvasScript : MonoBehaviour
 
         p1WinsUI = transform.Find("P1_Wins").GetComponent<Text>();
         p2WinsUI = transform.Find("P2_Wins").GetComponent<Text>();
+        p1WinsUI.text = gm.p1Wins.ToString();
+        p2WinsUI.text = gm.p2Wins.ToString();
 
         roundEndBanner = transform.Find("RoundOver").gameObject;
         gameBanner = transform.Find("GameOver").gameObject;
