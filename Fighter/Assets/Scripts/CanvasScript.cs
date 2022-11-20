@@ -85,20 +85,20 @@ public class CanvasScript : MonoBehaviour
         {
             timerStarted = false;
             p1ScoreUI.text = gm.p1Score.ToString();
+            p1WinsUI.text = gm.p1Wins.ToString();
             ShowBanner();
         }
         else if (gm.p2Score.ToString() != p2ScoreUI.text)
         {
             timerStarted = false;
             p2ScoreUI.text = gm.p2Score.ToString();
+            p2WinsUI.text = gm.p2Wins.ToString();
             ShowBanner();
         }
         else if (currentTime == 0 &&  gm._p1Health.Health == gm._p2Health.Health)
         {
             ShowBanner();
         }
-
-        
     }
 
     IEnumerator StartBanners()
