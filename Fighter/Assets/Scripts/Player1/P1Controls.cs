@@ -76,100 +76,104 @@ public class P1Controls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCrouching == true)
+        if (!GameManager.gameManager.isPaused)
         {
-            p1CanMove = false;
-        }
 
-        if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
-        {
-            //prevent walking/jumping/crouching from activating
-            p1CanMove = false;
-            canCrouch = false;
-            
-            //make character stand still
-            moveHorizontal = 0f;
-            moveVertical = false;
-            animator.SetFloat("Speed", 0);
-
-            //if they are crouching when times out, similar to uncrouch()
             if (isCrouching == true)
             {
-                isCrouching = false;
-                animator.SetBool("IsCrouching", false);
-                capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
-                capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
+                p1CanMove = false;
             }
 
-            //do win or lose anim
-            if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
+            if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
             {
-                StartCoroutine(WinAnimation());
-                winAnim = true;
-            }
-            else if (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
-            {
-                animator.SetBool("Lost", true);
-            }
-        }
-
-
-        if (p1CanMove)
-        {
-            //wrap these two around if notjumping
-            moveHorizontal = Input.GetAxisRaw("P1_Walk");
-            if (Input.GetButtonDown("P1_Jump") && !isJumping)
-            {
-                moveVertical = true;
-            }
+                //prevent walking/jumping/crouching from activating
+                p1CanMove = false;
+                canCrouch = false;
             
-            animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
+                //make character stand still
+                moveHorizontal = 0f;
+                moveVertical = false;
+                animator.SetFloat("Speed", 0);
 
-            if (moveHorizontal > 0 && !facingRight)
-            {
-                Flip();
-            }
-            else if (moveHorizontal < 0 && facingRight)
-            {
-                Flip();
-            }
+                //if they are crouching when times out, similar to uncrouch()
+                if (isCrouching == true)
+                {
+                    isCrouching = false;
+                    animator.SetBool("IsCrouching", false);
+                    capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
+                    capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
+                }
 
-            //dash
-            if(Time.time > firstPress + 0.5f || direction == -moveHorizontal)
-            {
-                firstPress = 0f;
-                direction = 0f;
-            }
-            if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
-            {
-                firstPress = Time.time;
-                direction = moveHorizontal;
-            }
-            else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
-            {
-                dash = true;
-                firstPress = 0f;
-                direction = 0f;
-            }
-        }
-        if (canCrouch)
-        {
-            if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.p1Attacking == false)
-            {
-                animator.SetTrigger("Crouch");
-                animator.SetBool("IsCrouching", true);
-                isCrouching = true;
-                crouch();
-                stopMovement();
-            }
-            else if(Input.GetButtonUp("P1_Crouch") && isCrouching == true)
-            {
-                animator.SetBool("IsCrouching", false);
-                startMovement();
-                unCrouch();
-                isCrouching = false;
+                //do win or lose anim
+                if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
+                {
+                    StartCoroutine(WinAnimation());
+                    winAnim = true;
+                }
+                else if (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
+                {
+                    animator.SetBool("Lost", true);
+                }
             }
 
+
+            if (p1CanMove)
+            {
+                //wrap these two around if notjumping
+                moveHorizontal = Input.GetAxisRaw("P1_Walk");
+                if (Input.GetButtonDown("P1_Jump") && !isJumping)
+                {
+                    moveVertical = true;
+                }
+            
+                animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
+
+                if (moveHorizontal > 0 && !facingRight)
+                {
+                    Flip();
+                }
+                else if (moveHorizontal < 0 && facingRight)
+                {
+                    Flip();
+                }
+
+                //dash
+                if(Time.time > firstPress + 0.5f || direction == -moveHorizontal)
+                {
+                    firstPress = 0f;
+                    direction = 0f;
+                }
+                if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
+                {
+                    firstPress = Time.time;
+                    direction = moveHorizontal;
+                }
+                else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                {
+                    dash = true;
+                    firstPress = 0f;
+                    direction = 0f;
+                }
+            }
+            if (canCrouch)
+            {
+                if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.p1Attacking == false)
+                {
+                    animator.SetTrigger("Crouch");
+                    animator.SetBool("IsCrouching", true);
+                    isCrouching = true;
+                    crouch();
+                    stopMovement();
+                }
+                else if(!Input.GetButton("P1_Crouch") && isCrouching == true)
+                {
+                    animator.SetBool("IsCrouching", false);
+                    startMovement();
+                    unCrouch();
+                    isCrouching = false;
+                }
+
+            }
         }
     }
 

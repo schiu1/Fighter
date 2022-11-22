@@ -27,30 +27,33 @@ public class P2Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime >= 3f && !started)
+        if (!GameManager.gameManager.isPaused)
         {
-            started = true;
-            p2controls.p2CanMove = true;
-            p2controls.canCrouch = true;
-            p2combat.p2CanAttack = true;
-        }
+            if (Time.time - startTime >= 3f && !started)
+            {
+                started = true;
+                p2controls.p2CanMove = true;
+                p2controls.canCrouch = true;
+                p2combat.p2CanAttack = true;
+            }
 
-        if (Input.GetKeyDown(KeyCode.RightControl))
-        {
-            Player2Dmg(10);
-            Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
-        }
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                Player2Dmg(10);
+                Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
+            }
 
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-            Player2Heal(10);
-            Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
-        }
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                Player2Heal(10);
+                Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
+            }
 
-        //if player reaches 0 health, call Die()
-        if(p2Health.Health <= 0)
-        {
-            Die();
+            //if player reaches 0 health, call Die()
+            if(p2Health.Health <= 0)
+            {
+                Die();
+            }
         }
     }
 

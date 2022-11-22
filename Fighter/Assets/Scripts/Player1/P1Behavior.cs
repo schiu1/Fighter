@@ -26,30 +26,33 @@ public class P1Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - startTime >= 3f && !started)
+        if (!GameManager.gameManager.isPaused)
         {
-            started = true;
-            p1controls.p1CanMove = true;
-            p1controls.canCrouch = true;
-            p1combat.p1CanAttack = true;
-        }
+            if(Time.time - startTime >= 3f && !started)
+            {
+                started = true;
+                p1controls.p1CanMove = true;
+                p1controls.canCrouch = true;
+                p1combat.p1CanAttack = true;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Player1Dmg(10);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Player1Dmg(10);
             
-            Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
-        }
+                Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
+            }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Player1Heal(10);
-            Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
-        }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                Player1Heal(10);
+                Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
+            }
 
-        if(p1Health.Health <= 0)
-        {
-            Die();
+            if(p1Health.Health <= 0)
+            {
+                Die();
+            }
         }
     }
 

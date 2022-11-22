@@ -37,54 +37,56 @@ public class P2Combat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //checks CD of p1Attacking
-        if (Time.time > lastAttack + attackCD)
+        if (!GameManager.gameManager.isPaused)
         {
-            lastAttack = 0f;
-            attackCD = 0f;
-            p2Attacking = false;
-        }
-
-        if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p1Health.Health == 0)
-        {
-            p2CanAttack = false;
-        }
-
-        if (p2CanAttack)
-        {
-            if ((p2Controls.isJumping == false) && (attackCD == 0) && (p2Controls.isCrouching == false))
+            //checks CD of p1Attacking
+            if (Time.time > lastAttack + attackCD)
             {
-                if (Input.GetButtonDown("P2_Punch"))
+                lastAttack = 0f;
+                attackCD = 0f;
+                p2Attacking = false;
+            }
+
+            if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p1Health.Health == 0)
+            {
+                p2CanAttack = false;
+            }
+
+            if (p2CanAttack)
+            {
+                if ((p2Controls.isJumping == false) && (attackCD == 0) && (p2Controls.isCrouching == false))
                 {
-                    p2Attacking = true;
-                    anim.SetTrigger("Punch");
-                    lastAttack = Time.time;
-                    attackCD = 0.5f;
-                }
-                if (Input.GetButtonDown("P2_Kick"))
-                {
-                    p2Attacking = true;
-                    anim.SetTrigger("Kick");
-                    lastAttack = Time.time;
-                    attackCD = 0.8f;
-                }
-                if (Input.GetButtonDown("P2_Slash"))
-                {
-                    p2Attacking = true;
-                    anim.SetTrigger("Slash");
-                    lastAttack = Time.time;
-                    attackCD = 0.8f;
-                }
-                if (Input.GetButtonDown("P2_HeavySlash"))
-                {
-                    p2Attacking = true;
-                    anim.SetTrigger("Heavy");
-                    lastAttack = Time.time;
-                    attackCD = 0.75f;
+                    if (Input.GetButtonDown("P2_Punch"))
+                    {
+                        p2Attacking = true;
+                        anim.SetTrigger("Punch");
+                        lastAttack = Time.time;
+                        attackCD = 0.5f;
+                    }
+                    if (Input.GetButtonDown("P2_Kick"))
+                    {
+                        p2Attacking = true;
+                        anim.SetTrigger("Kick");
+                        lastAttack = Time.time;
+                        attackCD = 0.8f;
+                    }
+                    if (Input.GetButtonDown("P2_Slash"))
+                    {
+                        p2Attacking = true;
+                        anim.SetTrigger("Slash");
+                        lastAttack = Time.time;
+                        attackCD = 0.8f;
+                    }
+                    if (Input.GetButtonDown("P2_HeavySlash"))
+                    {
+                        p2Attacking = true;
+                        anim.SetTrigger("Heavy");
+                        lastAttack = Time.time;
+                        attackCD = 0.75f;
+                    }
                 }
             }
         }
-
     }
 
     //put these methods in attack anim as events
