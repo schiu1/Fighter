@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public bool timedOut = false;
 
+    public bool isPaused = false;
+
     void Awake()
     {
         if(gameManager != null && gameManager != this)
@@ -33,6 +35,21 @@ public class GameManager : MonoBehaviour
             gameManager = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            isPaused = false;
+        }
+
     }
 
     //keep track of healthbar in GameManager and Canvas
