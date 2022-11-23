@@ -107,6 +107,11 @@ public class GameManager : MonoBehaviour
         if(type == "game")
         {
             Debug.Log("game end");
+
+            Time.timeScale = 0.1f;
+            yield return new WaitForSeconds(0.3f);
+            Time.timeScale = 1f;
+            
             //extend time before this happens later to show sprite win/lose animations
             bool done = false;
             while (!done)
@@ -129,7 +134,12 @@ public class GameManager : MonoBehaviour
         else if(type == "round")
         {
             Debug.Log("round end");
-            yield return new WaitForSeconds(6);
+
+            Time.timeScale = 0.1f;
+            yield return new WaitForSeconds(0.3f);
+            Time.timeScale = 1f;
+
+            yield return new WaitForSeconds(6f);
             _p1Health.Health = _p1Health.MaxHealth;
             _p2Health.Health = _p2Health.MaxHealth;
             round += 1;
