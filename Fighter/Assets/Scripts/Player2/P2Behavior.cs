@@ -12,6 +12,10 @@ public class P2Behavior : MonoBehaviour
 
     float startTime;
     bool started;
+
+    [SerializeField]
+    GameObject hitEffect = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +75,7 @@ public class P2Behavior : MonoBehaviour
     {
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
+        Instantiate(hitEffect, transform.position, Quaternion.identity);
         Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);    
     }
 
