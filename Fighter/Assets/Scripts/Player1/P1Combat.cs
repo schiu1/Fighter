@@ -24,6 +24,9 @@ public class P1Combat : MonoBehaviour
     [SerializeField] Transform kickAttackPoint = null;
     [SerializeField] Vector2 kickAttackRange = Vector2.zero;
 
+    [SerializeField]
+    GameObject hitEffect = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -110,6 +113,9 @@ public class P1Combat : MonoBehaviour
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Punch");
+
+            Vector2 collisionPoint = enemy.ClosestPoint(transform.position);
+            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
         }
     }
 
