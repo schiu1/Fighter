@@ -137,6 +137,8 @@ public class P1Combat : MonoBehaviour
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Kick");
+            Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
+            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
         }
     }
 
@@ -159,6 +161,8 @@ public class P1Combat : MonoBehaviour
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Slash");
+            Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
+            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
         }
     }
 
@@ -181,6 +185,8 @@ public class P1Combat : MonoBehaviour
                 enemy.GetComponent<P2Controls>().Pushback("push");
             }
             AudioManager.audioManager.PlaySound("HeavySlash");
+            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
+            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
         }
     }
 
