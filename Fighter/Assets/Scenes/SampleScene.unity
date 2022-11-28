@@ -2006,7 +2006,8 @@ MonoBehaviour:
   heavyAttackRange: {x: 1.1, y: 1.82}
   kickAttackPoint: {fileID: 1921027294}
   kickAttackRange: {x: 1.82, y: 0.48}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 8372996367463582210, guid: 8cc0a011324bc2e4099f60238d8053b2,
+    type: 3}
 --- !u!114 &1293614182
 MonoBehaviour:
   m_ObjectHideFlags: 0

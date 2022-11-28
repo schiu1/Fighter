@@ -113,8 +113,7 @@ public class P1Combat : MonoBehaviour
                 enemy.GetComponent<P2Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Punch");
-
-            Vector2 collisionPoint = enemy.ClosestPoint(transform.position);
+            Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
             Instantiate(hitEffect, collisionPoint, Quaternion.identity);
         }
     }
