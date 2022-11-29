@@ -114,7 +114,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Punch");
             Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
-            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            Destroy(s, .5f);
         }
     }
 
@@ -138,7 +139,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Kick");
             Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
-            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            Destroy(s, .5f);
         }
     }
 
@@ -162,7 +164,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Slash");
             Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
-            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            Destroy(s, .5f);
         }
     }
 
@@ -186,7 +189,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("HeavySlash");
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            Destroy(s, .5f);
         }
     }
 

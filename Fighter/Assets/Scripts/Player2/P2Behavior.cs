@@ -76,7 +76,7 @@ public class P2Behavior : MonoBehaviour
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
         GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(b, .2f); //based on the particle's lifetime
+        Destroy(b, .2f); //based on the particle system's duration
         Debug.Log("p2 health: " + GameManager.gameManager._p2Health.Health);    
     }
 
