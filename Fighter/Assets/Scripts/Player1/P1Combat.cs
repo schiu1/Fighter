@@ -114,7 +114,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Punch");
             Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
     }
@@ -139,7 +140,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Kick");
             Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
     }
@@ -164,7 +166,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Slash");
             Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
     }
@@ -189,7 +192,8 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("HeavySlash");
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.identity);
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(80, 0, 0)));
+            Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
     }
