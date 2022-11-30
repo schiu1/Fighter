@@ -192,7 +192,7 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("HeavySlash");
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(80, 0, 0)));
+            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
             Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
