@@ -12,6 +12,10 @@ public class P1Behavior : MonoBehaviour
 
     float startTime;
     bool started;
+
+    [SerializeField]
+    GameObject hitEffect = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +64,8 @@ public class P1Behavior : MonoBehaviour
     {
         p1Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
+        GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(b, .2f); //based on the particle system's duration
     }
 
     public void Player1Heal(int heal)
