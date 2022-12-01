@@ -25,7 +25,9 @@ public class P1Combat : MonoBehaviour
     [SerializeField] Vector2 kickAttackRange = Vector2.zero;
 
     [SerializeField]
-    GameObject hitEffect = null;
+    GameObject slashEffect = null;
+    [SerializeField]
+    GameObject punchEffect = null;
 
     // Start is called before the first frame update
     void Start()
@@ -114,7 +116,7 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Punch");
             Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
@@ -140,7 +142,7 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Kick");
             Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
@@ -166,7 +168,7 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("Slash");
             Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
@@ -192,7 +194,7 @@ public class P1Combat : MonoBehaviour
             }
             AudioManager.audioManager.PlaySound("HeavySlash");
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(hitEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
+            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
             Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
