@@ -1539,6 +1539,10 @@ MonoBehaviour:
   heavyAttackRange: {x: 1.1, y: 1.82}
   kickAttackPoint: {fileID: 1941143097}
   kickAttackRange: {x: 1.82, y: 0.48}
+  slashEffect: {fileID: 8372996367463582210, guid: 8cc0a011324bc2e4099f60238d8053b2,
+    type: 3}
+  punchEffect: {fileID: 4323550638723485780, guid: d4cc89a795a8b2b41a0e532159708412,
+    type: 3}
 --- !u!1 &1145321436
 GameObject:
   m_ObjectHideFlags: 0
