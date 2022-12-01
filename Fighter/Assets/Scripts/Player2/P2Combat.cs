@@ -24,6 +24,11 @@ public class P2Combat : MonoBehaviour
     [SerializeField] Transform kickAttackPoint = null;
     [SerializeField] Vector2 kickAttackRange = Vector2.zero;
 
+    [SerializeField]
+    GameObject slashEffect = null;
+    [SerializeField]
+    GameObject punchEffect = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,6 +114,9 @@ public class P2Combat : MonoBehaviour
                 enemy.GetComponent<P1Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Punch");
+            Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Destroy(s, .5f);
         }
     }
 
@@ -131,6 +139,9 @@ public class P2Combat : MonoBehaviour
                 enemy.GetComponent<P1Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Kick");
+            Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Destroy(s, .5f);
         }
     }
 
@@ -153,6 +164,9 @@ public class P2Combat : MonoBehaviour
                 enemy.GetComponent<P1Controls>().Pushback("flinch");
             }
             AudioManager.audioManager.PlaySound("Slash");
+            Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
+            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Destroy(s, .5f);
         }
     }
 
@@ -175,6 +189,9 @@ public class P2Combat : MonoBehaviour
                 enemy.GetComponent<P1Controls>().Pushback("push");
             }
             AudioManager.audioManager.PlaySound("HeavySlash");
+            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
+            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
+            Destroy(s, .5f);
         }
     }
 
