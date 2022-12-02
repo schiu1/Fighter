@@ -17,6 +17,7 @@ public class P2Controls : MonoBehaviour
 
     float jumpForce;
     float fallMultiplier;
+    [HideInInspector]
     public bool isJumping;
 
     float firstPress;
@@ -25,10 +26,12 @@ public class P2Controls : MonoBehaviour
     float direction;
     int airDash = 0;
 
-    public bool facingLeft;
+    bool facingLeft;
     [HideInInspector]
     public bool p2CanMove; // temp set to true until i implement GameManager
+    [HideInInspector]
     public bool canCrouch;
+    [HideInInspector]
     public bool isCrouching;
 
     bool pushback;

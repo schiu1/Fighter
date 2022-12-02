@@ -17,6 +17,7 @@ public class P1Controls : MonoBehaviour
 
     float jumpForce;
     float fallMultiplier;
+    [HideInInspector]
     public bool isJumping;
 
     float firstPress;
@@ -28,7 +29,9 @@ public class P1Controls : MonoBehaviour
     bool facingRight;
     [HideInInspector]
     public bool p1CanMove; // temp set to true until i implement GameManager
+    [HideInInspector]
     public bool canCrouch;
+    [HideInInspector]
     public bool isCrouching;
 
     bool pushback;
