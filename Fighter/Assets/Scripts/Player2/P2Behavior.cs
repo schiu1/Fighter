@@ -16,6 +16,9 @@ public class P2Behavior : MonoBehaviour
     [SerializeField]
     GameObject hitEffect = null;
 
+    GameObject vcam;
+    Shake shake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,9 @@ public class P2Behavior : MonoBehaviour
 
         startTime = Time.time;
         started = false;
+
+        vcam = GameObject.Find("CM vcam1");
+        shake = vcam.GetComponent<Shake>();
     }
 
     // Update is called once per frame
@@ -77,6 +83,7 @@ public class P2Behavior : MonoBehaviour
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
         GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(b, .2f); //based on the particle system's duration  
+        shake.ShakeCamera(.3f, .5f);
     }
 
     public void Player2Heal(int heal)

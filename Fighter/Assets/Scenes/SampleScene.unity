@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 232833800}
   - component: {fileID: 232833802}
   - component: {fileID: 232833801}
+  - component: {fileID: 232833803}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -308,6 +309,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &232833803
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232833799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &235433713
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +387,7 @@ GameObject:
   - component: {fileID: 381176066}
   - component: {fileID: 381176065}
   - component: {fileID: 381176067}
+  - component: {fileID: 381176068}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -444,6 +463,18 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 988434096}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!114 &381176068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381176064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f489dc9b3da40c43aaee94b328ea88f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &405032372
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +757,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.55
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -750,7 +781,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0073822257, y: 0.44698998, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1600,7 +1631,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJumping: 0
-  facingLeft: 0
   p2CanMove: 1
   canCrouch: 1
   isCrouching: 0
