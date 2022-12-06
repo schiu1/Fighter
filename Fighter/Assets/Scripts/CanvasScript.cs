@@ -65,11 +65,11 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.timeScale == 0 && pauseMenu.activeSelf == false)
+        if(GameManager.gameManager.isPaused && !pauseMenu.activeSelf)
         {
             pauseMenu.SetActive(true);
         }
-        else if (Time.timeScale == 1 && pauseMenu.activeSelf == true)
+        else if (!GameManager.gameManager.isPaused && pauseMenu.activeSelf)
         {
             pauseMenu.SetActive(false);
         }
