@@ -28,6 +28,13 @@ public class CanvasScript : MonoBehaviour
 
     GameObject pauseMenu;
 
+    [SerializeField]
+    Button resumeButton;
+    [SerializeField]
+    Button optionsButton;
+    [SerializeField]
+    Button quitButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +67,12 @@ public class CanvasScript : MonoBehaviour
         started = false;
 
         pauseMenu = transform.Find("PauseMenu").gameObject;
+
+        //testing issue
+        Navigation nav = resumeButton.navigation;
+        nav.selectOnUp = quitButton;
+        nav.selectOnDown = optionsButton;
+        resumeButton.navigation = nav;
     }
 
     // Update is called once per frame
