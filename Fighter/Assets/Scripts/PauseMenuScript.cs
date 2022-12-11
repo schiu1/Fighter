@@ -6,11 +6,22 @@ using UnityEngine.EventSystems;
 public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField]
-    GameObject firstSelected;
+    GameObject firstSelected = null;
 
-    // Start is called before the first frame update
-    void OnEnable()
+    public void ToggleMenuActive()
     {
-        EventSystem.current.SetSelectedGameObject(firstSelected);
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(!gameObject.activeInHierarchy);
+            if(EventSystem.current != null && firstSelected != null)
+            {
+                EventSystem.current.SetSelectedGameObject(firstSelected);
+            }
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            gameObject.SetActive(!gameObject.activeInHierarchy);
+        }
     }
 }

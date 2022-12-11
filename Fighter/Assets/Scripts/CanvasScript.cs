@@ -26,7 +26,8 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] float currentTime;
     bool timerStarted;
 
-    GameObject pauseMenu;
+    PauseMenuScript pauseMenu;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -59,19 +60,20 @@ public class CanvasScript : MonoBehaviour
         startTime = Time.time;
         started = false;
 
-        pauseMenu = transform.Find("PauseMenu").gameObject;
+        pauseMenu = transform.Find("PauseMenu").GetComponent<PauseMenuScript>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.gameManager.isPaused && !pauseMenu.activeSelf)
+        if(GameManager.gameManager.isPaused && !pauseMenu.gameObject.activeSelf)
         {
-            pauseMenu.SetActive(true);
+            pauseMenu.ToggleMenuActive();
         }
-        else if (!GameManager.gameManager.isPaused && pauseMenu.activeSelf)
+        else if (!GameManager.gameManager.isPaused && pauseMenu.gameObject.activeSelf)
         {
-            pauseMenu.SetActive(false);
+            pauseMenu.ToggleMenuActive();
         }
 
         if(Time.time - startTime >= 3f && !started)
