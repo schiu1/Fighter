@@ -35,16 +35,19 @@ public class GameManager : MonoBehaviour
             gameManager = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
+        if (Input.GetKeyDown(KeyCode.BackQuote) && Time.timeScale == 1)
         {
             Time.timeScale = 0;
             isPaused = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0)
+        else if (Input.GetKeyDown(KeyCode.BackQuote) && Time.timeScale == 0)
         {
             Time.timeScale = 1;
             isPaused = false;

@@ -17,11 +17,15 @@ public class PauseMenuScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(firstSelected);
             }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
             gameObject.SetActive(!gameObject.activeInHierarchy);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }
