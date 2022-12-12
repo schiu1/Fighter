@@ -28,4 +28,11 @@ public class PauseMenuScript : MonoBehaviour
             Cursor.visible = false;
         }
     }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        GameManager.gameManager.isPaused = false;
+        ToggleMenuActive();
+    }
 }
