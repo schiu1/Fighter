@@ -113,17 +113,25 @@ public class P1Combat : MonoBehaviour
         //apply damage to enemy
         foreach(Collider2D enemy in enemies)
         {
-            Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(5);
-            if (enemy.GetComponent<P2Controls>().isJumping)
+            if (enemy.GetComponent<P2Controls>().isCrouching)
             {
-                enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                enemy.GetComponent<P2Controls>().BlockAttack();
             }
             else
             {
-                enemy.GetComponent<P2Controls>().Pushback("flinch");
+                Debug.Log("player1 hit: " + enemy.name);
+                enemy.GetComponent<P2Behavior>().Player2Dmg(5);
+                if (enemy.GetComponent<P2Controls>().isJumping)
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                }
+                else
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("flinch");
+                }
+                AudioManager.audioManager.PlaySound("Punch");
             }
-            AudioManager.audioManager.PlaySound("Punch");
+
             Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
             GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Destroy(s, .5f);

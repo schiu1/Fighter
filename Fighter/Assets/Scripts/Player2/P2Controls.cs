@@ -308,6 +308,12 @@ public class P2Controls : MonoBehaviour
         }
      }
 
+    public void BlockAttack()
+    {
+        Debug.Log("p2 blocked");
+        animator.SetTrigger("Block");
+    }
+
     public void Flip()
     {
         facingLeft = !facingLeft;
