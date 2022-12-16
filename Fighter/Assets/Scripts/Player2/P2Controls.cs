@@ -312,6 +312,14 @@ public class P2Controls : MonoBehaviour
     {
         Debug.Log("p2 blocked");
         animator.SetTrigger("Block");
+        if (gameObject.transform.position.x - p1.transform.position.x > 0)
+        {
+            if (!facingLeft) { Flip(); }
+        }
+        else if (gameObject.transform.position.x - p1.transform.position.x < 0)
+        {
+            if (facingLeft) { Flip(); }
+        }
     }
 
     public void Flip()
