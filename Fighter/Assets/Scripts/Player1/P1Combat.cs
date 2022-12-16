@@ -116,6 +116,7 @@ public class P1Combat : MonoBehaviour
             if (enemy.GetComponent<P2Controls>().isCrouching)
             {
                 enemy.GetComponent<P2Controls>().BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
@@ -146,17 +147,26 @@ public class P1Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
-            Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(10);
-            if (enemy.GetComponent<P2Controls>().isJumping)
+            if (enemy.GetComponent<P2Controls>().isCrouching)
             {
-                enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                enemy.GetComponent<P2Controls>().BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                enemy.GetComponent<P2Controls>().Pushback("flinch");
+                Debug.Log("player1 hit: " + enemy.name);
+                enemy.GetComponent<P2Behavior>().Player2Dmg(10);
+                if (enemy.GetComponent<P2Controls>().isJumping)
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                }
+                else
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("flinch");
+                }
+                AudioManager.audioManager.PlaySound("Kick");
             }
-            AudioManager.audioManager.PlaySound("Kick");
+
             Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
             GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Debug.Log(s.transform.rotation);
@@ -172,17 +182,26 @@ public class P1Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
-            Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(15);
-            if (enemy.GetComponent<P2Controls>().isJumping)
+            if (enemy.GetComponent<P2Controls>().isCrouching)
             {
-                enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                enemy.GetComponent<P2Controls>().BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                enemy.GetComponent<P2Controls>().Pushback("flinch");
+                Debug.Log("player1 hit: " + enemy.name);
+                enemy.GetComponent<P2Behavior>().Player2Dmg(15);
+                if (enemy.GetComponent<P2Controls>().isJumping)
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                }
+                else
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("flinch");
+                }
+                AudioManager.audioManager.PlaySound("Slash");
             }
-            AudioManager.audioManager.PlaySound("Slash");
+
             Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
             GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Debug.Log(s.transform.rotation);
@@ -198,17 +217,26 @@ public class P1Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
-            Debug.Log("player1 hit: " + enemy.name);
-            enemy.GetComponent<P2Behavior>().Player2Dmg(20);
-            if (enemy.GetComponent<P2Controls>().isJumping)
+            if (enemy.GetComponent<P2Controls>().isCrouching)
             {
-                enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                enemy.GetComponent<P2Controls>().BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                enemy.GetComponent<P2Controls>().Pushback("push");
+                Debug.Log("player1 hit: " + enemy.name);
+                enemy.GetComponent<P2Behavior>().Player2Dmg(20);
+                if (enemy.GetComponent<P2Controls>().isJumping)
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("knockdown");
+                }
+                else
+                {
+                    enemy.GetComponent<P2Controls>().Pushback("push");
+                }
+                AudioManager.audioManager.PlaySound("HeavySlash");
             }
-            AudioManager.audioManager.PlaySound("HeavySlash");
+
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
             GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
             Debug.Log(s.transform.rotation);
