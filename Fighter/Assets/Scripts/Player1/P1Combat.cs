@@ -104,6 +104,12 @@ public class P1Combat : MonoBehaviour
 
     }
 
+    IEnumerator Hitstop(float duration)
+    {
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1;
+    }
+
     //put these methods in attack anim as events
     void punch()
     {
@@ -131,6 +137,12 @@ public class P1Combat : MonoBehaviour
                     enemy.GetComponent<P2Controls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
+
+                if(GameManager.gameManager._p2Health.Health > 0)
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
             }
 
             Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
@@ -165,6 +177,12 @@ public class P1Combat : MonoBehaviour
                     enemy.GetComponent<P2Controls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Kick");
+
+                if (GameManager.gameManager._p2Health.Health > 0)
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
             }
 
             Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
@@ -200,6 +218,12 @@ public class P1Combat : MonoBehaviour
                     enemy.GetComponent<P2Controls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Slash");
+
+                if (GameManager.gameManager._p2Health.Health > 0)
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
             }
 
             Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
@@ -235,6 +259,12 @@ public class P1Combat : MonoBehaviour
                     enemy.GetComponent<P2Controls>().Pushback("push");
                 }
                 AudioManager.audioManager.PlaySound("HeavySlash");
+
+                if (GameManager.gameManager._p2Health.Health > 0)
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
             }
 
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
