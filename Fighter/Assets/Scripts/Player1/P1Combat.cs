@@ -222,7 +222,7 @@ public class P1Combat : MonoBehaviour
                 if (GameManager.gameManager._p2Health.Health > 0)
                 {
                     Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.1f));
+                    StartCoroutine(Hitstop(0.15f));
                 }
             }
 
@@ -263,13 +263,12 @@ public class P1Combat : MonoBehaviour
                 if (GameManager.gameManager._p2Health.Health > 0)
                 {
                     Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.1f));
+                    StartCoroutine(Hitstop(0.2f));
                 }
             }
 
             Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
             GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
     }

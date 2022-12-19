@@ -305,6 +305,19 @@ public class P1Controls : MonoBehaviour
         }
     }
 
+    public void BlockAttack()
+    {
+        animator.SetTrigger("Block");
+        if (gameObject.transform.position.x - p2.transform.position.x > 0)
+        {
+            if (facingRight) { Flip(); }
+        }
+        else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+        {
+            if (!facingRight) { Flip(); }
+        }
+    }
+
     void Flip()
     {
         facingRight = !facingRight;
