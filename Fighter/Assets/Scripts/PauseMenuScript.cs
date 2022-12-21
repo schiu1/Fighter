@@ -36,6 +36,12 @@ public class PauseMenuScript : MonoBehaviour
         ToggleMenuActive();
     }
 
+    public void Options()
+    {
+        ToggleMenuActive();
+        //toggle on the options menu
+    }
+
     public void Quit()
     {
         //Application.Quit(); for build version
