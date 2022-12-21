@@ -35,4 +35,10 @@ public class PauseMenuScript : MonoBehaviour
         GameManager.gameManager.isPaused = false;
         ToggleMenuActive();
     }
+
+    public void Quit()
+    {
+        //Application.Quit(); for build version
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
 }
