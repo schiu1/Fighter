@@ -7,11 +7,12 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField]
     GameObject firstSelected = null;
+    /*
     [SerializeField]
     GameObject firstOptionSelected = null;
     [SerializeField]
     GameObject optionsMenu = null;
-
+    */
     public void ToggleMenuActive()
     {
         if (!gameObject.activeInHierarchy)
@@ -33,6 +34,7 @@ public class PauseMenuScript : MonoBehaviour
         }
     }
 
+    /*
     public void ToggleOptionsActive()
     {
         if (!optionsMenu.activeInHierarchy)
@@ -54,6 +56,13 @@ public class PauseMenuScript : MonoBehaviour
         }
     }
 
+    public void Options()
+    {
+        ToggleMenuActive();
+        ToggleOptionsActive();
+        Debug.Log("options");
+    }*/
+
     public void Resume()
     {
         Time.timeScale = 1;
@@ -61,12 +70,6 @@ public class PauseMenuScript : MonoBehaviour
         ToggleMenuActive();
     }
 
-    public void Options()
-    {
-        ToggleMenuActive();
-        ToggleOptionsActive();
-        Debug.Log("options");
-    }
 
     public void Quit()
     {
