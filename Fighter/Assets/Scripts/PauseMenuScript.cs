@@ -7,6 +7,10 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField]
     GameObject firstSelected = null;
+    [SerializeField]
+    GameObject firstOptionSelected = null;
+    [SerializeField]
+    GameObject optionsMenu = null;
 
     public void ToggleMenuActive()
     {
@@ -29,6 +33,27 @@ public class PauseMenuScript : MonoBehaviour
         }
     }
 
+    public void ToggleOptionsActive()
+    {
+        if (!optionsMenu.activeInHierarchy)
+        {
+            optionsMenu.SetActive(!optionsMenu.activeInHierarchy);
+            if (EventSystem.current != null && firstSelected != null)
+            {
+                EventSystem.current.SetSelectedGameObject(firstOptionSelected);
+            }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = !Cursor.visible;
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            optionsMenu.SetActive(!optionsMenu.activeInHierarchy);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = !Cursor.visible;
+        }
+    }
+
     public void Resume()
     {
         Time.timeScale = 1;
@@ -39,7 +64,8 @@ public class PauseMenuScript : MonoBehaviour
     public void Options()
     {
         ToggleMenuActive();
-        //toggle on the options menu
+        ToggleOptionsActive();
+        Debug.Log("options");
     }
 
     public void Quit()
