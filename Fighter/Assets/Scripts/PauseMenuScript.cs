@@ -7,12 +7,15 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField]
     GameObject firstSelected = null;
+    [HideInInspector]
+    public bool InOptions = false;
     /*
     [SerializeField]
     GameObject firstOptionSelected = null;
+    */
     [SerializeField]
     GameObject optionsMenu = null;
-    */
+
     public void ToggleMenuActive()
     {
         if (!gameObject.activeInHierarchy)
@@ -55,13 +58,15 @@ public class PauseMenuScript : MonoBehaviour
             Cursor.visible = !Cursor.visible;
         }
     }
+    */
 
     public void Options()
     {
+        InOptions = true; //test
         ToggleMenuActive();
-        ToggleOptionsActive();
+        optionsMenu.GetComponent<OptionsMenuScript>().ToggleOptionsActive();
         Debug.Log("options");
-    }*/
+    }
 
     public void Resume()
     {
