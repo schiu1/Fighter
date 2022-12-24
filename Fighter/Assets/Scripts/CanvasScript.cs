@@ -73,15 +73,12 @@ public class CanvasScript : MonoBehaviour
         }
         else if (!GameManager.gameManager.isPaused && pauseMenu.gameObject.activeSelf)
         {
-            if (!pauseMenu.InOptions)
-            {
-                pauseMenu.ToggleMenuActive();
-            }
-            else
-            {
-                Debug.Log("in here");
-                optionsMenu.ToggleOptionsActive();
-            }
+            pauseMenu.ToggleMenuActive();
+        }
+        else if (!GameManager.gameManager.isPaused && optionsMenu.gameObject.activeSelf)
+        {
+            pauseMenu.InOptions = !pauseMenu.InOptions;
+            optionsMenu.ToggleOptionsActive();
         }
 
         if(Time.time - startTime >= 3f && !started)
