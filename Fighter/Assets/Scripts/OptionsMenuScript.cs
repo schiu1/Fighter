@@ -7,6 +7,8 @@ public class OptionsMenuScript : MonoBehaviour
 {
     [SerializeField]
     GameObject firstSelected = null;
+    [SerializeField]
+    GameObject pauseMenu = null;
 
     public void ToggleOptionsActive()
     {
@@ -27,5 +29,13 @@ public class OptionsMenuScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = !Cursor.visible;
         }
+    }
+
+    public void OptionsBack()
+    {
+        pauseMenu.GetComponent<PauseMenuScript>().InOptions = false;
+        ToggleOptionsActive();
+        pauseMenu.GetComponent<PauseMenuScript>().ToggleMenuActive();
+
     }
 }

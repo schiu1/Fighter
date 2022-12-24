@@ -65,7 +65,6 @@ public class PauseMenuScript : MonoBehaviour
         InOptions = true; //test
         ToggleMenuActive();
         optionsMenu.GetComponent<OptionsMenuScript>().ToggleOptionsActive();
-        Debug.Log("options");
     }
 
     public void Resume()
