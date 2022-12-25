@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     Sound[] sounds = null;
+    //[HideInInspector]
+    public float masterVolume;
     
     void Awake()
     {
@@ -34,6 +36,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
+        masterVolume = 0.5f;
     }
 
     void Start()
