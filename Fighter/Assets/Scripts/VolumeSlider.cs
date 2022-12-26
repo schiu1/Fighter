@@ -16,5 +16,6 @@ public class VolumeSlider : MonoBehaviour
     public void ChangeVolume()
     {
         AudioManager.audioManager.masterVolume = volume.value;
+        AudioManager.audioManager.ChangeAllVolume(volume.value);
     }
 }

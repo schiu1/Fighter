@@ -61,6 +61,14 @@ public class AudioManager : MonoBehaviour
         }
         found.source.Play();
     }
+
+    public void ChangeAllVolume(float value)
+    {
+        foreach(Sound s in sounds)
+        {
+            s.source.volume = value;
+        }
+    }
     //when calling to play a sound clip, it gets it from an AudioSource component of same name
     //so instead of creating AudioSource components manually, spamming the gameobject, we use this to automate it
     //this script will automatically create an AudioSource in the same gameobject for each Sound type object in the Sound[] clips array
