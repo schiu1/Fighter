@@ -5,25 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    bool fightSceneLoaded;
-    void Awake()
-    {
-        fightSceneLoaded = false;
-    }
-
     public void StartGame()
     {
-        LoadFightScene();
-        if (fightSceneLoaded)
-        {
-            Debug.Log(SceneManager.GetSceneByName("Fight_Scene").name);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Fight_Scene"));
-        }
+        Debug.Log("loading");
+        SceneManager.LoadScene("Fight_Scene", LoadSceneMode.Single);
     }
 
-    void LoadFightScene()
+    public void QuitGame()
     {
-        SceneManager.LoadScene("Fight_Scene");
-        fightSceneLoaded = !fightSceneLoaded;
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
