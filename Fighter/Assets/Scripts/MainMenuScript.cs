@@ -5,20 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    [SerializeField]
-    Animator crossfade = null;
+    SceneLoaderScript crossfade;
+    void Start()
+    {
+        crossfade = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
+    }
 
     public void StartGame()
     {
-        StartCoroutine(Crossfade());  
+        crossfade.LoadLevel("Fight_Scene");
     }
 
-    IEnumerator Crossfade()
-    {
-        crossfade.SetTrigger("Start");
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Fight_Scene", LoadSceneMode.Single);
-    }
+
 
     public void QuitGame()
     {
