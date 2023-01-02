@@ -5,9 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField]
+    Animator crossfade = null;
+
     public void StartGame()
     {
-        Debug.Log("loading");
+        StartCoroutine(Crossfade());  
+    }
+
+    IEnumerator Crossfade()
+    {
+        crossfade.SetTrigger("Start");
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Fight_Scene", LoadSceneMode.Single);
     }
 
