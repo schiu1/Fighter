@@ -62,6 +62,9 @@ public class CanvasScript : MonoBehaviour
 
         pauseMenu = transform.Find("PauseMenu").GetComponent<PauseMenuScript>();
         optionsMenu = transform.Find("OptionsMenu").GetComponent<OptionsMenuScript>();
+
+        //to tell GM to get new sceneloader for the crossfade at the end
+        gm.getSceneLoader = true;
     }
 
     // Update is called once per frame

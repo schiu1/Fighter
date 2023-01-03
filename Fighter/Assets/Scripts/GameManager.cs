@@ -24,8 +24,14 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused = false;
 
+    SceneLoaderScript sceneLoader;
+    public bool getSceneLoader;
+
     void Awake()
     {
+        sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
+        getSceneLoader = false;
+
         if(gameManager != null && gameManager != this)
         {
             Destroy(this);
@@ -53,6 +59,12 @@ public class GameManager : MonoBehaviour
             isPaused = false;
         }
 
+        if (getSceneLoader)
+        {
+            Debug.Log("getting scene");
+            sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
+            getSceneLoader = false;
+        }
     }
 
     //keep track of healthbar in GameManager and Canvas
@@ -121,14 +133,16 @@ public class GameManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    timedOut = false;
+                    Scene scene = SceneManager.GetActiveScene();
+                    //SceneManager.LoadScene(scene.name);
+                    sceneLoader.LoadLevel(scene.name);
+                    yield return new WaitForSeconds(1);
                     _p1Health.Health = _p1Health.MaxHealth;
                     _p2Health.Health = _p2Health.MaxHealth;
                     p1Score = 0;
                     p2Score = 0;
                     round = 1;
-                    timedOut = false;
-                    Scene scene = SceneManager.GetActiveScene();
-                    SceneManager.LoadScene(scene.name);
                     done = true;
                 }
                 yield return null;
@@ -148,7 +162,8 @@ public class GameManager : MonoBehaviour
             round += 1;
             timedOut = false;
             Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            //SceneManager.LoadScene(scene.name);
+            sceneLoader.LoadLevel(scene.name);
         }
     }
 }
