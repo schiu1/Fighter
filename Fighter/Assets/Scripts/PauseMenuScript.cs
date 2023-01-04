@@ -77,7 +77,10 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Quit()
     {
-        //Application.Quit(); for build version
+        /*
+        SceneLoaderScript sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
+        sceneLoader.LoadLevel("Main_Menu");
+        */
         UnityEditor.EditorApplication.isPlaying = false;
     }
 }
