@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
@@ -77,10 +78,12 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Quit()
     {
-        /*
+        SceneManager.MoveGameObjectToScene(AudioManager.audioManager.gameObject, SceneManager.GetActiveScene());
+        SceneManager.MoveGameObjectToScene(GameManager.gameManager.gameObject, SceneManager.GetActiveScene());
+        Time.timeScale = 1;
         SceneLoaderScript sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
         sceneLoader.LoadLevel("Main_Menu");
-        */
-        UnityEditor.EditorApplication.isPlaying = false;
+        
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }
