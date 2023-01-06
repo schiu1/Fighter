@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     SceneLoaderScript crossfade;
+    [SerializeField]
+    GameObject optionsMenu;
     void Start()
     {
         crossfade = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
@@ -16,7 +18,14 @@ public class MainMenuScript : MonoBehaviour
         crossfade.LoadLevel("Fight_Scene");
     }
 
-
+    public void OptionsMenu()
+    {
+        //turn off main menu and logo
+        GameObject.Find("MainMenu").SetActive(false);
+        GameObject.Find("Logo").SetActive(false);
+        //open options menu
+        optionsMenu.SetActive(true);
+    }
 
     public void QuitGame()
     {
