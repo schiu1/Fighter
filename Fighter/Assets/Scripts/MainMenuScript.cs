@@ -24,7 +24,7 @@ public class MainMenuScript : MonoBehaviour
         GameObject.Find("MainMenu").SetActive(false);
         GameObject.Find("Logo").SetActive(false);
         //open options menu
-        optionsMenu.SetActive(true);
+        optionsMenu.GetComponent<OptionsMenuScript>().ToggleOptionsActive();
     }
 
     public void QuitGame()

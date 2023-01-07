@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class OptionsMenuScript : MonoBehaviour
 {
     [SerializeField]
     GameObject firstSelected = null;
     [SerializeField]
-    GameObject pauseMenu = null;
+    GameObject previousMenu = null;
+    [SerializeField]
+    GameObject logo = null;
 
     public void ToggleOptionsActive()
     {
@@ -19,23 +22,40 @@ public class OptionsMenuScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(firstSelected);
             }
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = !Cursor.visible;
+
+            if(SceneManager.GetSceneByName("Fight_Scene") == SceneManager.GetActiveScene())
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = !Cursor.visible;
+            }
         }
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
             gameObject.SetActive(!gameObject.activeInHierarchy);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = !Cursor.visible;
+
+            if (SceneManager.GetSceneByName("Fight_Scene") == SceneManager.GetActiveScene())
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = !Cursor.visible;
+            }
         }
     }
 
     public void OptionsBack()
     {
-        pauseMenu.GetComponent<PauseMenuScript>().InOptions = false;
-        ToggleOptionsActive();
-        pauseMenu.GetComponent<PauseMenuScript>().ToggleMenuActive();
+        if (SceneManager.GetSceneByName("Fight_Scene") == SceneManager.GetActiveScene())
+        {
+            previousMenu.GetComponent<PauseMenuScript>().InOptions = false;
+            ToggleOptionsActive();
+            previousMenu.GetComponent<PauseMenuScript>().ToggleMenuActive();
+        }
+        else
+        {
+            ToggleOptionsActive();
+            previousMenu.SetActive(true);
+            logo.SetActive(true);
+        }
 
     }
 }
