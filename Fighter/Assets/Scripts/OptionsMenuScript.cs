@@ -10,8 +10,6 @@ public class OptionsMenuScript : MonoBehaviour
     GameObject firstSelected = null;
     [SerializeField]
     GameObject previousMenu = null;
-    [SerializeField]
-    GameObject logo = null;
 
     public void ToggleOptionsActive()
     {
@@ -53,8 +51,7 @@ public class OptionsMenuScript : MonoBehaviour
         else
         {
             ToggleOptionsActive();
-            previousMenu.SetActive(true);
-            logo.SetActive(true);
+            previousMenu.GetComponent<MainMenuScript>().ToggleMainActive();
         }
 
     }

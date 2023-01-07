@@ -153,7 +153,7 @@ RectTransform:
   m_Children:
   - {fileID: 816722961}
   m_Father: {fileID: 2124528789}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -357,7 +357,7 @@ RectTransform:
   m_Children:
   - {fileID: 1560049011}
   m_Father: {fileID: 2124528789}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -629,7 +629,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1120513413}
-  - {fileID: 1141033633}
   - {fileID: 2124528789}
   - {fileID: 2005463415}
   m_Father: {fileID: 0}
@@ -1616,16 +1615,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141033632}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 15.96875}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
-  m_Father: {fileID: 358101672}
-  m_RootOrder: 1
+  m_Father: {fileID: 2124528789}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -118, y: 129}
+  m_AnchoredPosition: {x: 91.84662, y: 177.69955}
   m_SizeDelta: {x: 497, y: 349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1141033634
@@ -1799,7 +1798,7 @@ RectTransform:
   m_Children:
   - {fileID: 1621528499}
   m_Father: {fileID: 2124528789}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2446,7 +2445,7 @@ Transform:
   - {fileID: 396803170}
   - {fileID: 1871334715}
   m_Father: {fileID: 358101672}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2005463416
 MonoBehaviour:
@@ -2462,7 +2461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 396803168}
   previousMenu: {fileID: 2124528787}
-  logo: {fileID: 1141033632}
 --- !u!1 &2124528787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,6 +2491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 2005463414}
+  firstSelected: {fileID: 1520848686}
 --- !u!4 &2124528789
 Transform:
   m_ObjectHideFlags: 0
@@ -2504,11 +2503,12 @@ Transform:
   m_LocalPosition: {x: -209.84662, y: -48.699554, z: -15.96875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1141033633}
   - {fileID: 1520848687}
   - {fileID: 219144432}
   - {fileID: 43767864}
   m_Father: {fileID: 358101672}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4593411060047513637
 PrefabInstance:

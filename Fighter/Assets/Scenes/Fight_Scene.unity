@@ -4585,7 +4585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 79159133}
-  pauseMenu: {fileID: 21933478}
+  previousMenu: {fileID: 21933478}
 --- !u!114 &1735968794
 MonoBehaviour:
   m_ObjectHideFlags: 0
