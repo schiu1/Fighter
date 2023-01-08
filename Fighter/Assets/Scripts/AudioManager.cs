@@ -8,8 +8,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager audioManager;
 
     [SerializeField]
-    Sound[] sounds = null;
-    //[HideInInspector]
+    public Sound[] sounds = null;
+    [HideInInspector]
     public float masterVolume;
     
     void Awake()
@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
-        masterVolume = 0.5f;
+        masterVolume = SystemSettings.systemSettings.masterVolume;
     }
 
     void Start()
@@ -67,6 +67,8 @@ public class AudioManager : MonoBehaviour
         {
             s.source.volume = value;
         }
+        masterVolume = value;
+        SystemSettings.systemSettings.masterVolume = value;
     }
     //when calling to play a sound clip, it gets it from an AudioSource component of same name
     //so instead of creating AudioSource components manually, spamming the gameobject, we use this to automate it

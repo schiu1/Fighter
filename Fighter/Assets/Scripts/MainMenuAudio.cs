@@ -22,7 +22,7 @@ public class MainMenuAudio : MonoBehaviour
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
-        masterVolume = 0.5f;
+        masterVolume = SystemSettings.systemSettings.masterVolume;
     }
 
     void Start()
@@ -54,5 +54,7 @@ public class MainMenuAudio : MonoBehaviour
         {
             s.source.volume = value;
         }
+        masterVolume = value;
+        SystemSettings.systemSettings.masterVolume = value;
     }
 }
