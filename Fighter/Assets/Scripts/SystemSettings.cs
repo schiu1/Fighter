@@ -10,6 +10,16 @@ public class SystemSettings : MonoBehaviour
 
     void Awake()
     {
-        masterVolume = 0.5f;
+        if(systemSettings != null && systemSettings != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            systemSettings = this;
+            DontDestroyOnLoad(systemSettings);
+        }
+
+        masterVolume = 0.2f;
     }
 }

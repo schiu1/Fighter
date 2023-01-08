@@ -7,7 +7,7 @@ public class MainMenuAudio : MonoBehaviour
     [SerializeField]
     Sound[] sounds = null;
     //[HideInInspector]
-    public float masterVolume;
+    //public float masterVolume;
 
     void Awake()
     {
@@ -18,15 +18,19 @@ public class MainMenuAudio : MonoBehaviour
             //and assign the properties saved in Sound obj to the AudioSource obj
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.name = s.soundName;
-            s.source.volume = s.volume;
+            //s.source.volume = s.volume;
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
-        masterVolume = SystemSettings.systemSettings.masterVolume;
+        //masterVolume = SystemSettings.systemSettings.masterVolume;
     }
 
     void Start()
     {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = SystemSettings.systemSettings.masterVolume;
+        }
         PlaySound("Theme");
     }
 
@@ -54,7 +58,7 @@ public class MainMenuAudio : MonoBehaviour
         {
             s.source.volume = value;
         }
-        masterVolume = value;
+        //masterVolume = value;
         SystemSettings.systemSettings.masterVolume = value;
     }
 }
