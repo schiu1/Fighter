@@ -31,15 +31,19 @@ public class AudioManager : MonoBehaviour
             //assign the AudioSource variable in Sound an instance of AudioSource
             //and assign the properties saved in Sound obj to the AudioSource obj
             s.source = gameObject.AddComponent<AudioSource>();
-            s.source.volume = s.volume;
+            //s.source.volume = s.volume;
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
-        masterVolume = SystemSettings.systemSettings.masterVolume;
     }
 
     void Start()
     {
+        masterVolume = SystemSettings.systemSettings.masterVolume;
+        foreach(Sound s in sounds)
+        {
+            s.source.volume = masterVolume;
+        }
         PlaySound("Theme");
     }
 

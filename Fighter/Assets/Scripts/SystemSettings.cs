@@ -20,6 +20,6 @@ public class SystemSettings : MonoBehaviour
             DontDestroyOnLoad(systemSettings);
         }
 
-        masterVolume = 0.2f;
+        masterVolume = 0.5f;
     }
 }
