@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuAudio : MonoBehaviour
 {
@@ -59,5 +60,6 @@ public class MainMenuAudio : MonoBehaviour
         }
         //masterVolume = value;
         SystemSettings.systemSettings.masterVolume = value;
+        GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString();
     }
 }

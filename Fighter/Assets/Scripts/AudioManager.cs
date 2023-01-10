@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public class AudioManager : MonoBehaviour
         }
         masterVolume = value;
         SystemSettings.systemSettings.masterVolume = value;
+        GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString();
     }
     //when calling to play a sound clip, it gets it from an AudioSource component of same name
     //so instead of creating AudioSource components manually, spamming the gameobject, we use this to automate it
