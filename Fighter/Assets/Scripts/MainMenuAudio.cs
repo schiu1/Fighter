@@ -60,6 +60,6 @@ public class MainMenuAudio : MonoBehaviour
         }
         //masterVolume = value;
         SystemSettings.systemSettings.masterVolume = value;
-        GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString();
+        GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString("0.##");
     }
 }

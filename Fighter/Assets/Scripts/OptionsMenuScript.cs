@@ -27,7 +27,7 @@ public class OptionsMenuScript : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = !Cursor.visible;
             }
-            GameObject.Find("VolumeValue").GetComponent<Text>().text = SystemSettings.systemSettings.masterVolume.ToString("0.0");
+            GameObject.Find("VolumeValue").GetComponent<Text>().text = SystemSettings.systemSettings.masterVolume.ToString("0.##");
         }
         else
         {
