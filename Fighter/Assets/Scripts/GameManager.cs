@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
 
         if (getSceneLoader)
         {
-            Debug.Log("getting scene");
             sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
             getSceneLoader = false;
         }
@@ -135,7 +134,6 @@ public class GameManager : MonoBehaviour
                 {
                     timedOut = false;
                     Scene scene = SceneManager.GetActiveScene();
-                    //SceneManager.LoadScene(scene.name);
                     sceneLoader.LoadLevel(scene.name);
                     yield return new WaitForSeconds(1);
                     _p1Health.Health = _p1Health.MaxHealth;
@@ -162,7 +160,6 @@ public class GameManager : MonoBehaviour
             round += 1;
             timedOut = false;
             Scene scene = SceneManager.GetActiveScene();
-            //SceneManager.LoadScene(scene.name);
             sceneLoader.LoadLevel(scene.name);
         }
     }

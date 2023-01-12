@@ -7,7 +7,7 @@ public class MainMenuAudio : MonoBehaviour
 {
     [SerializeField]
     Sound[] sounds = null;
-    //[HideInInspector]
+    [HideInInspector]
     public float masterVolume;
 
     void Awake()
@@ -18,7 +18,6 @@ public class MainMenuAudio : MonoBehaviour
             //assign the AudioSource variable in Sound an instance of AudioSource
             //and assign the properties saved in Sound obj to the AudioSource obj
             s.source = gameObject.AddComponent<AudioSource>();
-            //s.source.volume = s.volume;
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
@@ -58,7 +57,6 @@ public class MainMenuAudio : MonoBehaviour
         {
             s.source.volume = value;
         }
-        //masterVolume = value;
         SystemSettings.systemSettings.masterVolume = value;
         GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString("0.##");
     }
