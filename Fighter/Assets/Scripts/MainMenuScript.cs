@@ -8,9 +8,9 @@ public class MainMenuScript : MonoBehaviour
 {
     SceneLoaderScript crossfade;
     [SerializeField]
-    GameObject optionsMenu;
+    GameObject optionsMenu = null;
     [SerializeField]
-    GameObject firstSelected;
+    GameObject firstSelected = null;
     void Start()
     {
         crossfade = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();

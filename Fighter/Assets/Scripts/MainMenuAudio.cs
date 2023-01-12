@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuAudio : MonoBehaviour
 {
     [SerializeField]
     Sound[] sounds = null;
-    //[HideInInspector]
+    [HideInInspector]
     public float masterVolume;
 
     void Awake()
@@ -17,16 +18,18 @@ public class MainMenuAudio : MonoBehaviour
             //assign the AudioSource variable in Sound an instance of AudioSource
             //and assign the properties saved in Sound obj to the AudioSource obj
             s.source = gameObject.AddComponent<AudioSource>();
-            s.source.name = s.soundName;
-            s.source.volume = s.volume;
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
-        masterVolume = 0.5f;
     }
 
     void Start()
     {
+        masterVolume = SystemSettings.systemSettings.masterVolume;
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = masterVolume;
+        }
         PlaySound("Theme");
     }
 
@@ -54,5 +57,7 @@ public class MainMenuAudio : MonoBehaviour
         {
             s.source.volume = value;
         }
+        SystemSettings.systemSettings.masterVolume = value;
+        GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString("0.##");
     }
 }

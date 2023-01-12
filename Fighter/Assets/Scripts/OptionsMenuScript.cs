@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OptionsMenuScript : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class OptionsMenuScript : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = !Cursor.visible;
             }
+            GameObject.Find("VolumeValue").GetComponent<Text>().text = SystemSettings.systemSettings.masterVolume.ToString("0.##");
         }
         else
         {

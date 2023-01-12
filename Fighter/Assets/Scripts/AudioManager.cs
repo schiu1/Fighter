@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager audioManager;
 
     [SerializeField]
-    Sound[] sounds = null;
-    //[HideInInspector]
+    public Sound[] sounds = null;
+    [HideInInspector]
     public float masterVolume;
     
     void Awake()
@@ -31,15 +32,18 @@ public class AudioManager : MonoBehaviour
             //assign the AudioSource variable in Sound an instance of AudioSource
             //and assign the properties saved in Sound obj to the AudioSource obj
             s.source = gameObject.AddComponent<AudioSource>();
-            s.source.volume = s.volume;
             s.source.clip = s.clip;
             s.source.loop = s.loop;
         }
-        masterVolume = 0.5f;
     }
 
     void Start()
     {
+        masterVolume = SystemSettings.systemSettings.masterVolume;
+        foreach(Sound s in sounds)
+        {
+            s.source.volume = masterVolume;
+        }
         PlaySound("Theme");
     }
 
@@ -67,6 +71,9 @@ public class AudioManager : MonoBehaviour
         {
             s.source.volume = value;
         }
+        masterVolume = value;
+        SystemSettings.systemSettings.masterVolume = value;
+        GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString("0.##");
     }
     //when calling to play a sound clip, it gets it from an AudioSource component of same name
     //so instead of creating AudioSource components manually, spamming the gameobject, we use this to automate it

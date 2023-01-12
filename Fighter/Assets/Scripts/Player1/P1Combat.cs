@@ -187,7 +187,6 @@ public class P1Combat : MonoBehaviour
 
             Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
             GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
-            Debug.Log(s.transform.rotation);
             Destroy(s, .5f);
         }
     }
