@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fighter
 {
-    /*
+    /* part 1
      * this will be a template of a fighter
      * also a place to outline how to go about creating this
      * 
@@ -30,5 +30,16 @@ public class Fighter
      * it would also maybe create the hurtboxes and hitboxes needed for character attacks
      * 
      * this looks intimidating
+     * 
+     * part 2
+     * to load in gameobject of the fighter after choosing, i could make the fighters a prefab
+     * it would hold basically everything about using the character, 
+     * controls/behavior/combat would be attached
+     * hitboxes would be attached
+     * sprite and animations would be attached
+     * 
+     * take prefabs of all the fighters and store into an array in FighterSelect
+     * representing the fighter as a value in an array and saving an int of what fighter was chosen will work
+     * PlayerPrefs will help achieve this
      */
 }
