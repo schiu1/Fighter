@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public UnitHealth _p1Health = new UnitHealth(100, 100);
     public UnitHealth _p2Health = new UnitHealth(100, 100);
 
+    public string p1Name = "MayP1";
+    public string p2Name = "MayP2";
+
     public int p1Score = 0;
     public int p2Score = 0;
 

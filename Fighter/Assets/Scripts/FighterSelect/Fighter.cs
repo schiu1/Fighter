@@ -41,5 +41,14 @@ public class Fighter
      * take prefabs of all the fighters and store into an array in FighterSelect
      * representing the fighter as a value in an array and saving an int of what fighter was chosen will work
      * PlayerPrefs will help achieve this
+     * 
+     * part 3
+     * encountered an issue with how the playerscripts will be able to interact with GameManager with health
+     * i decided to make player1 and player2 versions of each character, ex: MayP1 and MayP2
+     * so that there's no need to change the health names in GameManager based on which character is chosen
+     * and just let character selection be in charge of choosing the player1 version for left and player2 for right
+     * 
+     * in lines of code that use "Player1" or "Player2" explicitly, i might use GameManager as a way to hold the names 
+     * and GameManager can grab the names of the two players from PlayerPrefs
      */
 }

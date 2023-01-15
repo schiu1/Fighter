@@ -50,7 +50,7 @@ public class P1Controls : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
         p1combat = gameObject.GetComponent<P1Combat>();
-        p2 = GameObject.Find("Player2");
+        p2 = GameObject.Find(GameManager.gameManager.p2Name);
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;

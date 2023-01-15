@@ -15,11 +15,11 @@ public class Pirate : MonoBehaviour
         //call Physics2D.IgnoreCollision on their capsulecollider    
         if (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health)
         {
-            ignoredPlayer = GameObject.Find("Player2");
+            ignoredPlayer = GameObject.Find(GameManager.gameManager.p2Name);
         }
         else if (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
         {
-            ignoredPlayer = GameObject.Find("Player1");
+            ignoredPlayer = GameObject.Find(GameManager.gameManager.p1Name);
         }
         Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), ignoredPlayer.GetComponent<CapsuleCollider2D>());
 
@@ -43,7 +43,7 @@ public class Pirate : MonoBehaviour
             && collision.gameObject.tag == "Player1")
         {
             Destroy(gameObject);
-            GameObject p1 = GameObject.Find("Player1");
+            GameObject p1 = GameObject.Find(GameManager.gameManager.p1Name);
             p1.GetComponent<P1Controls>().WinAnimSpin();
         }
 
@@ -51,7 +51,7 @@ public class Pirate : MonoBehaviour
             && collision.gameObject.tag == "Player2")
         {
             Destroy(gameObject);
-            GameObject p2 = GameObject.Find("Player2");
+            GameObject p2 = GameObject.Find(GameManager.gameManager.p2Name);
             p2.GetComponent<P2Controls>().WinAnimSpin();
         }
     }
