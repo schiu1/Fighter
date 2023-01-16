@@ -2,8 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fighter
+public class Fighter : MonoBehaviour
 {
+    [SerializeField]
+    GameObject[] fighters = null;
+    int currentFighter;
+
+    void Start()
+    {
+        currentFighter = 0;
+        fighters[currentFighter].SetActive(true);
+    }
+
+    void Update()
+    {
+
+    }
+
+    public void Left()
+    {
+        if(currentFighter > fighters.Length - 1)
+        {
+            fighters[currentFighter].SetActive(false);
+            currentFighter -= 1;
+            fighters[currentFighter].SetActive(true);
+        }
+    }
+
+    public void Right()
+    {
+        if(currentFighter < fighters.Length - 1)
+        {
+            fighters[currentFighter].SetActive(false);
+            currentFighter += 1;
+            fighters[currentFighter].SetActive(true);
+        }
+    }
     /* part 1
      * this will be a template of a fighter
      * also a place to outline how to go about creating this
