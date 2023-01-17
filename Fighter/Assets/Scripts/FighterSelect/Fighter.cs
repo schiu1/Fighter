@@ -12,6 +12,7 @@ public class Fighter : MonoBehaviour
     {
         currentFighter = 0;
         fighters[currentFighter].SetActive(true);
+        Debug.Log(fighters[currentFighter]);
     }
 
     void Update()
@@ -21,8 +22,9 @@ public class Fighter : MonoBehaviour
 
     public void Left()
     {
-        if(currentFighter > fighters.Length - 1)
+        if(currentFighter > 0)
         {
+            Debug.Log("here");
             fighters[currentFighter].SetActive(false);
             currentFighter -= 1;
             fighters[currentFighter].SetActive(true);
@@ -31,8 +33,9 @@ public class Fighter : MonoBehaviour
 
     public void Right()
     {
-        if(currentFighter < fighters.Length - 1)
+        if (currentFighter < fighters.Length - 1)
         {
+            Debug.Log("now here");
             fighters[currentFighter].SetActive(false);
             currentFighter += 1;
             fighters[currentFighter].SetActive(true);

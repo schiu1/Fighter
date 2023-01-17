@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class P2Combat : MonoBehaviour
 {
@@ -37,6 +38,14 @@ public class P2Combat : MonoBehaviour
     GameObject slashEffect = null;
     [SerializeField]
     GameObject punchEffect = null;
+
+    void Awake()
+    {
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Fight_Scene"))
+        {
+            this.enabled = false;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
