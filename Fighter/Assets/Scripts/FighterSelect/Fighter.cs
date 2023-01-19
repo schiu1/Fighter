@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Fighter : MonoBehaviour
 {
@@ -41,6 +42,13 @@ public class Fighter : MonoBehaviour
             fighters[currentFighter].SetActive(true);
         }
     }
+
+    public void Select()
+    {
+        PlayerPrefs.SetString("player1", fighters[currentFighter].gameObject.name);
+        Debug.Log(PlayerPrefs.GetString("player1"));
+    }
+
     /* part 1
      * this will be a template of a fighter
      * also a place to outline how to go about creating this
