@@ -45,7 +45,6 @@ public class FighterSelect : MonoBehaviour
     public void Select()
     {
         PlayerPrefs.SetString("player1", fighters[currentFighter].gameObject.name);
-        Debug.Log(PlayerPrefs.GetString("player1"));
         crossfade.LoadLevel("Fight_Scene");
     }
 

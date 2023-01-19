@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
         getSceneLoader = false;
 
+        Debug.Log("player1 is: "+PlayerPrefs.GetString("player1")); //for testing
+
         if(gameManager != null && gameManager != this)
         {
             Destroy(this);
