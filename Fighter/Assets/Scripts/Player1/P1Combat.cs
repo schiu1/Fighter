@@ -244,6 +244,7 @@ public class P1Combat : MonoBehaviour
     {
         //get enemies in range of attack
         Collider2D[] enemies = Physics2D.OverlapBoxAll(heavyAttackPoint.position, heavyAttackRange, 0, enemyLayers);
+        Debug.Log(enemies.Length);
 
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
