@@ -127,6 +127,11 @@ public class P2Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
             if (enemy.GetComponent<P1Controls>().isCrouching)
             {
                 enemy.GetComponent<P1Controls>().BlockAttack();
@@ -167,6 +172,11 @@ public class P2Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
             if (enemy.GetComponent<P1Controls>().isCrouching)
             {
                 enemy.GetComponent<P1Controls>().BlockAttack();
@@ -207,6 +217,11 @@ public class P2Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
             if (enemy.GetComponent<P1Controls>().isCrouching)
             {
                 enemy.GetComponent<P1Controls>().BlockAttack();
@@ -247,6 +262,11 @@ public class P2Combat : MonoBehaviour
         //apply damage to enemy
         foreach (Collider2D enemy in enemies)
         {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
             if (enemy.GetComponent<P1Controls>().isCrouching)
             {
                 enemy.GetComponent<P1Controls>().BlockAttack();
