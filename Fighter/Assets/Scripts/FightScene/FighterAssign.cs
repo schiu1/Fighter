@@ -17,6 +17,11 @@ public class FighterAssign : MonoBehaviour
                 fighter.SetActive(true);
                 break;
             }
+            else if(fighter.name == PlayerPrefs.GetString("player2") && gameObject.name == "Player2")
+            {
+                fighter.SetActive(true);
+                break;
+            }
         }
     }
 
