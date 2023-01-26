@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P1Controls : MonoBehaviour
+public class P1Controls : PlayerControls
 {
+    /*
     Rigidbody2D rb2D;
     Animator animator;
     CapsuleCollider2D capCollider;
+    */
     P1Combat p1combat;
     GameObject p2;
 
+    /*
     float speed;
     float maxSpeed;
     float moveHorizontal;
@@ -26,10 +29,13 @@ public class P1Controls : MonoBehaviour
     float dashForce;
     float direction;
     int airDash = 0;
+    */
 
     bool facingRight;
     [HideInInspector]
     public bool p1CanMove; // temp set to true until i implement GameManager
+
+    /*
     [HideInInspector]
     public bool canCrouch;
     [HideInInspector]
@@ -51,6 +57,7 @@ public class P1Controls : MonoBehaviour
             this.enabled = false;
         }
     }
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -189,6 +196,7 @@ public class P1Controls : MonoBehaviour
         }
     }
 
+    /*
     void FixedUpdate()
     {
         if (isJumping == false && KDGround == true)
@@ -236,7 +244,9 @@ public class P1Controls : MonoBehaviour
 
         
     }
+    */
 
+    /*
     IEnumerator WinAnimation()
     {
         yield return new WaitForSeconds(1.2f);
@@ -248,6 +258,7 @@ public class P1Controls : MonoBehaviour
 
         Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
     }
+    */
 
     void WinAnimFaceRight()
     {
@@ -257,10 +268,12 @@ public class P1Controls : MonoBehaviour
         }
     }
 
+    /*
     public void WinAnimSpin()
     {
         animator.SetTrigger("WinSpin");
     }
+    */
 
     public void Pushback(string pushType)
     {

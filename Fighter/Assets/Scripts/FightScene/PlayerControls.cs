@@ -6,27 +6,27 @@ using UnityEngine.SceneManagement;
 public class PlayerControls : MonoBehaviour
 {
     //need to check which fields need to be labeled protected and which can be left as private
-    Rigidbody2D rb2D;
-    Animator animator;
-    CapsuleCollider2D capCollider;
+    protected Rigidbody2D rb2D;
+    protected Animator animator;
+    protected CapsuleCollider2D capCollider;
     //initialize combat script variable here
     //initialize enemy GameObject variable here
 
-    float speed;
-    float maxSpeed;
-    float moveHorizontal;
-    bool moveVertical;
+    protected float speed;
+    protected float maxSpeed;
+    protected float moveHorizontal;
+    protected bool moveVertical;
 
-    float jumpForce;
-    float fallMultiplier;
+    protected float jumpForce;
+    protected float fallMultiplier;
     [HideInInspector]
     public bool isJumping;
 
-    float firstPress;
-    bool dash;
-    float dashForce;
-    float direction;
-    int airDash = 0;
+    protected float firstPress;
+    protected bool dash;
+    protected float dashForce;
+    protected float direction;
+    protected int airDash = 0;
 
     //initialize facing direction bool here
     //initialize public canMove bool here with [HideInInspector]
@@ -35,14 +35,14 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector]
     public bool isCrouching;
 
-    bool pushback;
-    float pushForceX;
-    float pushForceY;
-    bool KDGround;
+    protected bool pushback;
+    protected float pushForceX;
+    protected float pushForceY;
+    protected bool KDGround;
 
     [SerializeField]
-    GameObject pirate = null;
-    bool winAnim;
+    protected GameObject pirate = null;
+    protected bool winAnim;
 
     //reason why this is here is so that child classes don't need to keep defining this
     protected void Awake() 
