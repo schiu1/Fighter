@@ -5,59 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class P1Controls : PlayerControls
 {
-    /*
-    Rigidbody2D rb2D;
-    Animator animator;
-    CapsuleCollider2D capCollider;
-    */
     P1Combat p1combat;
     GameObject p2;
-
-    /*
-    float speed;
-    float maxSpeed;
-    float moveHorizontal;
-    bool moveVertical;
-
-    float jumpForce;
-    float fallMultiplier;
-    [HideInInspector]
-    public bool isJumping;
-
-    float firstPress;
-    bool dash;
-    float dashForce;
-    float direction;
-    int airDash = 0;
-    */
 
     bool facingRight;
     [HideInInspector]
     public bool p1CanMove; // temp set to true until i implement GameManager
-
-    /*
-    [HideInInspector]
-    public bool canCrouch;
-    [HideInInspector]
-    public bool isCrouching;
-
-    bool pushback;
-    float pushForceX;
-    float pushForceY;
-    bool KDGround;
-
-    [SerializeField]
-    GameObject pirate = null;
-    bool winAnim;
-
-    void Awake()
-    {
-        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Fight_Scene"))
-        {
-            this.enabled = false;
-        }
-    }
-    */
 
     // Start is called before the first frame update
     void Start()
@@ -196,70 +149,6 @@ public class P1Controls : PlayerControls
         }
     }
 
-    /*
-    void FixedUpdate()
-    {
-        if (isJumping == false && KDGround == true)
-        {
-            animator.SetTrigger("KDGround");
-            KDGround = false;
-        }
-        if (pushback)
-        {
-            Debug.Log("in pushback");
-            rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(new Vector2(pushForceX, pushForceY), ForceMode2D.Impulse);
-            pushForceX = 0;
-            pushForceY = 0;
-            pushback = false;
-        }
-
-        if ((moveHorizontal > 0.1f && rb2D.velocity.x < maxSpeed) || (moveHorizontal < -0.1f && rb2D.velocity.x > -maxSpeed))
-        {
-            rb2D.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Impulse);
-        }
-
-        if(dash == true)
-        {
-            dash = false;
-            animator.SetTrigger("Dash");
-            rb2D.AddForce(new Vector2(moveHorizontal * dashForce, 0f), ForceMode2D.Impulse);
-            if(isJumping == true)
-            {
-                airDash += 1;
-            }
-        }
-
-        if (moveVertical == true && !isJumping)
-        {
-            animator.SetTrigger("Jump");
-            rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            moveVertical = false;
-        }
-        //falling helper
-        if (rb2D.velocity.y < 0)
-        {
-            rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-
-        
-    }
-    */
-
-    /*
-    IEnumerator WinAnimation()
-    {
-        yield return new WaitForSeconds(1.2f);
-
-        float x = gameObject.transform.position.x;
-        float y = gameObject.transform.position.y;
-
-        animator.SetBool("Win", true);
-
-        Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
-    }
-    */
-
     void WinAnimFaceRight()
     {
         if (facingRight)
@@ -267,13 +156,6 @@ public class P1Controls : PlayerControls
             Flip();
         }
     }
-
-    /*
-    public void WinAnimSpin()
-    {
-        animator.SetTrigger("WinSpin");
-    }
-    */
 
     public void Pushback(string pushType)
     {
