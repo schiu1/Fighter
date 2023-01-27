@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P1Combat : MonoBehaviour
+public class P1Combat : PlayerCombat
 {
-    Animator anim;
+    //Animator anim;
     P1Controls p1Controls;
-    float lastAttack = 0f;
-    float attackCD = 0f;
+    //float lastAttack = 0f;
+    //float attackCD = 0f;
     [HideInInspector]
     public bool p1Attacking;
     [HideInInspector]
     public bool p1CanAttack;
 
+    /*
     [Header("General")]
     [SerializeField] LayerMask enemyLayers = 0;
 
@@ -46,7 +47,8 @@ public class P1Combat : MonoBehaviour
             this.enabled = false;
         }
     }
-
+    */
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -113,11 +115,13 @@ public class P1Combat : MonoBehaviour
 
     }
 
+    /*
     IEnumerator Hitstop(float duration)
     {
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1;
     }
+    */
 
     //put these methods in attack anim as events
     void punch()
@@ -299,6 +303,7 @@ public class P1Combat : MonoBehaviour
         }
     }
 
+    /*
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -307,4 +312,5 @@ public class P1Combat : MonoBehaviour
         Gizmos.DrawWireCube(heavyAttackPoint.position, heavyAttackRange);
         Gizmos.DrawWireCube(kickAttackPoint.position, kickAttackRange);
     }
+    */
 }
