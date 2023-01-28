@@ -5,49 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class P1Combat : PlayerCombat
 {
-    //Animator anim;
     P1Controls p1Controls;
-    //float lastAttack = 0f;
-    //float attackCD = 0f;
+
     [HideInInspector]
     public bool p1Attacking;
     [HideInInspector]
     public bool p1CanAttack;
-
-    /*
-    [Header("General")]
-    [SerializeField] LayerMask enemyLayers = 0;
-
-    [Header("Punch")]
-    [SerializeField] Transform punchAttackPoint = null;
-    [SerializeField] Vector2 punchAttackRange = Vector2.zero; //0.5583461f, 0.6071799f
-    
-    [Header("Slash")]
-    [SerializeField] Transform slashAttackPoint = null;
-    [SerializeField] Vector2 slashAttackRange = Vector2.zero;
-
-    [Header("Heavy Slash")]
-    [SerializeField] Transform heavyAttackPoint = null;
-    [SerializeField] Vector2 heavyAttackRange = Vector2.zero;
-
-    [Header("Kick")]
-    [SerializeField] Transform kickAttackPoint = null;
-    [SerializeField] Vector2 kickAttackRange = Vector2.zero;
-
-    [Header("Visual Effects")]
-    [SerializeField]
-    GameObject slashEffect = null;
-    [SerializeField]
-    GameObject punchEffect = null;
-
-    void Awake()
-    {
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Fight_Scene"))
-        {
-            this.enabled = false;
-        }
-    }
-    */
     
     // Start is called before the first frame update
     void Start()
@@ -114,14 +77,6 @@ public class P1Combat : PlayerCombat
         }
 
     }
-
-    /*
-    IEnumerator Hitstop(float duration)
-    {
-        yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1;
-    }
-    */
 
     //put these methods in attack anim as events
     void punch()
@@ -302,15 +257,4 @@ public class P1Combat : PlayerCombat
             Destroy(s, .5f);
         }
     }
-
-    /*
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(punchAttackPoint.position, punchAttackRange);
-        Gizmos.DrawWireCube(slashAttackPoint.position, slashAttackRange);
-        Gizmos.DrawWireCube(heavyAttackPoint.position, heavyAttackRange);
-        Gizmos.DrawWireCube(kickAttackPoint.position, kickAttackRange);
-    }
-    */
 }
