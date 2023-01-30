@@ -26,15 +26,12 @@ public class MainMenuAudio : MonoBehaviour
     void Start()
     {
         //masterVolume = SystemSettings.systemSettings.masterVolume;
-        if(PlayerPrefs.GetFloat("masterVolume") != 0)
+        if(!PlayerPrefs.HasKey("masterVolume"))
         {
-            masterVolume = PlayerPrefs.GetFloat("masterVolume");
+            Debug.Log("masterVolume PlayerPref not made");
+            PlayerPrefs.SetFloat("masterVolume", 0.5f);
         }
-        else
-        {
-            Debug.Log(PlayerPrefs.GetFloat("masterVolume"));
-            masterVolume = 0.5f;
-        }
+        masterVolume = PlayerPrefs.GetFloat("masterVolume");
 
         foreach (Sound s in sounds)
         {
