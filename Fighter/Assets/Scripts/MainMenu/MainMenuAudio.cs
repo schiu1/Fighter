@@ -25,7 +25,14 @@ public class MainMenuAudio : MonoBehaviour
 
     void Start()
     {
-        masterVolume = SystemSettings.systemSettings.masterVolume;
+        //masterVolume = SystemSettings.systemSettings.masterVolume;
+        if(!PlayerPrefs.HasKey("masterVolume"))
+        {
+            Debug.Log("masterVolume PlayerPref not made");
+            PlayerPrefs.SetFloat("masterVolume", 0.5f);
+        }
+        masterVolume = PlayerPrefs.GetFloat("masterVolume");
+
         foreach (Sound s in sounds)
         {
             s.source.volume = masterVolume;
@@ -57,7 +64,8 @@ public class MainMenuAudio : MonoBehaviour
         {
             s.source.volume = value;
         }
-        SystemSettings.systemSettings.masterVolume = value;
+        //SystemSettings.systemSettings.masterVolume = value;
+        PlayerPrefs.SetFloat("masterVolume", value);
         GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString("0.##");
     }
 }

@@ -39,8 +39,9 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        masterVolume = SystemSettings.systemSettings.masterVolume;
-        foreach(Sound s in sounds)
+        //masterVolume = SystemSettings.systemSettings.masterVolume;
+        masterVolume = PlayerPrefs.GetFloat("masterVolume");
+        foreach (Sound s in sounds)
         {
             s.source.volume = masterVolume;
         }
@@ -72,7 +73,8 @@ public class AudioManager : MonoBehaviour
             s.source.volume = value;
         }
         masterVolume = value;
-        SystemSettings.systemSettings.masterVolume = value;
+        //SystemSettings.systemSettings.masterVolume = value;
+        PlayerPrefs.SetFloat("masterVolume", value);
         GameObject.Find("VolumeValue").GetComponent<Text>().text = value.ToString("0.##");
     }
     //when calling to play a sound clip, it gets it from an AudioSource component of same name

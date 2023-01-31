@@ -35,7 +35,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        crossfade.LoadLevel("Fight_Scene");
+        crossfade.LoadLevel("Fighter_Selection");
     }
 
     public void OptionsMenu()
