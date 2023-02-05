@@ -155,7 +155,54 @@ public class BridgetP1Controls : PlayerControls
 
     public void Pushback(string pushType)
     {
-
+        if (pushType == "flinch")
+        {
+            animator.SetTrigger("Flinch");
+        }
+        else if (pushType == "push")
+        {
+            p1CanMove = false;
+            moveHorizontal = 0;
+            p1combat.p1CanAttack = false;
+            rb2D.isKinematic = false;
+            animator.SetTrigger("Push");
+            if (gameObject.transform.position.x - p2.transform.position.x > 0)
+            {
+                if (facingRight) { Flip(); }
+                pushForceX = 15f;
+                Debug.Log("pushing right");
+            }
+            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            {
+                if (!facingRight) { Flip(); }
+                pushForceX = -15f;
+                Debug.Log("pushing left");
+            }
+            pushback = true;
+        }
+        else if (pushType == "knockdown")
+        {
+            p1CanMove = false;
+            moveHorizontal = 0;
+            p1combat.p1CanAttack = false;
+            rb2D.isKinematic = false;
+            animator.SetTrigger("KDAir");
+            if (gameObject.transform.position.x - p2.transform.position.x > 0)
+            {
+                if (facingRight) { Flip(); }
+                pushForceX = 15f;
+                Debug.Log("KD right");
+            }
+            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            {
+                if (!facingRight) { Flip(); }
+                pushForceX = -15f;
+                Debug.Log("KD left");
+            }
+            pushForceY = 5f;
+            pushback = true;
+            KDGround = true;
+        }
     }
 
     void PushEnd()
@@ -167,7 +214,15 @@ public class BridgetP1Controls : PlayerControls
 
     public void BlockAttack()
     {
-
+        animator.SetTrigger("Block");
+        if (gameObject.transform.position.x - p2.transform.position.x > 0)
+        {
+            if (facingRight) { Flip(); }
+        }
+        else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+        {
+            if (!facingRight) { Flip(); }
+        }
     }
 
     void Flip()
@@ -180,31 +235,55 @@ public class BridgetP1Controls : PlayerControls
 
     void StopMovement()
     {
-
+        p1CanMove = false;
+        rb2D.isKinematic = true;
+        rb2D.velocity = Vector2.zero;
+        moveHorizontal = 0f;
+        animator.SetFloat("Speed", 0);
     }
 
     void StartMovement()
     {
-
+        p1CanMove = true;
+        rb2D.isKinematic = false;
     }
 
     void Crouch()
     {
-
+        //shorten height of capsule collider to whatever height the sprite is
+        //move offset of capsule collider down 1/2 of the height difference
+        p1CanMove = false;
     }
 
     void Uncrouch()
     {
-
+        //increase height by same amount it was decreased when crouching
+        //move offset up by same amount it was moved down when crouching
+        p1CanMove = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if(collision.gameObject.tag == "Ground")
+        {
+            isJumping = false;
+            animator.SetBool("InAir", false);
+            if (airDash != 0)
+            {
+                airDash = 0;
+            }
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), false);
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-
+        if (collision.gameObject.tag == "Ground")
+        {
+            isJumping = true;
+            animator.SetBool("InAir", true);
+            //might want to change this somehow in the future to ignore collision only on jump start and not entire jump anim
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), true);
+        }
     }
 }
