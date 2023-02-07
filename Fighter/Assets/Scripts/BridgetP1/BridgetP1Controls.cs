@@ -71,8 +71,8 @@ public class BridgetP1Controls : PlayerControls
                 {
                     isCrouching = false;
                     animator.SetBool("IsCrouching", false);
-                    //make capCollider size normal here
-                    //make offset normal here
+                    capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.872712f);
+                    capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.43635579f);
                 }
 
                 //do win or lose anim
@@ -86,9 +86,10 @@ public class BridgetP1Controls : PlayerControls
                     animator.SetBool("Lost", true);
                 }
             }
-
+            Debug.Log(p1CanMove);
             if (p1CanMove)
             {
+                
                 moveHorizontal = Input.GetAxisRaw("P1_Walk");
                 if(Input.GetButtonDown("P1_Jump") && !isJumping)
                 {
@@ -250,15 +251,15 @@ public class BridgetP1Controls : PlayerControls
 
     void Crouch()
     {
-        //shorten height of capsule collider to whatever height the sprite is
-        //move offset of capsule collider down 1/2 of the height difference
+        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.872712f);
+        capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y - 0.43635579f);
         p1CanMove = false;
     }
 
     void Uncrouch()
     {
-        //increase height by same amount it was decreased when crouching
-        //move offset up by same amount it was moved down when crouching
+        capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.872712f);
+        capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.43635579f);
         p1CanMove = true;
     }
 
