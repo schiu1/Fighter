@@ -86,7 +86,7 @@ public class BridgetP1Controls : PlayerControls
                     animator.SetBool("Lost", true);
                 }
             }
-            Debug.Log(p1CanMove);
+
             if (p1CanMove)
             {
                 

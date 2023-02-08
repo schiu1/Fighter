@@ -90,7 +90,7 @@ public class P2Combat : PlayerCombat
             {
                 continue;
             }
-
+            Debug.Log("here");
             if (enemy.GetComponent<P1Controls>().isCrouching)
             {
                 enemy.GetComponent<P1Controls>().BlockAttack();
