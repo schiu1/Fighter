@@ -213,7 +213,7 @@ public class BridgetP1Controls : PlayerControls
         p1combat.p1CanAttack = true;
     }
 
-    public void BlockAttack()
+    public override void BlockAttack()
     {
         animator.SetTrigger("Block");
         if (gameObject.transform.position.x - p2.transform.position.x > 0)

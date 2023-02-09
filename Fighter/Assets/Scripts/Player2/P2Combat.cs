@@ -90,10 +90,9 @@ public class P2Combat : PlayerCombat
             {
                 continue;
             }
-            Debug.Log("here");
-            if (enemy.GetComponent<P1Controls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
             {
-                enemy.GetComponent<P1Controls>().BlockAttack();
+                enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else

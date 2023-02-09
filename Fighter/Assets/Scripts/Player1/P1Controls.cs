@@ -209,7 +209,7 @@ public class P1Controls : PlayerControls
         }
     }
 
-    public void BlockAttack()
+    public override void BlockAttack()
     {
         animator.SetTrigger("Block");
         if (gameObject.transform.position.x - p2.transform.position.x > 0)

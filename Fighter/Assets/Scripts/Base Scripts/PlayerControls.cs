@@ -126,6 +126,10 @@ public class PlayerControls : MonoBehaviour
     // Pushback in child classes bc uses facingRight or facingLeft
 
     // BlockAttack in child classes bc uses facingRight or facingLeft
+    public virtual void BlockAttack()
+    {
+
+    }
 
     // Flip in child classes - - - - -
 

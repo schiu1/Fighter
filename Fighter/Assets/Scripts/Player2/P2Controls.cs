@@ -210,7 +210,7 @@ public class P2Controls : PlayerControls
         }
      }
 
-    public void BlockAttack()
+    public override void BlockAttack()
     {
         Debug.Log("p2 blocked");
         animator.SetTrigger("Block");
