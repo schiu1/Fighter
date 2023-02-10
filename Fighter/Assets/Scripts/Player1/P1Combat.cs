@@ -100,7 +100,7 @@ public class P1Combat : PlayerCombat
             else
             {
                 Debug.Log("player1 hit: " + enemy.name);
-                enemy.GetComponent<P2Behavior>().Player2Dmg(5);
+                enemy.GetComponent<P2Behavior>().PlayerDmg(5);
                 if (enemy.GetComponent<P2Controls>().isJumping)
                 {
                     enemy.GetComponent<P2Controls>().Pushback("knockdown");
@@ -145,7 +145,7 @@ public class P1Combat : PlayerCombat
             else
             {
                 Debug.Log("player1 hit: " + enemy.name);
-                enemy.GetComponent<P2Behavior>().Player2Dmg(10);
+                enemy.GetComponent<P2Behavior>().PlayerDmg(10);
                 if (enemy.GetComponent<P2Controls>().isJumping)
                 {
                     enemy.GetComponent<P2Controls>().Pushback("knockdown");
@@ -190,7 +190,7 @@ public class P1Combat : PlayerCombat
             else
             {
                 Debug.Log("player1 hit: " + enemy.name);
-                enemy.GetComponent<P2Behavior>().Player2Dmg(15);
+                enemy.GetComponent<P2Behavior>().PlayerDmg(15);
                 if (enemy.GetComponent<P2Controls>().isJumping)
                 {
                     enemy.GetComponent<P2Controls>().Pushback("knockdown");
@@ -234,7 +234,7 @@ public class P1Combat : PlayerCombat
             else
             {
                 Debug.Log("player1 hit: " + enemy.name);
-                enemy.GetComponent<P2Behavior>().Player2Dmg(20);
+                enemy.GetComponent<P2Behavior>().PlayerDmg(20);
                 if (enemy.GetComponent<P2Controls>().isJumping)
                 {
                     enemy.GetComponent<P2Controls>().Pushback("knockdown");

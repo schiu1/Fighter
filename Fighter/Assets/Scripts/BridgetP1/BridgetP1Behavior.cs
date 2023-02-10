@@ -3,22 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BridgetP1Behavior : MonoBehaviour
+public class BridgetP1Behavior : PlayerBehavior
 {
-    Animator anim;
     BridgetP1Controls p1controls;
     BridgetP1Combat p1combat;
     UnitHealth p1Health;
-    [SerializeField] Healthbar _healthbar = null;
-
-    float startTime;
-    bool started;
-
-    [SerializeField]
-    GameObject hitEffect = null;
-
-    GameObject vcam;
-    Shake shake;
 
     void Awake()
     {
@@ -64,7 +53,7 @@ public class BridgetP1Behavior : MonoBehaviour
         }
     }
 
-    public void Player1Dmg(int dmg)
+    public override void PlayerDmg(int dmg)
     {
         p1Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
@@ -73,13 +62,13 @@ public class BridgetP1Behavior : MonoBehaviour
         shake.ShakeCamera(.3f, .5f);
     }
 
-    public void Player1Heal(int heal)
+    public override void PlayerHeal(int heal)
     {
         p1Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
     }
 
-    void Die()
+    protected override void Die()
     {
         Debug.Log("p1 killed");
         anim.SetBool("IsKO", true);

@@ -4964,6 +4964,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2032320579}
     m_Modifications:
+    - target: {fileID: -5001030615649315947, guid: 37a50a602385512469efdebcf3d116c2,
+        type: 3}
+      propertyPath: _healthbar
+      value: 
+      objectReference: {fileID: 114436209}
+    - target: {fileID: -5001030615649315947, guid: 37a50a602385512469efdebcf3d116c2,
+        type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 8754987701745503227, guid: 42573a638904c76489355c073d980c61,
+        type: 3}
     - target: {fileID: 3290569558417604358, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
       propertyPath: m_LocalPosition.x

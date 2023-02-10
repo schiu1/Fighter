@@ -3,22 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P2Behavior : MonoBehaviour
+public class P2Behavior : PlayerBehavior
 {
     P2Controls p2controls;
     P2Combat p2combat;
-    Animator anim;
     UnitHealth p2Health;
-    [SerializeField] Healthbar _healthbar = null;
-
-    float startTime;
-    bool started;
-
-    [SerializeField]
-    GameObject hitEffect = null;
-
-    GameObject vcam;
-    Shake shake;
 
     void Awake()
     {
@@ -58,13 +47,13 @@ public class P2Behavior : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                Player2Dmg(10);
+                PlayerDmg(10);
                 Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
             }
 
             if (Input.GetKeyDown(KeyCode.RightShift))
             {
-                Player2Heal(10);
+                PlayerHeal(10);
                 Debug.Log("player2: " + GameManager.gameManager._p2Health.Health);
             }
 
@@ -86,7 +75,7 @@ public class P2Behavior : MonoBehaviour
     while AddForce is called, trigger pushback animation and prevent movement and attack from player
     */
 
-    public void Player2Dmg(int dmg)
+    public override void PlayerDmg(int dmg)
     {
         p2Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
@@ -95,13 +84,13 @@ public class P2Behavior : MonoBehaviour
         shake.ShakeCamera(.3f, .5f);
     }
 
-    public void Player2Heal(int heal)
+    public override void PlayerHeal(int heal)
     {
         p2Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p2Health.Health);
     }
 
-    void Die()
+    protected override void Die()
     {
         Debug.Log("p2 killed");
         anim.SetBool("IsKO", true);
