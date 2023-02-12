@@ -6,20 +6,22 @@ using UnityEngine.SceneManagement;
 public class P1Combat : PlayerCombat
 {
     P1Controls p1Controls;
-
+    
+    /*
     [HideInInspector]
     public bool p1Attacking;
     [HideInInspector]
     public bool p1CanAttack;
-    
+    */
+
     // Start is called before the first frame update
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
         p1Controls = gameObject.GetComponent<P1Controls>();
 
-        p1Attacking = false;
-        p1CanAttack = false;
+        attacking = false;
+        canAttack = false;
     }
 
     // Update is called once per frame
@@ -32,42 +34,42 @@ public class P1Combat : PlayerCombat
             {
                 lastAttack = 0f;
                 attackCD = 0f;
-                p1Attacking = false;
+                attacking = false;
             }
 
             if(GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
             {
-                p1CanAttack = false;
+                canAttack = false;
             }
 
-            if (p1CanAttack)
+            if (canAttack)
             {
                 if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
                 {
                     if (Input.GetButtonDown("P1_Punch"))
                     {
-                        p1Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Punch");
                         lastAttack = Time.time;
                         attackCD = 0.5f;
                     }
                     if (Input.GetButtonDown("P1_Kick"))
                     {
-                        p1Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Kick");
                         lastAttack = Time.time;
                         attackCD = 0.8f;
                     }
                     if (Input.GetButtonDown("P1_Slash"))
                     {
-                        p1Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Slash");
                         lastAttack = Time.time;
                         attackCD = 0.8f;
                     }
                     if (Input.GetButtonDown("P1_HeavySlash"))
                     {
-                        p1Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Heavy");
                         lastAttack = Time.time;
                         attackCD = 0.75f;
@@ -92,9 +94,9 @@ public class P1Combat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<P2Controls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
             {
-                enemy.GetComponent<P2Controls>().BlockAttack();
+                enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else

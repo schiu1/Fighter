@@ -11,6 +11,8 @@ public class PlayerCombat : MonoBehaviour
     protected float attackCD = 0f;
     //HideInInspector public bool playerAttacking variable init here
     //- - - playerCanAttack - - -
+    public bool attacking;
+    public bool canAttack;
 
     [Header("General")]
     [SerializeField] protected LayerMask enemyLayers = 0;

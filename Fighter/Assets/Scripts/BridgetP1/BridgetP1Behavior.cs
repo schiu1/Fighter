@@ -39,7 +39,7 @@ public class BridgetP1Behavior : PlayerBehavior
             if (Time.time - startTime >= 3f && !started)
             {
                 started = true;
-                p1controls.p1CanMove = true;
+                p1controls.canMove = true;
                 p1controls.canCrouch = true;
                 p1combat.p1CanAttack = true;
             }
@@ -72,7 +72,7 @@ public class BridgetP1Behavior : PlayerBehavior
     {
         Debug.Log("p1 killed");
         anim.SetBool("IsKO", true);
-        p1controls.p1CanMove = false;
+        p1controls.canMove = false;
         p1controls.canCrouch = false;
         p1combat.p1CanAttack = false;
         GameManager.gameManager.endRound("player");

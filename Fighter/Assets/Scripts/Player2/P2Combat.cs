@@ -7,10 +7,12 @@ public class P2Combat : PlayerCombat
 {
     P2Controls p2Controls;
 
+    /*
     [HideInInspector]
     public bool p2Attacking;
     [HideInInspector]
     public bool p2CanAttack;
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +20,8 @@ public class P2Combat : PlayerCombat
         anim = gameObject.GetComponent<Animator>();
         p2Controls = gameObject.GetComponent<P2Controls>();
 
-        p2Attacking = false;
-        p2CanAttack = false;
+        attacking = false;
+        canAttack = false;
     }
 
     // Update is called once per frame
@@ -32,42 +34,42 @@ public class P2Combat : PlayerCombat
             {
                 lastAttack = 0f;
                 attackCD = 0f;
-                p2Attacking = false;
+                attacking = false;
             }
 
             if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p1Health.Health == 0)
             {
-                p2CanAttack = false;
+                canAttack = false;
             }
 
-            if (p2CanAttack)
+            if (canAttack)
             {
                 if ((p2Controls.isJumping == false) && (attackCD == 0) && (p2Controls.isCrouching == false))
                 {
                     if (Input.GetButtonDown("P2_Punch"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Punch");
                         lastAttack = Time.time;
                         attackCD = 0.5f;
                     }
                     if (Input.GetButtonDown("P2_Kick"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Kick");
                         lastAttack = Time.time;
                         attackCD = 0.8f;
                     }
                     if (Input.GetButtonDown("P2_Slash"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Slash");
                         lastAttack = Time.time;
                         attackCD = 0.8f;
                     }
                     if (Input.GetButtonDown("P2_HeavySlash"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Heavy");
                         lastAttack = Time.time;
                         attackCD = 0.75f;
@@ -101,11 +103,11 @@ public class P2Combat : PlayerCombat
                 enemy.GetComponent<PlayerBehavior>().PlayerDmg(5);
                 if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("knockdown");
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("flinch");
+                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 

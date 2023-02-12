@@ -8,8 +8,6 @@ public class BridgetP1Controls : PlayerControls
     GameObject p2;
 
     bool facingRight;
-    [HideInInspector]
-    public bool p1CanMove; //maybe its fine staying like this?
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +31,7 @@ public class BridgetP1Controls : PlayerControls
         dashForce = 30f;
         direction = 0f;
 
-        p1CanMove = false;
+        canMove = false;
         canCrouch = false;
         isCrouching = false;
 
@@ -51,14 +49,14 @@ public class BridgetP1Controls : PlayerControls
         {
             if(isCrouching == true)
             {
-                p1CanMove = false;
+                canMove = false;
             }
 
             //when times out or gets kill
             if(GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
             {
                 //prevent walking/jumping/crouching
-                p1CanMove = false;
+                canMove = false;
                 canCrouch = false;
 
                 //make character stand still
@@ -87,7 +85,7 @@ public class BridgetP1Controls : PlayerControls
                 }
             }
 
-            if (p1CanMove)
+            if (canMove)
             {
                 
                 moveHorizontal = Input.GetAxisRaw("P1_Walk");
@@ -154,7 +152,7 @@ public class BridgetP1Controls : PlayerControls
         }
     }
 
-    public void Pushback(string pushType)
+    public override void Pushback(string pushType)
     {
         if (pushType == "flinch")
         {
@@ -162,7 +160,7 @@ public class BridgetP1Controls : PlayerControls
         }
         else if (pushType == "push")
         {
-            p1CanMove = false;
+            canMove = false;
             moveHorizontal = 0;
             p1combat.p1CanAttack = false;
             rb2D.isKinematic = false;
@@ -183,7 +181,7 @@ public class BridgetP1Controls : PlayerControls
         }
         else if (pushType == "knockdown")
         {
-            p1CanMove = false;
+            canMove = false;
             moveHorizontal = 0;
             p1combat.p1CanAttack = false;
             rb2D.isKinematic = false;
@@ -208,7 +206,7 @@ public class BridgetP1Controls : PlayerControls
 
     void PushEnd()
     {
-        p1CanMove = true;
+        canMove = true;
         rb2D.isKinematic = false; 
         p1combat.p1CanAttack = true;
     }
@@ -236,7 +234,7 @@ public class BridgetP1Controls : PlayerControls
 
     void StopMovement()
     {
-        p1CanMove = false;
+        canMove = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -245,7 +243,7 @@ public class BridgetP1Controls : PlayerControls
 
     void StartMovement()
     {
-        p1CanMove = true;
+        canMove = true;
         rb2D.isKinematic = false;
     }
 
@@ -253,14 +251,14 @@ public class BridgetP1Controls : PlayerControls
     {
         capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.872712f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y - 0.43635579f);
-        p1CanMove = false;
+        canMove = false;
     }
 
     void Uncrouch()
     {
         capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.872712f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.43635579f);
-        p1CanMove = true;
+        canMove = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

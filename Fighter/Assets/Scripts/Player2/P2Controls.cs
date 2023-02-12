@@ -9,8 +9,6 @@ public class P2Controls : PlayerControls
     GameObject p1;
 
     bool facingLeft;
-    [HideInInspector]
-    public bool p2CanMove; // temp set to true until i implement GameManager
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +32,7 @@ public class P2Controls : PlayerControls
         dashForce = 30f;
         direction = 0f;
 
-        p2CanMove = false;
+        canMove = false;
         canCrouch = false;
         isCrouching = false;
 
@@ -53,13 +51,13 @@ public class P2Controls : PlayerControls
         {
             if (isCrouching == true)
             {
-                p2CanMove = false;
+                canMove = false;
             }
 
             if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p1Health.Health == 0)
             {
                 //prevent walking/jumping/crouching from activating
-                p2CanMove = false;
+                canMove = false;
                 canCrouch = false;
 
                 //make character stand still
@@ -89,7 +87,7 @@ public class P2Controls : PlayerControls
                 }
             }
 
-            if (p2CanMove)
+            if (canMove)
             {
                 //wrap these two around if notjumping
                 moveHorizontal = Input.GetAxisRaw("P2_Walk");
@@ -130,19 +128,19 @@ public class P2Controls : PlayerControls
 
             if (canCrouch)
             {
-                if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && p2combat.p2Attacking == false)
+                if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && p2combat.attacking == false)
                 {
                     animator.SetTrigger("Crouch");
                     animator.SetBool("IsCrouching", true);
                     isCrouching = true;
-                    crouch();
-                    stopMovement();
+                    Crouch();
+                    StopMovement();
                 }
                 else if (!Input.GetButton("P2_Crouch") && isCrouching == true)
                 {
                     animator.SetBool("IsCrouching", false);
-                    startMovement();
-                    unCrouch();
+                    StartMovement();
+                    Uncrouch();
                     isCrouching = false;
                 }
 
@@ -158,7 +156,7 @@ public class P2Controls : PlayerControls
         }
     }
 
-    public void Pushback(string pushType)
+    public override void Pushback(string pushType)
      {
         if (pushType == "flinch")
         {
@@ -166,9 +164,9 @@ public class P2Controls : PlayerControls
         }
         else if (pushType == "push")
         {
-            p2CanMove = false;
+            canMove = false;
             moveHorizontal = 0;
-            p2combat.p2CanAttack = false;
+            p2combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Push");
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
@@ -187,9 +185,9 @@ public class P2Controls : PlayerControls
         }
         else if (pushType == "knockdown") //very similar to push code, might change this later
         {
-            p2CanMove = false;
+            canMove = false;
             moveHorizontal = 0;
-            p2combat.p2CanAttack = false;
+            p2combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("KDAir");
             if (gameObject.transform.position.x - p1.transform.position.x > 0)
@@ -234,38 +232,38 @@ public class P2Controls : PlayerControls
 
     void PushEnd()
     {
-        p2CanMove = true;
+        canMove = true;
         rb2D.isKinematic = false; // for if player is hit between stopmovement and startmovement like during attack 
-        p2combat.p2CanAttack = true;
+        p2combat.canAttack = true;
     }
 
-    void stopMovement()
+    void StopMovement()
     {
-        p2CanMove = false;
+        canMove = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
         animator.SetFloat("Speed", 0);
     }
 
-    void startMovement()
+    void StartMovement()
     {
-        p2CanMove = true;
+        canMove = true;
         rb2D.isKinematic = false; //for allowing player to move once again in general cases
     }
 
-    void crouch()
+    void Crouch()
     {
         capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y - 0.54259f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y - 0.27437781f);
-        p2CanMove = false;
+        canMove = false;
     }
 
-    void unCrouch()
+    void Uncrouch()
     {
         capCollider.size = new Vector2(capCollider.size.x, capCollider.size.y + 0.54259f);
         capCollider.offset = new Vector2(capCollider.offset.x, capCollider.offset.y + 0.27437781f);
-        p2CanMove = true;
+        canMove = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

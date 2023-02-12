@@ -40,9 +40,9 @@ public class P2Behavior : PlayerBehavior
             if (Time.time - startTime >= 3f && !started)
             {
                 started = true;
-                p2controls.p2CanMove = true;
+                p2controls.canMove = true;
                 p2controls.canCrouch = true;
-                p2combat.p2CanAttack = true;
+                p2combat.canAttack = true;
             }
 
             if (Input.GetKeyDown(KeyCode.RightControl))
@@ -94,9 +94,9 @@ public class P2Behavior : PlayerBehavior
     {
         Debug.Log("p2 killed");
         anim.SetBool("IsKO", true);
-        p2controls.p2CanMove = false;
+        p2controls.canMove = false;
         p2controls.canCrouch = false;
-        p2combat.p2CanAttack = false;
+        p2combat.canAttack = false;
         GameManager.gameManager.endRound("player");
         this.enabled = false;
     }
