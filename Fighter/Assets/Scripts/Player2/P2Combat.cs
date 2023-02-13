@@ -7,13 +7,6 @@ public class P2Combat : PlayerCombat
 {
     P2Controls p2Controls;
 
-    /*
-    [HideInInspector]
-    public bool p2Attacking;
-    [HideInInspector]
-    public bool p2CanAttack;
-    */
-
     // Start is called before the first frame update
     void Start()
     {

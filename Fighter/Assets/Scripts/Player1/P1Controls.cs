@@ -164,6 +164,7 @@ public class P1Controls : PlayerControls
         else if (pushType == "push")
         {
             canMove = false;
+            canCrouch = false;
             moveHorizontal = 0;
             p1combat.canAttack = false;
             rb2D.isKinematic = false;
@@ -185,6 +186,7 @@ public class P1Controls : PlayerControls
         else if (pushType == "knockdown")
         {
             canMove = false;
+            canCrouch = false;
             moveHorizontal = 0;
             p1combat.canAttack = false;
             rb2D.isKinematic = false;
@@ -231,6 +233,7 @@ public class P1Controls : PlayerControls
     void PushEnd()
     {
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false; // for if player is hit between stopmovement and startmovement like during attack 
         p1combat.canAttack = true;
     }
@@ -238,6 +241,7 @@ public class P1Controls : PlayerControls
     void StopMovement()
     {
         canMove = false;
+        canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -247,6 +251,7 @@ public class P1Controls : PlayerControls
     void StartMovement()
     {
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false;
     }
 

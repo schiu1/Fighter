@@ -125,7 +125,7 @@ public class BridgetP1Controls : PlayerControls
             }
             if (canCrouch)
             {                                                                                    //this is why its not in base class
-                if(Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.p1Attacking == false)
+                if(Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
                 {
                     animator.SetTrigger("Crouch");
                     animator.SetBool("IsCrouching", true);
@@ -161,8 +161,9 @@ public class BridgetP1Controls : PlayerControls
         else if (pushType == "push")
         {
             canMove = false;
+            canCrouch = false;
             moveHorizontal = 0;
-            p1combat.p1CanAttack = false;
+            p1combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Push");
             if (gameObject.transform.position.x - p2.transform.position.x > 0)
@@ -182,8 +183,9 @@ public class BridgetP1Controls : PlayerControls
         else if (pushType == "knockdown")
         {
             canMove = false;
+            canCrouch = false;
             moveHorizontal = 0;
-            p1combat.p1CanAttack = false;
+            p1combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("KDAir");
             if (gameObject.transform.position.x - p2.transform.position.x > 0)
@@ -207,8 +209,9 @@ public class BridgetP1Controls : PlayerControls
     void PushEnd()
     {
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false; 
-        p1combat.p1CanAttack = true;
+        p1combat.canAttack = true;
     }
 
     public override void BlockAttack()
@@ -235,6 +238,7 @@ public class BridgetP1Controls : PlayerControls
     void StopMovement()
     {
         canMove = false;
+        canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -244,6 +248,7 @@ public class BridgetP1Controls : PlayerControls
     void StartMovement()
     {
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false;
     }
 

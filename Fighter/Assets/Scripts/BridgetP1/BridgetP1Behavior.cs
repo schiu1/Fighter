@@ -41,7 +41,7 @@ public class BridgetP1Behavior : PlayerBehavior
                 started = true;
                 p1controls.canMove = true;
                 p1controls.canCrouch = true;
-                p1combat.p1CanAttack = true;
+                p1combat.canAttack = true;
             }
 
             //leave out self-heal and self-dmg
@@ -74,7 +74,7 @@ public class BridgetP1Behavior : PlayerBehavior
         anim.SetBool("IsKO", true);
         p1controls.canMove = false;
         p1controls.canCrouch = false;
-        p1combat.p1CanAttack = false;
+        p1combat.canAttack = false;
         GameManager.gameManager.endRound("player");
         this.enabled = false;
     }

@@ -165,6 +165,7 @@ public class P2Controls : PlayerControls
         else if (pushType == "push")
         {
             canMove = false;
+            canCrouch = false;
             moveHorizontal = 0;
             p2combat.canAttack = false;
             rb2D.isKinematic = false;
@@ -186,6 +187,7 @@ public class P2Controls : PlayerControls
         else if (pushType == "knockdown") //very similar to push code, might change this later
         {
             canMove = false;
+            canCrouch = false;
             moveHorizontal = 0;
             p2combat.canAttack = false;
             rb2D.isKinematic = false;
@@ -233,6 +235,7 @@ public class P2Controls : PlayerControls
     void PushEnd()
     {
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false; // for if player is hit between stopmovement and startmovement like during attack 
         p2combat.canAttack = true;
     }
@@ -240,6 +243,7 @@ public class P2Controls : PlayerControls
     void StopMovement()
     {
         canMove = false;
+        canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -249,6 +253,7 @@ public class P2Controls : PlayerControls
     void StartMovement()
     {
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false; //for allowing player to move once again in general cases
     }
 

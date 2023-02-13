@@ -6,13 +6,6 @@ using UnityEngine.SceneManagement;
 public class P1Combat : PlayerCombat
 {
     P1Controls p1Controls;
-    
-    /*
-    [HideInInspector]
-    public bool p1Attacking;
-    [HideInInspector]
-    public bool p1CanAttack;
-    */
 
     // Start is called before the first frame update
     void Start()
