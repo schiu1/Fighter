@@ -92,7 +92,7 @@ public class P2Combat : PlayerCombat
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
                 enemy.GetComponent<PlayerBehavior>().PlayerDmg(5);
                 if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
@@ -137,7 +137,7 @@ public class P2Combat : PlayerCombat
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
                 enemy.GetComponent<PlayerBehavior>().PlayerDmg(10);
                 if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
@@ -182,7 +182,7 @@ public class P2Combat : PlayerCombat
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
                 enemy.GetComponent<PlayerBehavior>().PlayerDmg(15);
                 if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
@@ -227,7 +227,7 @@ public class P2Combat : PlayerCombat
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
                 enemy.GetComponent<PlayerBehavior>().PlayerDmg(20);
                 if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
