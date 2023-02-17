@@ -125,8 +125,11 @@ public class BridgetP1Controls : PlayerControls
             }
             if (canCrouch)
             {                                                                                    //this is why its not in base class
+                Debug.Log(Input.GetButton("P1_Crouch"));
+                Debug.Log(isCrouching);
                 if(Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
                 {
+                    Debug.Log("crouching");
                     animator.SetTrigger("Crouch");
                     animator.SetBool("IsCrouching", true);
                     isCrouching = true;
@@ -135,6 +138,7 @@ public class BridgetP1Controls : PlayerControls
                 }
                 else if(!Input.GetButton("P1_Crouch") && isCrouching == true)
                 {
+                    Debug.Log("uncrouching");
                     animator.SetBool("IsCrouching", false);
                     StartMovement();
                     Uncrouch();
