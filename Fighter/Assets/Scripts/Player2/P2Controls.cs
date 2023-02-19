@@ -243,7 +243,7 @@ public class P2Controls : PlayerControls
     void StopMovement()
     {
         canMove = false;
-        canCrouch = false;
+        //canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -253,7 +253,7 @@ public class P2Controls : PlayerControls
     void StartMovement()
     {
         canMove = true;
-        canCrouch = true;
+        //canCrouch = true;
         rb2D.isKinematic = false; //for allowing player to move once again in general cases
     }
 
