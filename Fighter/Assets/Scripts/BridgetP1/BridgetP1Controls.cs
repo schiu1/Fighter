@@ -91,7 +91,6 @@ public class BridgetP1Controls : PlayerControls
                 moveHorizontal = Input.GetAxisRaw("P1_Walk");
                 if(Input.GetButtonDown("P1_Jump") && !isJumping)
                 {
-                    Debug.Log("jump");
                     moveVertical = true;
                 }
 
@@ -126,7 +125,7 @@ public class BridgetP1Controls : PlayerControls
             }
             if (canCrouch)
             {                                                                                    //this is why its not in base class
-                if(Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
+                if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
                 {
                     animator.SetTrigger("Crouch");
                     animator.SetBool("IsCrouching", true);
@@ -157,6 +156,11 @@ public class BridgetP1Controls : PlayerControls
     {
         if (pushType == "flinch")
         {
+            canMove = false;
+            canCrouch = false;
+            moveHorizontal = 0;
+            p1combat.canAttack = false;
+            rb2D.isKinematic = false;
             animator.SetTrigger("Flinch");
         }
         else if (pushType == "push")
@@ -239,7 +243,6 @@ public class BridgetP1Controls : PlayerControls
     void StopMovement()
     {
         canMove = false;
-        //canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -249,7 +252,6 @@ public class BridgetP1Controls : PlayerControls
     void StartMovement()
     {
         canMove = true;
-        //canCrouch = true;
         rb2D.isKinematic = false;
     }
 

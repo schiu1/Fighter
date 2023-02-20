@@ -159,6 +159,11 @@ public class P1Controls : PlayerControls
     {
         if(pushType == "flinch")
         {
+            canMove = false;
+            canCrouch = false;
+            moveHorizontal = 0;
+            p1combat.canAttack = false;
+            rb2D.isKinematic = false;
             animator.SetTrigger("Flinch");
         }
         else if (pushType == "push")
@@ -241,7 +246,6 @@ public class P1Controls : PlayerControls
     void StopMovement()
     {
         canMove = false;
-        //canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -251,7 +255,6 @@ public class P1Controls : PlayerControls
     void StartMovement()
     {
         canMove = true;
-        //canCrouch = true;
         rb2D.isKinematic = false;
     }
 
