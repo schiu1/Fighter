@@ -221,6 +221,10 @@ public class BridgetP1Controls : PlayerControls
 
     public override void BlockAttack()
     {
+        canMove = false;
+        canCrouch = false;
+        p1combat.canAttack = false;
+        rb2D.isKinematic = false;
         animator.SetTrigger("Block");
         if (gameObject.transform.position.x - p2.transform.position.x > 0)
         {
