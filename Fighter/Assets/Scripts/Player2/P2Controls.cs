@@ -217,7 +217,10 @@ public class P2Controls : PlayerControls
 
     public override void BlockAttack()
     {
-        Debug.Log("p2 blocked");
+        canMove = false;
+        canCrouch = false;
+        p2combat.canAttack = false;
+        rb2D.isKinematic = false;
         animator.SetTrigger("Block");
         if (gameObject.transform.position.x - p1.transform.position.x > 0)
         {
