@@ -76,8 +76,7 @@ public class BridgetP1Controls : PlayerControls
                 //do win or lose anim
                 if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
                 {
-                    StartCoroutine(WinAnimation());
-                    winAnim = true;
+                    //bridget specific win anim
                 }
                 else if ((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health))
                 {

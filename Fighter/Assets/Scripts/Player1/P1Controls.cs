@@ -147,6 +147,18 @@ public class P1Controls : PlayerControls
         }
     }
 
+    private IEnumerator WinAnimation() //used in Update
+    {
+        yield return new WaitForSeconds(1.2f);
+
+        float x = gameObject.transform.position.x;
+        float y = gameObject.transform.position.y;
+
+        animator.SetBool("Win", true);
+
+        Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
+    }
+
     void WinAnimFaceRight()
     {
         if (facingRight)
