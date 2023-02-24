@@ -190,7 +190,7 @@ public class BridgetP1Combat : PlayerCombat
                 {
                     enemy.GetComponent<PlayerControls>().Pushback("flinch");
                 }
-                AudioManager.audioManager.PlaySound("Slash");
+                AudioManager.audioManager.PlaySound("Punch");
 
                 if (GameManager.gameManager._p2Health.Health > 0)
                 {
@@ -233,7 +233,7 @@ public class BridgetP1Combat : PlayerCombat
                 {
                     enemy.GetComponent<PlayerControls>().Pushback("push");
                 }
-                AudioManager.audioManager.PlaySound("HeavySlash");
+                AudioManager.audioManager.PlaySound("Punch");
 
                 if (GameManager.gameManager._p2Health.Health > 0)
                 {
