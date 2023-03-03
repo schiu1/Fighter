@@ -77,6 +77,7 @@ public class BridgetP1Controls : PlayerControls
                 if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
                 {
                     //bridget specific win anim
+                    StartCoroutine(WinAnimation());
                 }
                 else if ((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health))
                 {
@@ -141,6 +142,12 @@ public class BridgetP1Controls : PlayerControls
                 }
             }
         }
+    }
+
+    IEnumerator WinAnimation()
+    {
+        yield return new WaitForSeconds(1.2f);
+        animator.SetBool("Win", true);
     }
 
     void WinAnimFaceRight()
