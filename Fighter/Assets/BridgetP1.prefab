@@ -209,15 +209,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   punchAttackPoint: {fileID: 2664127239562875215}
-  punchAttackRange: {x: 0, y: 0}
+  punchAttackRange: {x: 1.21, y: 0.43}
   slashAttackPoint: {fileID: 2716863149936914351}
-  slashAttackRange: {x: 0, y: 0}
+  slashAttackRange: {x: 0.86, y: 0.35}
   heavyAttackPoint: {fileID: 8967433742256130700}
-  heavyAttackRange: {x: 0, y: 0}
+  heavyAttackRange: {x: 0.6, y: 1.45}
   kickAttackPoint: {fileID: 1146314585602565009}
-  kickAttackRange: {x: 0, y: 0}
-  slashEffect: {fileID: 0}
-  punchEffect: {fileID: 0}
+  kickAttackRange: {x: 0.55, y: 0.54}
+  slashEffect: {fileID: 8372996367463582210, guid: 8cc0a011324bc2e4099f60238d8053b2,
+    type: 3}
+  punchEffect: {fileID: 4323550638723485780, guid: d4cc89a795a8b2b41a0e532159708412,
+    type: 3}
 --- !u!114 &-5001030615649315947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3503819310572184193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.08, y: 0, z: 0}
+  m_LocalPosition: {x: 1.33, y: 0.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3290569558417604358}
@@ -317,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8010420330418390009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.07, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3290569558417604358}
@@ -347,7 +349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8682817951737263787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.14, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3290569558417604358}

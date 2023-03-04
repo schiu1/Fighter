@@ -200,7 +200,7 @@ public class BridgetP1Combat : PlayerCombat
             }
 
             Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
-            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
             Destroy(s, .5f);
         }
     }
