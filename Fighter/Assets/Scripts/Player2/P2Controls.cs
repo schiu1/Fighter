@@ -42,6 +42,7 @@ public class P2Controls : PlayerControls
         KDGround = false;
 
         winAnim = false;
+        Debug.Log(gameObject.transform.parent.name);
     }
 
     // Update is called once per frame

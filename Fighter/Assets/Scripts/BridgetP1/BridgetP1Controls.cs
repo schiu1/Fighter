@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * make a bool Player1 that is set to either true or false at beginning of Start()
+ * remove the P1 in all three of the character scripts (will need to check and fix errors after
+ * scan BridgetControls for anything p1 or p2 specific and split them with if else
+ * 
+ * set default of facingRight to true or false depending on p1 or p2 with if else
+ * might not need to change facingRight except for default?
+ * moveHorizontal will need if else for p1 and p2
+ * change to "canCrouch && Player1" for p1 and make elseif with "canCrouch && !Player1" for p2
+ */
+
 public class BridgetP1Controls : PlayerControls
 {
     BridgetP1Combat p1combat;
@@ -40,6 +51,7 @@ public class BridgetP1Controls : PlayerControls
         pushForceY = 0f;
 
         winAnim = false;
+        Debug.Log(gameObject.transform.parent.name);
     }
 
     // Update is called once per frame
