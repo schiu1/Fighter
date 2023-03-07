@@ -13,20 +13,30 @@ using UnityEngine;
  * change to "canCrouch && Player1" for p1 and make elseif with "canCrouch && !Player1" for p2
  */
 
-public class BridgetP1Controls : PlayerControls
+public class BridgetControls : PlayerControls
 {
-    BridgetP1Combat p1combat;
+    BridgetCombat combat;
     GameObject p2;
 
     bool facingRight;
+    bool Player1;
 
     // Start is called before the first frame update
     void Start()
     {
+        if(gameObject.transform.parent.name == "Player1")
+        {
+            Player1 = true;
+        }
+        else
+        {
+            Player1 = false;
+        }
+
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
-        p1combat = gameObject.GetComponent<BridgetP1Combat>();
+        combat = gameObject.GetComponent<BridgetCombat>();
         p2 = GameObject.Find(GameManager.gameManager.p2Name);
         speed = 3f;
         maxSpeed = 4f;
@@ -35,7 +45,8 @@ public class BridgetP1Controls : PlayerControls
         fallMultiplier = 7f;
         isJumping = false;
 
-        facingRight = true;
+        if (Player1) { facingRight = true; }
+        else if (!Player1) { facingRight = false; }
 
         firstPress = 0f;
         dash = false;
@@ -51,7 +62,6 @@ public class BridgetP1Controls : PlayerControls
         pushForceY = 0f;
 
         winAnim = false;
-        Debug.Log(gameObject.transform.parent.name);
     }
 
     // Update is called once per frame
@@ -99,11 +109,21 @@ public class BridgetP1Controls : PlayerControls
 
             if (canMove)
             {
-                
-                moveHorizontal = Input.GetAxisRaw("P1_Walk");
-                if(Input.GetButtonDown("P1_Jump") && !isJumping)
+                if (Player1)
                 {
-                    moveVertical = true;
+                    moveHorizontal = Input.GetAxisRaw("P1_Walk");
+                    if(Input.GetButtonDown("P1_Jump") && !isJumping)
+                    {
+                        moveVertical = true;
+                    }
+                }
+                else if (!Player1)
+                {
+                    moveHorizontal = Input.GetAxisRaw("P2_Walk");
+                    if (Input.GetButtonDown("P2_Jump") && !isJumping)
+                    {
+                        moveVertical = true;
+                    }
                 }
 
                 animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
@@ -135,9 +155,9 @@ public class BridgetP1Controls : PlayerControls
                     direction = 0f;
                 }
             }
-            if (canCrouch)
+            if (canCrouch && Player1)
             {                                                                                    //this is why its not in base class
-                if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
+                if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && combat.attacking == false)
                 {
                     animator.SetTrigger("Crouch");
                     animator.SetBool("IsCrouching", true);
@@ -146,6 +166,24 @@ public class BridgetP1Controls : PlayerControls
                     StopMovement();
                 }
                 else if(!Input.GetButton("P1_Crouch") && isCrouching == true)
+                {
+                    animator.SetBool("IsCrouching", false);
+                    StartMovement();
+                    Uncrouch();
+                    isCrouching = false;
+                }
+            }
+            else if(canCrouch && !Player1)
+            {
+                if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && combat.attacking == false)
+                {
+                    animator.SetTrigger("Crouch");
+                    animator.SetBool("IsCrouching", true);
+                    isCrouching = true;
+                    Crouch();
+                    StopMovement();
+                }
+                else if (!Input.GetButton("P2_Crouch") && isCrouching == true)
                 {
                     animator.SetBool("IsCrouching", false);
                     StartMovement();
@@ -177,7 +215,7 @@ public class BridgetP1Controls : PlayerControls
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
-            p1combat.canAttack = false;
+            combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Flinch");
         }
@@ -186,7 +224,7 @@ public class BridgetP1Controls : PlayerControls
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
-            p1combat.canAttack = false;
+            combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Push");
             if (gameObject.transform.position.x - p2.transform.position.x > 0)
@@ -208,7 +246,7 @@ public class BridgetP1Controls : PlayerControls
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
-            p1combat.canAttack = false;
+            combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("KDAir");
             if (gameObject.transform.position.x - p2.transform.position.x > 0)
@@ -234,14 +272,14 @@ public class BridgetP1Controls : PlayerControls
         canMove = true;
         canCrouch = true;
         rb2D.isKinematic = false; 
-        p1combat.canAttack = true;
+        combat.canAttack = true;
     }
 
     public override void BlockAttack()
     {
         canMove = false;
         canCrouch = false;
-        p1combat.canAttack = false;
+        combat.canAttack = false;
         rb2D.isKinematic = false;
         animator.SetTrigger("Block");
         if (gameObject.transform.position.x - p2.transform.position.x > 0)

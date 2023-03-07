@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BridgetP1Behavior : PlayerBehavior
+public class BridgetBehavior : PlayerBehavior
 {
-    BridgetP1Controls p1controls;
-    BridgetP1Combat p1combat;
+    BridgetControls p1controls;
+    BridgetCombat p1combat;
     UnitHealth p1Health;
 
     void Awake()
@@ -21,8 +21,8 @@ public class BridgetP1Behavior : PlayerBehavior
     {
         p1Health = GameManager.gameManager._p1Health;
         anim = gameObject.GetComponent<Animator>();
-        p1controls = gameObject.GetComponent<BridgetP1Controls>();
-        p1combat = gameObject.GetComponent<BridgetP1Combat>();
+        p1controls = gameObject.GetComponent<BridgetControls>();
+        p1combat = gameObject.GetComponent<BridgetCombat>();
 
         startTime = Time.time;
         started = false;
