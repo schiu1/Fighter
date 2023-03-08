@@ -27,10 +27,12 @@ public class BridgetControls : PlayerControls
         if(gameObject.transform.parent.name == "Player1")
         {
             Player1 = true;
+            facingRight = true;
         }
         else
         {
             Player1 = false;
+            facingRight = false;
         }
 
         rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -44,9 +46,6 @@ public class BridgetControls : PlayerControls
 
         fallMultiplier = 7f;
         isJumping = false;
-
-        if (Player1) { facingRight = true; }
-        else if (!Player1) { facingRight = false; }
 
         firstPress = 0f;
         dash = false;

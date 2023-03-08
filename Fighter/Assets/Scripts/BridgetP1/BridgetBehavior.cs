@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class BridgetBehavior : PlayerBehavior
 {
-    BridgetControls p1controls;
-    BridgetCombat p1combat;
-    UnitHealth p1Health;
+    BridgetControls controls;
+    BridgetCombat combat;
+    UnitHealth Health;
 
     void Awake()
     {
@@ -19,10 +19,17 @@ public class BridgetBehavior : PlayerBehavior
     // Start is called before the first frame update
     void Start()
     {
-        p1Health = GameManager.gameManager._p1Health;
+        if (gameObject.transform.parent.name == "Player1")
+        {
+            Health = GameManager.gameManager._p1Health;
+        }
+        else
+        {
+            Health = GameManager.gameManager._p2Health;
+        }
         anim = gameObject.GetComponent<Animator>();
-        p1controls = gameObject.GetComponent<BridgetControls>();
-        p1combat = gameObject.GetComponent<BridgetCombat>();
+        controls = gameObject.GetComponent<BridgetControls>();
+        combat = gameObject.GetComponent<BridgetCombat>();
 
         startTime = Time.time;
         started = false;
@@ -39,14 +46,14 @@ public class BridgetBehavior : PlayerBehavior
             if (Time.time - startTime >= 3f && !started)
             {
                 started = true;
-                p1controls.canMove = true;
-                p1controls.canCrouch = true;
-                p1combat.canAttack = true;
+                controls.canMove = true;
+                controls.canCrouch = true;
+                combat.canAttack = true;
             }
 
             //leave out self-heal and self-dmg
 
-            if(p1Health.Health <= 0)
+            if(Health.Health <= 0)
             {
                 Die();
             }
@@ -55,8 +62,8 @@ public class BridgetBehavior : PlayerBehavior
 
     public override void PlayerDmg(int dmg)
     {
-        p1Health.dmgUnit(dmg);
-        _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
+        Health.dmgUnit(dmg);
+        _healthbar.SetHealth(Health.Health);
         GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(b, .2f); //based on the particle system's duration
         shake.ShakeCamera(.3f, .5f);
@@ -64,17 +71,16 @@ public class BridgetBehavior : PlayerBehavior
 
     public override void PlayerHeal(int heal)
     {
-        p1Health.healUnit(heal);
-        _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
+        Health.healUnit(heal);
+        _healthbar.SetHealth(Health.Health);
     }
 
     protected override void Die()
     {
-        Debug.Log("p1 killed");
         anim.SetBool("IsKO", true);
-        p1controls.canMove = false;
-        p1controls.canCrouch = false;
-        p1combat.canAttack = false;
+        controls.canMove = false;
+        controls.canCrouch = false;
+        combat.canAttack = false;
         GameManager.gameManager.endRound("player");
         this.enabled = false;
     }
