@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class BridgetCombat : PlayerCombat
 {
-    BridgetControls p1Controls;
+    BridgetControls controls;
+    bool Player1;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.transform.parent.name == "Player1")
+        {
+            Player1 = true;
+        }
+        else
+        {
+            Player1 = false;
+        }
         anim = gameObject.GetComponent<Animator>();
-        p1Controls = gameObject.GetComponent<BridgetControls>();
+        controls = gameObject.GetComponent<BridgetControls>();
 
         attacking = false;
         canAttack = false;
@@ -37,39 +46,73 @@ public class BridgetCombat : PlayerCombat
 
             if (canAttack)
             {
-                if((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
+                if((controls.isJumping == false) && (attackCD == 0) && (controls.isCrouching == false))
                 {
-                    if (Input.GetButtonDown("P1_Punch"))
+                    if (Player1)
                     {
-                        Debug.Log("punch");
-                        attacking = true;
-                        anim.SetTrigger("Punch");
-                        lastAttack = Time.time;
-                        attackCD = 0.5f; //will be different
+                        if (Input.GetButtonDown("P1_Punch"))
+                        {
+                            Debug.Log("punch");
+                            attacking = true;
+                            anim.SetTrigger("Punch");
+                            lastAttack = Time.time;
+                            attackCD = 0.5f; //will be different
+                        }
+                        if (Input.GetButtonDown("P1_Kick"))
+                        {
+                            Debug.Log("kick");
+                            attacking = true;
+                            anim.SetTrigger("Kick");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f; //will be different
+                        }
+                        if (Input.GetButtonDown("P1_Slash"))
+                        {
+                            Debug.Log("slash");
+                            attacking = true;
+                            anim.SetTrigger("Slash");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f; //will be different
+                        }
+                        if (Input.GetButtonDown("P1_HeavySlash"))
+                        {
+                            Debug.Log("heavy");
+                            attacking = true;
+                            anim.SetTrigger("Heavy");
+                            lastAttack = Time.time;
+                            attackCD = 0.75f; //will be different
+                        }
                     }
-                    if (Input.GetButtonDown("P1_Kick"))
+                    else if (!Player1)
                     {
-                        Debug.Log("kick");
-                        attacking = true;
-                        anim.SetTrigger("Kick");
-                        lastAttack = Time.time;
-                        attackCD = 0.8f; //will be different
-                    }
-                    if (Input.GetButtonDown("P1_Slash"))
-                    {
-                        Debug.Log("slash");
-                        attacking = true;
-                        anim.SetTrigger("Slash");
-                        lastAttack = Time.time;
-                        attackCD = 0.8f; //will be different
-                    }
-                    if (Input.GetButtonDown("P1_HeavySlash"))
-                    {
-                        Debug.Log("heavy");
-                        attacking = true;
-                        anim.SetTrigger("Heavy");
-                        lastAttack = Time.time;
-                        attackCD = 0.75f; //will be different
+                        if (Input.GetButtonDown("P2_Punch"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Punch");
+                            lastAttack = Time.time;
+                            attackCD = 0.5f;
+                        }
+                        if (Input.GetButtonDown("P2_Kick"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Kick");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f;
+                        }
+                        if (Input.GetButtonDown("P2_Slash"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Slash");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f;
+                        }
+                        if (Input.GetButtonDown("P2_HeavySlash"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Heavy");
+                            lastAttack = Time.time;
+                            attackCD = 0.75f;
+                        }
                     }
                 }
             }
