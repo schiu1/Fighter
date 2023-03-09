@@ -16,7 +16,7 @@ using UnityEngine;
 public class BridgetControls : PlayerControls
 {
     BridgetCombat combat;
-    GameObject p2;
+    GameObject enemyPlayer;
 
     bool facingRight;
     bool Player1;
@@ -39,7 +39,14 @@ public class BridgetControls : PlayerControls
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
         combat = gameObject.GetComponent<BridgetCombat>();
-        p2 = GameObject.Find(GameManager.gameManager.p2Name);
+        if (Player1)
+        {
+            enemyPlayer = GameObject.Find(GameManager.gameManager.p2Name);
+        }
+        else if (!Player1)
+        {
+            enemyPlayer = GameObject.Find(GameManager.gameManager.p1Name);
+        }
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
@@ -142,16 +149,33 @@ public class BridgetControls : PlayerControls
                     firstPress = 0f;
                     direction = 0f;
                 }
-                if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
+                if (Player1)
                 {
-                    firstPress = Time.time;
-                    direction = moveHorizontal;
-                } 
-                else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                    if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
+                    {
+                        firstPress = Time.time;
+                        direction = moveHorizontal;
+                    } 
+                    else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                    {
+                        dash = true;
+                        firstPress = 0f;
+                        direction = 0f;
+                    }
+                }
+                else if (!Player1)
                 {
-                    dash = true;
-                    firstPress = 0f;
-                    direction = 0f;
+                    if (firstPress == 0f && Input.GetButtonDown("P2_Walk") && airDash == 0)
+                    {
+                        firstPress = Time.time;
+                        direction = moveHorizontal;
+                    }
+                    else if (Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P2_Walk"))
+                    {
+                        dash = true;
+                        firstPress = 0f;
+                        direction = 0f;
+                    }
                 }
             }
             if (canCrouch && Player1)
@@ -226,13 +250,13 @@ public class BridgetControls : PlayerControls
             combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Push");
-            if (gameObject.transform.position.x - p2.transform.position.x > 0)
+            if (gameObject.transform.position.x - enemyPlayer.transform.position.x > 0)
             {
                 if (facingRight) { Flip(); }
                 pushForceX = 15f;
                 Debug.Log("pushing right");
             }
-            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            else if (gameObject.transform.position.x - enemyPlayer.transform.position.x < 0)
             {
                 if (!facingRight) { Flip(); }
                 pushForceX = -15f;
@@ -248,13 +272,13 @@ public class BridgetControls : PlayerControls
             combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("KDAir");
-            if (gameObject.transform.position.x - p2.transform.position.x > 0)
+            if (gameObject.transform.position.x - enemyPlayer.transform.position.x > 0)
             {
                 if (facingRight) { Flip(); }
                 pushForceX = 15f;
                 Debug.Log("KD right");
             }
-            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            else if (gameObject.transform.position.x - enemyPlayer.transform.position.x < 0)
             {
                 if (!facingRight) { Flip(); }
                 pushForceX = -15f;
@@ -281,11 +305,11 @@ public class BridgetControls : PlayerControls
         combat.canAttack = false;
         rb2D.isKinematic = false;
         animator.SetTrigger("Block");
-        if (gameObject.transform.position.x - p2.transform.position.x > 0)
+        if (gameObject.transform.position.x - enemyPlayer.transform.position.x > 0)
         {
             if (facingRight) { Flip(); }
         }
-        else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+        else if (gameObject.transform.position.x - enemyPlayer.transform.position.x < 0)
         {
             if (!facingRight) { Flip(); }
         }
@@ -338,7 +362,7 @@ public class BridgetControls : PlayerControls
             {
                 airDash = 0;
             }
-            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), false);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), false);
         }
     }
 
@@ -349,7 +373,7 @@ public class BridgetControls : PlayerControls
             isJumping = true;
             animator.SetBool("InAir", true);
             //might want to change this somehow in the future to ignore collision only on jump start and not entire jump anim
-            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), true);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), true);
         }
     }
 }
