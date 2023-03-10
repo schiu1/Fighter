@@ -747,12 +747,17 @@ PrefabInstance:
     - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
       propertyPath: m_Name
-      value: BridgetP1
+      value: Bridget
       objectReference: {fileID: 0}
     - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 3290569558417604409, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
@@ -1326,7 +1331,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3707051, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1587,7 +1592,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.55
+  orthographic size: 2.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1611,7 +1616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0089357775, y: 0.44698, z: -10}
+  m_LocalPosition: {x: -0.0042625666, y: 0.70947, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5075,7 +5080,7 @@ PrefabInstance:
     - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
       propertyPath: m_Name
-      value: BridgetP1
+      value: Bridget
       objectReference: {fileID: 0}
     - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}

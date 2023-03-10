@@ -1578,7 +1578,7 @@ PrefabInstance:
     - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
       propertyPath: m_Name
-      value: BridgetP1
+      value: Bridget
       objectReference: {fileID: 0}
     - target: {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2,
         type: 3}
