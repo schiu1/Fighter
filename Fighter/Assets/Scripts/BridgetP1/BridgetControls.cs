@@ -108,7 +108,9 @@ public class BridgetControls : PlayerControls
 
             //MAKE P2 VERSION
             //when times out or gets kill
-            if(GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
+            if(GameManager.gameManager.timedOut == true 
+                || (GameManager.gameManager._p2Health.Health == 0 && Player1) 
+                || (GameManager.gameManager._p1Health.Health == 0 && !Player1))
             {
                 //prevent walking/jumping/crouching
                 canMove = false;
@@ -129,12 +131,14 @@ public class BridgetControls : PlayerControls
                 }
 
                 //do win or lose anim
-                if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
+                if((Player1 && (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) 
+                    || (!Player1 && (GameManager.gameManager._p2Health.Health > GameManager.gameManager._p1Health.Health))))
                 {
                     //bridget specific win anim
                     StartCoroutine(WinAnimation());
                 }
-                else if ((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health))
+                else if (Player1 && (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
+                    || (!Player1 && (GameManager.gameManager._p2Health.Health < GameManager.gameManager._p1Health.Health)))
                 {
                     animator.SetBool("Lost", true);
                 }
