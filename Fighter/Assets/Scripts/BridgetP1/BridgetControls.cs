@@ -106,6 +106,7 @@ public class BridgetControls : PlayerControls
                 canMove = false;
             }
 
+            //MAKE P2 VERSION
             //when times out or gets kill
             if(GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
             {
