@@ -148,7 +148,8 @@ public class BridgetCombat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0) 
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.1f));
@@ -192,7 +193,8 @@ public class BridgetCombat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Kick");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.1f));
@@ -235,7 +237,8 @@ public class BridgetCombat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.15f));
@@ -278,7 +281,8 @@ public class BridgetCombat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.2f));
