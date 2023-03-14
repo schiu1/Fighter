@@ -7,7 +7,7 @@ public class FighterSelect : MonoBehaviour
 {
     [SerializeField]
     GameObject[] fighters = null;
-    int currentFighter;
+    public int currentFighter;
     SceneLoaderScript crossfade;
 
     void Start()
