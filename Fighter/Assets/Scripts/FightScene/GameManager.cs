@@ -35,9 +35,10 @@ public class GameManager : MonoBehaviour
         sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
         getSceneLoader = false;
 
-        Debug.Log("player1 is: "+PlayerPrefs.GetString("player1")); //for testing
         p1Name = PlayerPrefs.GetString("player1");
-        p2Name = "Bridget"; //hard coded temporarily until FighterAssign handles p2
+        p2Name = PlayerPrefs.GetString("player2");
+        Debug.Log("player1 is: "+PlayerPrefs.GetString("player1")); //for testing
+        Debug.Log("player2 is: " + PlayerPrefs.GetString("player2"));
 
         if (gameManager != null && gameManager != this)
         {

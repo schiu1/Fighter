@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1873199973}
+      - m_Target: {fileID: 1594428244}
         m_MethodName: Select
         m_Mode: 1
         m_Arguments:
@@ -1617,6 +1617,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d993184bd10a794faab00201e0c6fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FighterList1:
+  - {fileID: 430625550}
+  - {fileID: 1928144975}
+  FighterList2:
+  - {fileID: 1280488130}
+  - {fileID: 1952439640}
 --- !u!1 &1613611848
 GameObject:
   m_ObjectHideFlags: 0
