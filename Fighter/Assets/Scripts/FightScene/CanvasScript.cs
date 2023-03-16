@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class CanvasScript : MonoBehaviour
 {
+    Text p1Name;
+    Text p2Name;
+
     Text p1ScoreUI;
     Text p2ScoreUI;
 
@@ -33,6 +36,11 @@ public class CanvasScript : MonoBehaviour
     void Start()
     {
         gm = GameManager.gameManager;
+
+        p1Name = transform.Find("P1_Name").GetComponent<Text>();
+        p2Name = transform.Find("P2_Name").GetComponent<Text>();
+        p1Name.text = gm.p1Name;
+        p2Name.text = gm.p2Name;
 
         p1ScoreUI = transform.Find("P1_Score").GetComponent<Text>();
         p2ScoreUI = transform.Find("P2_Score").GetComponent<Text>();

@@ -1359,7 +1359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381176064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -0.06970215, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 232833800}
@@ -1427,8 +1427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -198.25, y: 237}
-  m_SizeDelta: {x: 114.093506, y: 33.41349}
+  m_AnchoredPosition: {x: -293, y: 237}
+  m_SizeDelta: {x: 300, y: 33.41349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427803676
 MonoBehaviour:
@@ -1456,7 +1456,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 57
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1619,7 +1619,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.55
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1643,7 +1643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.0089357775, y: 0.44698, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4452,8 +4452,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 198.25, y: 237}
-  m_SizeDelta: {x: 114.093506, y: 33.41349}
+  m_AnchoredPosition: {x: 291, y: 237}
+  m_SizeDelta: {x: 300, y: 33.41349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001052550
 MonoBehaviour:
@@ -5208,6 +5208,16 @@ PrefabInstance:
       propertyPath: _healthbar
       value: 
       objectReference: {fileID: 114436209}
+    - target: {fileID: 4141270870683221679, guid: e17155ea1dadb164fa4672672d34e034,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141270871041816520, guid: e17155ea1dadb164fa4672672d34e034,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e17155ea1dadb164fa4672672d34e034, type: 3}
 --- !u!1 &4141270870278189852 stripped
@@ -5223,6 +5233,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468055439}
     m_Modifications:
+    - target: {fileID: 9129357679019383180, guid: 3ba01d5e28cb8f54abcbb8a0be372864,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9129357679254895904, guid: 3ba01d5e28cb8f54abcbb8a0be372864,
         type: 3}
       propertyPath: _healthbar

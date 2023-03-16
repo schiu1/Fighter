@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9129357679019383181
 RectTransform:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJumping: 0
-  p2CanMove: 1
+  canMove: 0
   canCrouch: 1
   isCrouching: 0
   pirate: {fileID: 89396882432325939, guid: 967d25c9a2ac1444bb791f7f693ac2f1, type: 3}
@@ -364,8 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711c85d564e51134eb77dde85a5a9d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p2Attacking: 0
-  p2CanAttack: 1
+  attacking: 0
+  canAttack: 0
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
