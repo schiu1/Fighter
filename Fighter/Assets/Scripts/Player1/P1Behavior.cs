@@ -3,22 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P1Behavior : MonoBehaviour
+public class P1Behavior : PlayerBehavior
 {
-    Animator anim;
     P1Controls p1controls;
     P1Combat p1combat;
     UnitHealth p1Health;
-    [SerializeField] Healthbar _healthbar = null;
-
-    float startTime;
-    bool started;
-
-    [SerializeField]
-    GameObject hitEffect = null;
-
-    GameObject vcam;
-    Shake shake;
 
     void Awake()
     {
@@ -51,21 +40,21 @@ public class P1Behavior : MonoBehaviour
             if(Time.time - startTime >= 3f && !started)
             {
                 started = true;
-                p1controls.p1CanMove = true;
+                p1controls.canMove = true;
                 p1controls.canCrouch = true;
-                p1combat.p1CanAttack = true;
+                p1combat.canAttack = true;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Player1Dmg(10);
+                PlayerDmg(10);
             
                 Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                Player1Heal(10);
+                PlayerHeal(10);
                 Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
             }
 
@@ -76,7 +65,7 @@ public class P1Behavior : MonoBehaviour
         }
     }
 
-    public void Player1Dmg(int dmg)
+    public override void PlayerDmg(int dmg)
     {
         p1Health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
@@ -85,19 +74,19 @@ public class P1Behavior : MonoBehaviour
         shake.ShakeCamera(.3f, .5f);
     }
 
-    public void Player1Heal(int heal)
+    public override void PlayerHeal(int heal)
     {
         p1Health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
     }
 
-    void Die()
+    protected override void Die()
     {
         Debug.Log("p1 killed");
         anim.SetBool("IsKO", true);
-        p1controls.p1CanMove = false;
+        p1controls.canMove = false;
         p1controls.canCrouch = false;
-        p1combat.p1CanAttack = false;
+        p1combat.canAttack = false;
         GameManager.gameManager.endRound("player");
         this.enabled = false;
     }

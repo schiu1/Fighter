@@ -7,19 +7,14 @@ public class P2Combat : PlayerCombat
 {
     P2Controls p2Controls;
 
-    [HideInInspector]
-    public bool p2Attacking;
-    [HideInInspector]
-    public bool p2CanAttack;
-
     // Start is called before the first frame update
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
         p2Controls = gameObject.GetComponent<P2Controls>();
 
-        p2Attacking = false;
-        p2CanAttack = false;
+        attacking = false;
+        canAttack = false;
     }
 
     // Update is called once per frame
@@ -32,42 +27,42 @@ public class P2Combat : PlayerCombat
             {
                 lastAttack = 0f;
                 attackCD = 0f;
-                p2Attacking = false;
+                attacking = false;
             }
 
             if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p1Health.Health == 0)
             {
-                p2CanAttack = false;
+                canAttack = false;
             }
 
-            if (p2CanAttack)
+            if (canAttack)
             {
                 if ((p2Controls.isJumping == false) && (attackCD == 0) && (p2Controls.isCrouching == false))
                 {
                     if (Input.GetButtonDown("P2_Punch"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Punch");
                         lastAttack = Time.time;
                         attackCD = 0.5f;
                     }
                     if (Input.GetButtonDown("P2_Kick"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Kick");
                         lastAttack = Time.time;
                         attackCD = 0.8f;
                     }
                     if (Input.GetButtonDown("P2_Slash"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Slash");
                         lastAttack = Time.time;
                         attackCD = 0.8f;
                     }
                     if (Input.GetButtonDown("P2_HeavySlash"))
                     {
-                        p2Attacking = true;
+                        attacking = true;
                         anim.SetTrigger("Heavy");
                         lastAttack = Time.time;
                         attackCD = 0.75f;
@@ -90,23 +85,22 @@ public class P2Combat : PlayerCombat
             {
                 continue;
             }
-
-            if (enemy.GetComponent<P1Controls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
             {
-                enemy.GetComponent<P1Controls>().BlockAttack();
+                enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
-                enemy.GetComponent<P1Behavior>().Player1Dmg(5);
-                if (enemy.GetComponent<P1Controls>().isJumping)
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemy.GetComponent<PlayerBehavior>().PlayerDmg(5);
+                if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("knockdown");
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("flinch");
+                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
@@ -136,22 +130,22 @@ public class P2Combat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<P1Controls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
             {
-                enemy.GetComponent<P1Controls>().BlockAttack();
+                enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
-                enemy.GetComponent<P1Behavior>().Player1Dmg(10);
-                if (enemy.GetComponent<P1Controls>().isJumping)
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemy.GetComponent<PlayerBehavior>().PlayerDmg(10);
+                if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("knockdown");
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("flinch");
+                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Kick");
 
@@ -181,22 +175,22 @@ public class P2Combat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<P1Controls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
             {
-                enemy.GetComponent<P1Controls>().BlockAttack();
+                enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
-                enemy.GetComponent<P1Behavior>().Player1Dmg(15);
-                if (enemy.GetComponent<P1Controls>().isJumping)
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemy.GetComponent<PlayerBehavior>().PlayerDmg(15);
+                if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("knockdown");
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("flinch");
+                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Slash");
 
@@ -226,22 +220,22 @@ public class P2Combat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<P1Controls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
             {
-                enemy.GetComponent<P1Controls>().BlockAttack();
+                enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                Debug.Log("player2 hit: " + enemy.name);
-                enemy.GetComponent<P1Behavior>().Player1Dmg(20);
-                if (enemy.GetComponent<P1Controls>().isJumping)
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemy.GetComponent<PlayerBehavior>().PlayerDmg(20);
+                if (enemy.GetComponent<PlayerControls>().isJumping)
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("knockdown");
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<P1Controls>().Pushback("push");
+                    enemy.GetComponent<PlayerControls>().Pushback("push");
                 }
                 AudioManager.audioManager.PlaySound("HeavySlash");
 

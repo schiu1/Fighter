@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public UnitHealth _p2Health = new UnitHealth(100, 100);
 
     public string p1Name;
-    public string p2Name = "MayP2";
+    public string p2Name;
 
     public int p1Score = 0;
     public int p2Score = 0;
@@ -35,8 +35,10 @@ public class GameManager : MonoBehaviour
         sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
         getSceneLoader = false;
 
-        Debug.Log("player1 is: "+PlayerPrefs.GetString("player1")); //for testing
         p1Name = PlayerPrefs.GetString("player1");
+        p2Name = PlayerPrefs.GetString("player2");
+        Debug.Log("player1 is: "+PlayerPrefs.GetString("player1")); //for testing
+        Debug.Log("player2 is: " + PlayerPrefs.GetString("player2"));
 
         if (gameManager != null && gameManager != this)
         {

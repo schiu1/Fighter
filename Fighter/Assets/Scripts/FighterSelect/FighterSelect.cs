@@ -1,25 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FighterSelect : MonoBehaviour
 {
     [SerializeField]
     GameObject[] fighters = null;
-    int currentFighter;
-    SceneLoaderScript crossfade;
+    public int currentFighter;
 
     void Start()
     {
         currentFighter = 0;
         fighters[currentFighter].SetActive(true);
-        crossfade = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
-    }
-
-    void Update()
-    {
-
     }
 
     public void Left()
@@ -40,12 +32,6 @@ public class FighterSelect : MonoBehaviour
             currentFighter += 1;
             fighters[currentFighter].SetActive(true);
         }
-    }
-
-    public void Select()
-    {
-        PlayerPrefs.SetString("player1", fighters[currentFighter].gameObject.name);
-        crossfade.LoadLevel("Fight_Scene");
     }
 
     /* part 1

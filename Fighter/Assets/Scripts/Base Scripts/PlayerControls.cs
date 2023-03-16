@@ -31,6 +31,8 @@ public class PlayerControls : MonoBehaviour
     //initialize facing direction bool here
     //initialize public canMove bool here with [HideInInspector]
     [HideInInspector]
+    public bool canMove;
+    [HideInInspector]
     public bool canCrouch;
     [HideInInspector]
     public bool isCrouching;
@@ -104,18 +106,6 @@ public class PlayerControls : MonoBehaviour
 
     }
 
-    protected IEnumerator WinAnimation() //used in Update
-    {
-        yield return new WaitForSeconds(1.2f);
-
-        float x = gameObject.transform.position.x;
-        float y = gameObject.transform.position.y;
-
-        animator.SetBool("Win", true);
-
-        Instantiate(pirate, new Vector2(x + 4, y), Quaternion.identity);
-    }
-
     // WinAnimFaceRight in child classes bc uses facingRight or facingLeft
 
     public void WinAnimSpin()
@@ -123,9 +113,15 @@ public class PlayerControls : MonoBehaviour
         animator.SetTrigger("WinSpin");
     }
 
-    // Pushback in child classes bc uses facingRight or facingLeft
+    public virtual void Pushback(string pushType)
+    {
 
-    // BlockAttack in child classes bc uses facingRight or facingLeft
+    }
+
+    public virtual void BlockAttack()
+    {
+
+    }
 
     // Flip in child classes - - - - -
 
