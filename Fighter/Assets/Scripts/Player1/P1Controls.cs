@@ -5,19 +5,47 @@ using UnityEngine.SceneManagement;
 
 public class P1Controls : PlayerControls
 {
-    P1Combat p1combat;
-    GameObject p2;
+    P1Combat combat;
+    GameObject enemyPlayer;
 
     bool facingRight;
+    bool Player1;
 
     // Start is called before the first frame update
     void Start()
     {
+        if(gameObject.transform.parent.name == "Player1")
+        {
+            Player1 = true;
+            facingRight = true;
+            foreach(GameObject o in GameObject.FindGameObjectsWithTag("Player2"))
+            {
+                if(GameManager.gameManager.p2Name == o.name)
+                {
+                    enemyPlayer = o;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Player1 = false;
+            facingRight = false;
+            foreach(GameObject o in GameObject.FindGameObjectsWithTag("Player1"))
+            {
+                if(GameManager.gameManager.p1Name == o.name)
+                {
+                    enemyPlayer = o;
+                    break;
+                }
+            }
+        }
+
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
-        p1combat = gameObject.GetComponent<P1Combat>();
-        p2 = GameObject.Find(GameManager.gameManager.p2Name);
+        combat = gameObject.GetComponent<P1Combat>();
+        enemyPlayer = GameObject.Find(GameManager.gameManager.p2Name);
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
@@ -54,7 +82,9 @@ public class P1Controls : PlayerControls
                 canMove = false;
             }
 
-            if (GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
+            if (GameManager.gameManager.timedOut == true 
+                || (GameManager.gameManager._p2Health.Health == 0 && Player1)
+                || (GameManager.gameManager._p1Health.Health == 0 && !Player1))
             {
                 //prevent walking/jumping/crouching from activating
                 canMove = false;
@@ -75,12 +105,14 @@ public class P1Controls : PlayerControls
                 }
 
                 //do win or lose anim
-                if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim)
+                if((Player1 && (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) && !winAnim) 
+                    ||(!Player1 && (GameManager.gameManager._p2Health.Health > GameManager.gameManager._p1Health.Health) && !winAnim))
                 {
                     StartCoroutine(WinAnimation());
                     winAnim = true;
                 }
-                else if (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
+                else if ((Player1 && (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health))
+                    || (!Player1 && (GameManager.gameManager._p2Health.Health < GameManager.gameManager._p1Health.Health)))
                 {
                     animator.SetBool("Lost", true);
                 }
@@ -89,11 +121,21 @@ public class P1Controls : PlayerControls
 
             if (canMove)
             {
-                //wrap these two around if notjumping
-                moveHorizontal = Input.GetAxisRaw("P1_Walk");
-                if (Input.GetButtonDown("P1_Jump") && !isJumping)
+                if (Player1)
                 {
-                    moveVertical = true;
+                    moveHorizontal = Input.GetAxisRaw("P1_Walk");
+                    if (Input.GetButtonDown("P1_Jump") && !isJumping)
+                    {
+                        moveVertical = true;
+                    }
+                }
+                else if (!Player1)
+                {
+                    moveHorizontal = Input.GetAxisRaw("P2_Walk");
+                    if (Input.GetButtonDown("P2_Jump") && !isJumping)
+                    {
+                        moveVertical = true;
+                    }
                 }
             
                 animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
@@ -113,21 +155,38 @@ public class P1Controls : PlayerControls
                     firstPress = 0f;
                     direction = 0f;
                 }
-                if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
+                if (Player1)
                 {
-                    firstPress = Time.time;
-                    direction = moveHorizontal;
+                    if (firstPress == 0f && Input.GetButtonDown("P1_Walk") && airDash == 0)
+                    {
+                        firstPress = Time.time;
+                        direction = moveHorizontal;
+                    }
+                    else if (Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                    {
+                        dash = true;
+                        firstPress = 0f;
+                        direction = 0f;
+                    }
                 }
-                else if(Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                else if (!Player1)
                 {
-                    dash = true;
-                    firstPress = 0f;
-                    direction = 0f;
+                    if (firstPress == 0f && Input.GetButtonDown("P2_Walk") && airDash == 0)
+                    {
+                        firstPress = Time.time;
+                        direction = moveHorizontal;
+                    }
+                    else if (Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                    {
+                        dash = true;
+                        firstPress = 0f;
+                        direction = 0f;
+                    }
                 }
             }
-            if (canCrouch)
+            if (canCrouch && Player1)
             {
-                if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && p1combat.attacking == false)
+                if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && combat.attacking == false)
                 {
                     animator.SetTrigger("Crouch");
                     animator.SetBool("IsCrouching", true);
@@ -143,6 +202,24 @@ public class P1Controls : PlayerControls
                     isCrouching = false;
                 }
 
+            }
+            else if (canCrouch && !Player1)
+            {
+                if (Input.GetButton("P2_Crouch") && isJumping == false && isCrouching == false && combat.attacking == false)
+                {
+                    animator.SetTrigger("Crouch");
+                    animator.SetBool("IsCrouching", true);
+                    isCrouching = true;
+                    Crouch();
+                    StopMovement();
+                }
+                else if (!Input.GetButton("P2_Crouch") && isCrouching == true)
+                {
+                    animator.SetBool("IsCrouching", false);
+                    StartMovement();
+                    Uncrouch();
+                    isCrouching = false;
+                }
             }
         }
     }
@@ -174,7 +251,7 @@ public class P1Controls : PlayerControls
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
-            p1combat.canAttack = false;
+            combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Flinch");
         }
@@ -183,16 +260,16 @@ public class P1Controls : PlayerControls
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
-            p1combat.canAttack = false;
+            combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("Push");
-            if(gameObject.transform.position.x - p2.transform.position.x > 0)
+            if(gameObject.transform.position.x - enemyPlayer.transform.position.x > 0)
             {
                 if (facingRight) { Flip(); }
                 pushForceX = 15f;
                 Debug.Log("pushing right");
             }
-            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            else if (gameObject.transform.position.x - enemyPlayer.transform.position.x < 0)
             {
                 if (!facingRight) { Flip(); }
                 pushForceX = -15f;
@@ -205,16 +282,16 @@ public class P1Controls : PlayerControls
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
-            p1combat.canAttack = false;
+            combat.canAttack = false;
             rb2D.isKinematic = false;
             animator.SetTrigger("KDAir");
-            if(gameObject.transform.position.x - p2.transform.position.x > 0)
+            if(gameObject.transform.position.x - enemyPlayer.transform.position.x > 0)
             {
                 if (facingRight) { Flip(); }
                 pushForceX = 15f;
                 Debug.Log("KD right");
             }
-            else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+            else if (gameObject.transform.position.x - enemyPlayer.transform.position.x < 0)
             {
                 if (!facingRight) { Flip(); }
                 pushForceX = -15f;
@@ -230,14 +307,14 @@ public class P1Controls : PlayerControls
     {
         canMove = false;
         canCrouch = false;
-        p1combat.canAttack = false;
+        combat.canAttack = false;
         rb2D.isKinematic = false;
         animator.SetTrigger("Block");
-        if (gameObject.transform.position.x - p2.transform.position.x > 0)
+        if (gameObject.transform.position.x - enemyPlayer.transform.position.x > 0)
         {
             if (facingRight) { Flip(); }
         }
-        else if (gameObject.transform.position.x - p2.transform.position.x < 0)
+        else if (gameObject.transform.position.x - enemyPlayer.transform.position.x < 0)
         {
             if (!facingRight) { Flip(); }
         }
@@ -256,7 +333,7 @@ public class P1Controls : PlayerControls
         canMove = true;
         canCrouch = true;
         rb2D.isKinematic = false; // for if player is hit between stopmovement and startmovement like during attack 
-        p1combat.canAttack = true;
+        combat.canAttack = true;
     }
 
     void StopMovement()
@@ -298,7 +375,7 @@ public class P1Controls : PlayerControls
             {
                 airDash = 0;
             }
-            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), false);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), false);
         }
     }
 
@@ -309,7 +386,7 @@ public class P1Controls : PlayerControls
             isJumping = true;
             animator.SetBool("InAir", true);
             //might want to change this somehow in the future to ignore collision only on jump start and not entire jump anim
-            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), p2.GetComponent<CapsuleCollider2D>(), true);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), true);
         }
     }
 }
