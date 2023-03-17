@@ -7,7 +7,7 @@ public class BridgetBehavior : PlayerBehavior
 {
     BridgetControls controls;
     BridgetCombat combat;
-    UnitHealth Health;
+    UnitHealth health;
 
     void Awake()
     {
@@ -21,11 +21,11 @@ public class BridgetBehavior : PlayerBehavior
     {
         if (gameObject.transform.parent.name == "Player1")
         {
-            Health = GameManager.gameManager._p1Health;
+            health = GameManager.gameManager._p1Health;
         }
         else
         {
-            Health = GameManager.gameManager._p2Health;
+            health = GameManager.gameManager._p2Health;
         }
         anim = gameObject.GetComponent<Animator>();
         controls = gameObject.GetComponent<BridgetControls>();
@@ -53,7 +53,7 @@ public class BridgetBehavior : PlayerBehavior
 
             //leave out self-heal and self-dmg
 
-            if(Health.Health <= 0)
+            if(health.Health <= 0)
             {
                 Die();
             }
@@ -62,8 +62,8 @@ public class BridgetBehavior : PlayerBehavior
 
     public override void PlayerDmg(int dmg)
     {
-        Health.dmgUnit(dmg);
-        _healthbar.SetHealth(Health.Health);
+        health.dmgUnit(dmg);
+        _healthbar.SetHealth(health.Health);
         GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(b, .2f); //based on the particle system's duration
         shake.ShakeCamera(.3f, .5f);
@@ -71,8 +71,8 @@ public class BridgetBehavior : PlayerBehavior
 
     public override void PlayerHeal(int heal)
     {
-        Health.healUnit(heal);
-        _healthbar.SetHealth(Health.Health);
+        health.healUnit(heal);
+        _healthbar.SetHealth(health.Health);
     }
 
     protected override void Die()

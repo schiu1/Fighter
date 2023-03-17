@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class P1Behavior : PlayerBehavior
 {
-    P1Controls p1controls;
-    P1Combat p1combat;
-    UnitHealth p1Health;
+    P1Controls controls;
+    P1Combat combat;
+    UnitHealth health;
 
     void Awake()
     {
@@ -20,10 +20,17 @@ public class P1Behavior : PlayerBehavior
     // Start is called before the first frame update
     void Start()
     {
-        p1Health = GameManager.gameManager._p1Health;
+        if(gameObject.transform.parent.name == "Player1")
+        {
+            health = GameManager.gameManager._p1Health;
+        }
+        else
+        {
+            health = GameManager.gameManager._p2Health;
+        }
         anim = gameObject.GetComponent<Animator>();
-        p1controls = gameObject.GetComponent<P1Controls>();
-        p1combat = gameObject.GetComponent<P1Combat>();
+        controls = gameObject.GetComponent<P1Controls>();
+        combat = gameObject.GetComponent<P1Combat>();
 
         startTime = Time.time;
         started = false;
@@ -40,11 +47,12 @@ public class P1Behavior : PlayerBehavior
             if(Time.time - startTime >= 3f && !started)
             {
                 started = true;
-                p1controls.canMove = true;
-                p1controls.canCrouch = true;
-                p1combat.canAttack = true;
+                controls.canMove = true;
+                controls.canCrouch = true;
+                combat.canAttack = true;
             }
 
+            /*
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 PlayerDmg(10);
@@ -57,8 +65,9 @@ public class P1Behavior : PlayerBehavior
                 PlayerHeal(10);
                 Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
             }
+            */
 
-            if(p1Health.Health <= 0)
+            if(health.Health <= 0)
             {
                 Die();
             }
@@ -67,7 +76,7 @@ public class P1Behavior : PlayerBehavior
 
     public override void PlayerDmg(int dmg)
     {
-        p1Health.dmgUnit(dmg);
+        health.dmgUnit(dmg);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
         GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(b, .2f); //based on the particle system's duration
@@ -76,7 +85,7 @@ public class P1Behavior : PlayerBehavior
 
     public override void PlayerHeal(int heal)
     {
-        p1Health.healUnit(heal);
+        health.healUnit(heal);
         _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
     }
 
@@ -84,9 +93,9 @@ public class P1Behavior : PlayerBehavior
     {
         Debug.Log("p1 killed");
         anim.SetBool("IsKO", true);
-        p1controls.canMove = false;
-        p1controls.canCrouch = false;
-        p1combat.canAttack = false;
+        controls.canMove = false;
+        controls.canCrouch = false;
+        combat.canAttack = false;
         GameManager.gameManager.endRound("player");
         this.enabled = false;
     }
