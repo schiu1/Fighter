@@ -6,10 +6,19 @@ using UnityEngine.SceneManagement;
 public class P1Combat : PlayerCombat
 {
     P1Controls p1Controls;
+    bool Player1;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.transform.parent.name == "Player1")
+        {
+            Player1 = true;
+        }
+        else
+        {
+            Player1 = false;
+        }
         anim = gameObject.GetComponent<Animator>();
         p1Controls = gameObject.GetComponent<P1Controls>();
 
@@ -39,33 +48,67 @@ public class P1Combat : PlayerCombat
             {
                 if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
                 {
-                    if (Input.GetButtonDown("P1_Punch"))
+                    if (Player1)
                     {
-                        attacking = true;
-                        anim.SetTrigger("Punch");
-                        lastAttack = Time.time;
-                        attackCD = 0.5f;
+                        if (Input.GetButtonDown("P1_Punch"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Punch");
+                            lastAttack = Time.time;
+                            attackCD = 0.5f;
+                        }
+                        if (Input.GetButtonDown("P1_Kick"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Kick");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f;
+                        }
+                        if (Input.GetButtonDown("P1_Slash"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Slash");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f;
+                        }
+                        if (Input.GetButtonDown("P1_HeavySlash"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Heavy");
+                            lastAttack = Time.time;
+                            attackCD = 0.75f;
+                        }
                     }
-                    if (Input.GetButtonDown("P1_Kick"))
+                    else if (!Player1)
                     {
-                        attacking = true;
-                        anim.SetTrigger("Kick");
-                        lastAttack = Time.time;
-                        attackCD = 0.8f;
-                    }
-                    if (Input.GetButtonDown("P1_Slash"))
-                    {
-                        attacking = true;
-                        anim.SetTrigger("Slash");
-                        lastAttack = Time.time;
-                        attackCD = 0.8f;
-                    }
-                    if (Input.GetButtonDown("P1_HeavySlash"))
-                    {
-                        attacking = true;
-                        anim.SetTrigger("Heavy");
-                        lastAttack = Time.time;
-                        attackCD = 0.75f;
+                        if (Input.GetButtonDown("P2_Punch"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Punch");
+                            lastAttack = Time.time;
+                            attackCD = 0.5f;
+                        }
+                        if (Input.GetButtonDown("P2_Kick"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Kick");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f;
+                        }
+                        if (Input.GetButtonDown("P2_Slash"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Slash");
+                            lastAttack = Time.time;
+                            attackCD = 0.8f;
+                        }
+                        if (Input.GetButtonDown("P2_HeavySlash"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Heavy");
+                            lastAttack = Time.time;
+                            attackCD = 0.75f;
+                        }
                     }
                 }
             }
@@ -106,7 +149,8 @@ public class P1Combat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
-                if(GameManager.gameManager._p2Health.Health > 0)
+                if((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.1f));
@@ -151,7 +195,8 @@ public class P1Combat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Kick");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.1f));
@@ -196,7 +241,8 @@ public class P1Combat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("Slash");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.15f));
@@ -240,7 +286,8 @@ public class P1Combat : PlayerCombat
                 }
                 AudioManager.audioManager.PlaySound("HeavySlash");
 
-                if (GameManager.gameManager._p2Health.Health > 0)
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;
                     StartCoroutine(Hitstop(0.2f));
