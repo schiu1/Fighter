@@ -52,7 +52,7 @@ public class Pirate : MonoBehaviour
         {
             Destroy(gameObject);
             GameObject p2 = GameObject.Find(GameManager.gameManager.p2Name);
-            p2.GetComponent<P2Controls>().WinAnimSpin();
+            p2.GetComponent<P1Controls>().WinAnimSpin();
         }
     }
 }
