@@ -77,7 +77,7 @@ public class P1Behavior : PlayerBehavior
     public override void PlayerDmg(int dmg)
     {
         health.dmgUnit(dmg);
-        _healthbar.SetHealth(GameManager.gameManager._p1Health.Health);
+        _healthbar.SetHealth(health.Health);
         GameObject b = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(b, .2f); //based on the particle system's duration
         shake.ShakeCamera(.3f, .5f);

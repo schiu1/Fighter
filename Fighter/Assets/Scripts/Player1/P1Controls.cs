@@ -45,15 +45,12 @@ public class P1Controls : PlayerControls
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
         combat = gameObject.GetComponent<P1Combat>();
-        enemyPlayer = GameObject.Find(GameManager.gameManager.p2Name);
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
 
         fallMultiplier = 7f;
         isJumping = false;
-
-        facingRight = true;
 
         firstPress = 0f;
         dash = false;
@@ -176,7 +173,7 @@ public class P1Controls : PlayerControls
                         firstPress = Time.time;
                         direction = moveHorizontal;
                     }
-                    else if (Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P1_Walk"))
+                    else if (Time.time < firstPress + 0.5f && firstPress != 0f && direction == moveHorizontal && Input.GetButtonDown("P2_Walk"))
                     {
                         dash = true;
                         firstPress = 0f;
@@ -257,6 +254,7 @@ public class P1Controls : PlayerControls
         }
         else if (pushType == "push")
         {
+            Debug.Log(gameObject.transform.position.x+"-"+enemyPlayer.transform.position.x);
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;
