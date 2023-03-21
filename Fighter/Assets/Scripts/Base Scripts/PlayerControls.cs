@@ -110,6 +110,7 @@ public class PlayerControls : MonoBehaviour
 
     public void WinAnimSpin()
     {
+        Debug.Log("winspin");
         animator.SetTrigger("WinSpin");
     }
 

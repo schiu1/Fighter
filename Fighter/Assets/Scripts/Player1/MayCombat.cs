@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P1Combat : PlayerCombat
+public class MayCombat : PlayerCombat
 {
-    P1Controls p1Controls;
+    MayControls p1Controls;
     bool Player1;
 
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class P1Combat : PlayerCombat
             Player1 = false;
         }
         anim = gameObject.GetComponent<Animator>();
-        p1Controls = gameObject.GetComponent<P1Controls>();
+        p1Controls = gameObject.GetComponent<MayControls>();
 
         attacking = false;
         canAttack = false;

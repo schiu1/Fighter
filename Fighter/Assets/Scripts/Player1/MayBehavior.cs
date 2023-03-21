@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P1Behavior : PlayerBehavior
+public class MayBehavior : PlayerBehavior
 {
-    P1Controls controls;
-    P1Combat combat;
+    MayControls controls;
+    MayCombat combat;
     UnitHealth health;
 
     void Awake()
@@ -29,8 +29,8 @@ public class P1Behavior : PlayerBehavior
             health = GameManager.gameManager._p2Health;
         }
         anim = gameObject.GetComponent<Animator>();
-        controls = gameObject.GetComponent<P1Controls>();
-        combat = gameObject.GetComponent<P1Combat>();
+        controls = gameObject.GetComponent<MayControls>();
+        combat = gameObject.GetComponent<MayCombat>();
 
         startTime = Time.time;
         started = false;

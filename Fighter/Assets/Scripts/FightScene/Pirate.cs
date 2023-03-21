@@ -42,17 +42,31 @@ public class Pirate : MonoBehaviour
         if((GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health) 
             && collision.gameObject.tag == "Player1")
         {
+            Debug.Log("pirate touched p1");
             Destroy(gameObject);
-            GameObject p1 = GameObject.Find(GameManager.gameManager.p1Name);
-            p1.GetComponent<P1Controls>().WinAnimSpin();
+            foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player1"))
+            {
+                if (obj.name == GameManager.gameManager.p1Name)
+                {
+                    obj.GetComponent<MayControls>().WinAnimSpin();
+                    break;
+                }
+            }
         }
 
         else if ((GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
             && collision.gameObject.tag == "Player2")
         {
+            Debug.Log("pirate touched p2");
             Destroy(gameObject);
-            GameObject p2 = GameObject.Find(GameManager.gameManager.p2Name);
-            p2.GetComponent<P1Controls>().WinAnimSpin();
+            foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player2"))
+            {
+                if(obj.name == GameManager.gameManager.p2Name)
+                {
+                    obj.GetComponent<MayControls>().WinAnimSpin();
+                    break;
+                }
+            }
         }
     }
 }

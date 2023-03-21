@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class P1Controls : PlayerControls
+public class MayControls : PlayerControls
 {
-    P1Combat combat;
+    MayCombat combat;
     GameObject enemyPlayer;
 
     bool facingRight;
@@ -44,7 +44,7 @@ public class P1Controls : PlayerControls
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
-        combat = gameObject.GetComponent<P1Combat>();
+        combat = gameObject.GetComponent<MayCombat>();
         speed = 3f;
         maxSpeed = 4f;
         jumpForce = 20f;
