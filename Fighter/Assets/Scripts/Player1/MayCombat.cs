@@ -39,7 +39,7 @@ public class MayCombat : PlayerCombat
                 attacking = false;
             }
 
-            if(GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0)
+            if(GameManager.gameManager.timedOut == true || GameManager.gameManager._p2Health.Health == 0 || GameManager.gameManager._p1Health.Health == 0)
             {
                 canAttack = false;
             }
