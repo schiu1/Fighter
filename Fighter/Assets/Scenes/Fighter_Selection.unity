@@ -131,12 +131,7 @@ PrefabInstance:
     - target: {fileID: 4141270869253050183, guid: e17155ea1dadb164fa4672672d34e034,
         type: 3}
       propertyPath: m_Name
-      value: MayP1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4141270869253050183, guid: e17155ea1dadb164fa4672672d34e034,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: May
       objectReference: {fileID: 0}
     - target: {fileID: 4141270869253050235, guid: e17155ea1dadb164fa4672672d34e034,
         type: 3}
@@ -522,7 +517,7 @@ PrefabInstance:
     - target: {fileID: 4141270869253050183, guid: e17155ea1dadb164fa4672672d34e034,
         type: 3}
       propertyPath: m_Name
-      value: MayP1
+      value: May
       objectReference: {fileID: 0}
     - target: {fileID: 4141270869253050183, guid: e17155ea1dadb164fa4672672d34e034,
         type: 3}
