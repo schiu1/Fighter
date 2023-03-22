@@ -80,7 +80,7 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;
-                            attackCD = 0.75f; //will be different
+                            attackCD = 1.2f; //will be different
                         }
                     }
                     else if (!Player1)
@@ -111,7 +111,7 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;
-                            attackCD = 0.75f;
+                            attackCD = 1.2f;
                         }
                     }
                 }
