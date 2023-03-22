@@ -106,13 +106,7 @@ public class PlayerControls : MonoBehaviour
 
     }
 
-    // WinAnimFaceRight in child classes bc uses facingRight or facingLeft
-
-    public void WinAnimSpin()
-    {
-        Debug.Log("winspin");
-        animator.SetTrigger("WinSpin");
-    }
+    // WinAnimFaceRight in child classes bc uses facingRight or facingLeft and also for May only
 
     public virtual void Pushback(string pushType)
     {

@@ -241,6 +241,12 @@ public class MayControls : PlayerControls
         }
     }
 
+    public void WinAnimSpin()
+    {
+        Debug.Log("winspin");
+        animator.SetTrigger("WinSpin");
+    }
+
     public override void Pushback(string pushType)
     {
         if(pushType == "flinch")
