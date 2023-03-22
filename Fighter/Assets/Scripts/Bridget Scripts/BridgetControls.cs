@@ -254,14 +254,6 @@ public class BridgetControls : PlayerControls
         animator.SetBool("Win", true);
     }
 
-    void WinAnimFaceRight()
-    {
-        if (facingRight)
-        {
-            Flip();
-        }
-    }
-
     public override void Pushback(string pushType)
     {
         if (pushType == "flinch")
