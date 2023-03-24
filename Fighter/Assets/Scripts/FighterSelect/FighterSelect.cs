@@ -7,11 +7,21 @@ public class FighterSelect : MonoBehaviour
     [SerializeField]
     GameObject[] fighters = null;
     public int currentFighter;
+    NameUpdater nameUpdater;
 
     void Start()
     {
         currentFighter = 0;
         fighters[currentFighter].SetActive(true);
+        if (gameObject.name == "Fighters1")
+        {
+            nameUpdater = GameObject.Find("P1Name").GetComponent<NameUpdater>();
+        }
+        else if (gameObject.name == "Fighters2")
+        {
+            nameUpdater = GameObject.Find("P2Name").GetComponent<NameUpdater>();
+        }
+        nameUpdater.ChangeName(fighters[currentFighter].name);
     }
 
     public void Left()
@@ -21,6 +31,7 @@ public class FighterSelect : MonoBehaviour
             fighters[currentFighter].SetActive(false);
             currentFighter -= 1;
             fighters[currentFighter].SetActive(true);
+            nameUpdater.ChangeName(fighters[currentFighter].name);
         }
     }
 
@@ -31,6 +42,7 @@ public class FighterSelect : MonoBehaviour
             fighters[currentFighter].SetActive(false);
             currentFighter += 1;
             fighters[currentFighter].SetActive(true);
+            nameUpdater.ChangeName(fighters[currentFighter].name);
         }
     }
 
