@@ -26,6 +26,15 @@ public class MayCombat : PlayerCombat
         canAttack = false;
     }
 
+    /*
+     * connect animator component 
+     * use GetBool from animator component to see if crouching while pressing an attack button
+     * if (attackbutton && !isCrouching) -> do standing attack
+     * else if (attackbutton && isCrouching) -> do crouching attack
+     * connect crouching attack anim to after crouch anim only and returns to crouching_idle when done
+     * probably similar logic for air attack too
+     */
+
     // Update is called once per frame
     void Update()
     {
