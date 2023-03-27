@@ -33,6 +33,7 @@ public class MayCombat : PlayerCombat
      * else if (attackbutton && isCrouching) -> do crouching attack
      * connect crouching attack anim to after crouch anim only and returns to crouching_idle when done
      * probably similar logic for air attack too
+     * make sure to edit StartMovement to check if fighter is crouching after the attack
      */
 
     // Update is called once per frame
@@ -55,32 +56,40 @@ public class MayCombat : PlayerCombat
 
             if (canAttack)
             {
-                if ((p1Controls.isJumping == false) && (attackCD == 0) && (p1Controls.isCrouching == false))
+                if ((p1Controls.isJumping == false) && (attackCD == 0))
                 {
                     if (Player1)
                     {
-                        if (Input.GetButtonDown("P1_Punch"))
+                        if (Input.GetButtonDown("P1_Punch") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
                             attackCD = 0.5f;
                         }
-                        if (Input.GetButtonDown("P1_Kick"))
+                        else if (Input.GetButtonDown("P1_Punch") && anim.GetBool("IsCrouching"))
+                        {
+                            Debug.Log("crouch punch");
+                            attacking = true;
+                            anim.SetTrigger("Punch");
+                            lastAttack = Time.time;
+                            attackCD = 1f; //temp
+                        }
+                        if (Input.GetButtonDown("P1_Kick") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
                             attackCD = 0.8f;
                         }
-                        if (Input.GetButtonDown("P1_Slash"))
+                        if (Input.GetButtonDown("P1_Slash") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
                             attackCD = 0.8f;
                         }
-                        if (Input.GetButtonDown("P1_HeavySlash"))
+                        if (Input.GetButtonDown("P1_HeavySlash") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Heavy");
@@ -90,28 +99,28 @@ public class MayCombat : PlayerCombat
                     }
                     else if (!Player1)
                     {
-                        if (Input.GetButtonDown("P2_Punch"))
+                        if (Input.GetButtonDown("P2_Punch") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
                             attackCD = 0.5f;
                         }
-                        if (Input.GetButtonDown("P2_Kick"))
+                        if (Input.GetButtonDown("P2_Kick") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
                             attackCD = 0.8f;
                         }
-                        if (Input.GetButtonDown("P2_Slash"))
+                        if (Input.GetButtonDown("P2_Slash") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
                             attackCD = 0.8f;
                         }
-                        if (Input.GetButtonDown("P2_HeavySlash"))
+                        if (Input.GetButtonDown("P2_HeavySlash") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
                             anim.SetTrigger("Heavy");

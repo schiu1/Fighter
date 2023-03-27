@@ -351,7 +351,10 @@ public class MayControls : PlayerControls
 
     void StartMovement()
     {
-        canMove = true;
+        if (!animator.GetBool("IsCrouching"))
+        {
+            canMove = true;
+        }
         rb2D.isKinematic = false;
     }
 
