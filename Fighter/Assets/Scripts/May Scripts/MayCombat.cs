@@ -73,7 +73,7 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
-                            attackCD = 1f; //temp
+                            attackCD = .5f; //temp
                         }
                         if (Input.GetButtonDown("P1_Kick") && !anim.GetBool("IsCrouching"))
                         {
@@ -168,6 +168,52 @@ public class MayCombat : PlayerCombat
                 AudioManager.audioManager.PlaySound("Punch");
 
                 if((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
+            }
+
+            Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Destroy(s, .5f);
+        }
+    }
+
+    void CPunch()
+    {
+        //get enemies in range of attack
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(cPunchAttackPoint.position, cPunchAttackRange, 0, enemyLayers);
+
+        foreach(Collider2D enemy in enemies)
+        {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
+            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            {
+                enemy.GetComponent<PlayerControls>().BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
+            }
+
+            else
+            {
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemy.GetComponent<PlayerBehavior>().PlayerDmg(5);
+                if (enemy.GetComponent<PlayerControls>().isJumping)
+                {
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                }
+                else
+                {
+                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
+                }
+                AudioManager.audioManager.PlaySound("Punch");
+
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
                     || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
                 {
                     Time.timeScale = 0;

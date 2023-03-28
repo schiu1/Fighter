@@ -21,6 +21,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] protected Transform punchAttackPoint = null;
     [SerializeField] protected Vector2 punchAttackRange = Vector2.zero;
 
+    [Header("Crouch Punch")]
+    [SerializeField] protected Transform cPunchAttackPoint = null;
+    [SerializeField] protected Vector2 cPunchAttackRange = Vector2.zero;
+
     [Header("Slash")]
     [SerializeField] protected Transform slashAttackPoint = null;
     [SerializeField] protected Vector2 slashAttackRange = Vector2.zero;
@@ -63,6 +67,7 @@ public class PlayerCombat : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(punchAttackPoint.position, punchAttackRange);
+        Gizmos.DrawWireCube(cPunchAttackPoint.position, cPunchAttackRange);
         Gizmos.DrawWireCube(slashAttackPoint.position, slashAttackRange);
         Gizmos.DrawWireCube(heavyAttackPoint.position, heavyAttackRange);
         Gizmos.DrawWireCube(kickAttackPoint.position, kickAttackRange);
