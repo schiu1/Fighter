@@ -45,6 +45,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     protected GameObject pirate = null;
     protected bool winAnim;
+    public bool inCrouchAttack;
 
     //reason why this is here is so that child classes don't need to keep defining this
     protected void Awake() 

@@ -66,11 +66,23 @@ public class MayControls : PlayerControls
         pushForceY = 0f;
 
         winAnim = false;
+        inCrouchAttack = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("CrouchAttack") && !inCrouchAttack)
+        {
+            inCrouchAttack = !inCrouchAttack;
+            Debug.Log("inCrouchAttack: " + inCrouchAttack);
+        }
+        else if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("CrouchAttack") && inCrouchAttack)
+        {
+            inCrouchAttack = !inCrouchAttack;
+            Debug.Log("inCrouchAttack: " + inCrouchAttack);
+        }
+
         if (!GameManager.gameManager.isPaused)
         {
 
@@ -351,10 +363,16 @@ public class MayControls : PlayerControls
 
     void StartMovement()
     {
+        /*
+         * might not need this anymore as i don't remember its purpose
+         * i thought it was for preventing movement while in block anim
+         * but i fixed that in another way
         if (!animator.GetBool("IsCrouching"))
         {
             canMove = true;
         }
+        */
+        canMove = true;
         rb2D.isKinematic = false;
     }
 

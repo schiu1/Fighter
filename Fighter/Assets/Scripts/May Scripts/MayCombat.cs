@@ -69,11 +69,10 @@ public class MayCombat : PlayerCombat
                         }
                         else if (Input.GetButtonDown("P1_Punch") && anim.GetBool("IsCrouching"))
                         {
-                            Debug.Log("crouch punch");
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
-                            attackCD = .5f; //temp
+                            attackCD = .5f;
                         }
                         if (Input.GetButtonDown("P1_Kick") && !anim.GetBool("IsCrouching"))
                         {
@@ -148,7 +147,8 @@ public class MayCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching 
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");

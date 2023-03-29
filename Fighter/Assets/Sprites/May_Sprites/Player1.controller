@@ -1197,7 +1197,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: bf37f86c1928a2b49842d4f74d30291a, type: 2}
-  m_Tag: 
+  m_Tag: CrouchAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
