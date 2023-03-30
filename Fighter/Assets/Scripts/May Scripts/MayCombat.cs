@@ -74,6 +74,7 @@ public class MayCombat : PlayerCombat
                             lastAttack = Time.time;
                             attackCD = .5f;
                         }
+
                         if (Input.GetButtonDown("P1_Kick") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
@@ -81,6 +82,11 @@ public class MayCombat : PlayerCombat
                             lastAttack = Time.time;
                             attackCD = 0.8f;
                         }
+                        else if (Input.GetButtonDown("P1_Kick") && anim.GetBool("IsCrouching"))
+                        {
+
+                        }
+
                         if (Input.GetButtonDown("P1_Slash") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
@@ -105,6 +111,14 @@ public class MayCombat : PlayerCombat
                             lastAttack = Time.time;
                             attackCD = 0.5f;
                         }
+                        else if (Input.GetButtonDown("P2_Punch") && anim.GetBool("IsCrouching"))
+                        {
+                            attacking = true;
+                            anim.SetTrigger("Punch");
+                            lastAttack = Time.time;
+                            attackCD = .5f;
+                        }
+
                         if (Input.GetButtonDown("P2_Kick") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
@@ -112,6 +126,11 @@ public class MayCombat : PlayerCombat
                             lastAttack = Time.time;
                             attackCD = 0.8f;
                         }
+                        else if (Input.GetButtonDown("P1_Kick") && anim.GetBool("IsCrouching"))
+                        {
+
+                        }
+
                         if (Input.GetButtonDown("P2_Slash") && !anim.GetBool("IsCrouching"))
                         {
                             attacking = true;
@@ -193,7 +212,8 @@ public class MayCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching 
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -240,7 +260,8 @@ public class MayCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -286,7 +307,8 @@ public class MayCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -331,7 +353,8 @@ public class MayCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");

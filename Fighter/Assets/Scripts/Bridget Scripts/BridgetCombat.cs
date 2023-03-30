@@ -129,7 +129,8 @@ public class BridgetCombat : PlayerCombat
             {
                 continue;
             }
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -174,7 +175,8 @@ public class BridgetCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -218,7 +220,8 @@ public class BridgetCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -262,7 +265,8 @@ public class BridgetCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching)
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
             {
                 enemy.GetComponent<PlayerControls>().BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
