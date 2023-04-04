@@ -37,6 +37,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] protected Transform kickAttackPoint = null;
     [SerializeField] protected Vector2 kickAttackRange = Vector2.zero;
 
+    [Header("Crouch Kick")]
+    [SerializeField] protected Transform cKickAttackPoint = null;
+    [SerializeField] protected Vector2 cKickAttackRange = Vector2.zero;
+
     [Header("Visual Effects")]
     [SerializeField]
     protected GameObject slashEffect = null;
@@ -71,5 +75,6 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireCube(slashAttackPoint.position, slashAttackRange);
         Gizmos.DrawWireCube(heavyAttackPoint.position, heavyAttackRange);
         Gizmos.DrawWireCube(kickAttackPoint.position, kickAttackRange);
+        Gizmos.DrawWireCube(cKickAttackPoint.position, cKickAttackRange);
     }
 }

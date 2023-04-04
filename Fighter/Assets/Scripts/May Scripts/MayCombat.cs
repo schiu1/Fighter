@@ -330,6 +330,53 @@ public class MayCombat : PlayerCombat
         }
     }
 
+    void cKick()
+    {
+        //get enemies in range of attack
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(cKickAttackPoint.position, cKickAttackRange, 0, enemyLayers);
+
+        //apply damage to enemy
+        foreach (Collider2D enemy in enemies)
+        {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
+            if (enemy.GetComponent<PlayerControls>().isCrouching
+                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
+            {
+                enemy.GetComponent<PlayerControls>().BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
+            }
+            else
+            {
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemy.GetComponent<PlayerBehavior>().PlayerDmg(10);
+                if (enemy.GetComponent<PlayerControls>().isJumping)
+                {
+                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                }
+                else
+                {
+                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
+                }
+                AudioManager.audioManager.PlaySound("Kick");
+
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
+            }
+
+            Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
+            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Destroy(s, .5f);
+        }
+    }
+
     void slash()
     {
         //get enemies in range of attack
