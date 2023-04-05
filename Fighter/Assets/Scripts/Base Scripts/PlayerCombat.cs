@@ -21,10 +21,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] protected Transform punchAttackPoint = null;
     [SerializeField] protected Vector2 punchAttackRange = Vector2.zero;
 
-    [Header("Crouch Punch")]
-    [SerializeField] protected Transform cPunchAttackPoint = null;
-    [SerializeField] protected Vector2 cPunchAttackRange = Vector2.zero;
-
     [Header("Slash")]
     [SerializeField] protected Transform slashAttackPoint = null;
     [SerializeField] protected Vector2 slashAttackRange = Vector2.zero;
@@ -36,6 +32,18 @@ public class PlayerCombat : MonoBehaviour
     [Header("Kick")]
     [SerializeField] protected Transform kickAttackPoint = null;
     [SerializeField] protected Vector2 kickAttackRange = Vector2.zero;
+
+    [Header("Crouch Punch")]
+    [SerializeField] protected Transform cPunchAttackPoint = null;
+    [SerializeField] protected Vector2 cPunchAttackRange = Vector2.zero;
+
+    [Header("Crouch Slash")]
+    [SerializeField] protected Transform cSlashAttackPoint = null;
+    [SerializeField] protected Vector2 cSlashAttackRange = Vector2.zero;
+
+    [Header("Heavy Slash")]
+    [SerializeField] protected Transform cHeavyAttackPoint = null;
+    [SerializeField] protected Vector2 cHeavyAttackRange = Vector2.zero;
 
     [Header("Crouch Kick")]
     [SerializeField] protected Transform cKickAttackPoint = null;
@@ -71,10 +79,13 @@ public class PlayerCombat : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(punchAttackPoint.position, punchAttackRange);
-        Gizmos.DrawWireCube(cPunchAttackPoint.position, cPunchAttackRange);
         Gizmos.DrawWireCube(slashAttackPoint.position, slashAttackRange);
         Gizmos.DrawWireCube(heavyAttackPoint.position, heavyAttackRange);
         Gizmos.DrawWireCube(kickAttackPoint.position, kickAttackRange);
+
+        Gizmos.DrawWireCube(cPunchAttackPoint.position, cPunchAttackRange);
+        Gizmos.DrawWireCube(cSlashAttackPoint.position, cSlashAttackRange);
+        Gizmos.DrawWireCube(cHeavyAttackPoint.position, cHeavyAttackRange);
         Gizmos.DrawWireCube(cKickAttackPoint.position, cKickAttackRange);
     }
 }
