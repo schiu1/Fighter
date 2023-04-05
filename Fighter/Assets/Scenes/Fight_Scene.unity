@@ -1381,7 +1381,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 2.4466546, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1398,7 +1398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381176064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06970215, z: -13.28125}
+  m_LocalPosition: {x: 0, y: -0.06970215, z: -16.5625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 232833800}
@@ -1658,7 +1658,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.55
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1682,7 +1682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06970215, z: -13.28125}
+  m_LocalPosition: {x: -0.009495296, y: 0.44700003, z: -16.5625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4989,6 +4989,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468055439}
     m_Modifications:
+    - target: {fileID: 90245683321092655, guid: e17155ea1dadb164fa4672672d34e034,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.743
+      objectReference: {fileID: 0}
     - target: {fileID: 156199905277004252, guid: e17155ea1dadb164fa4672672d34e034,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5124,6 +5129,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907214003752224602, guid: e17155ea1dadb164fa4672672d34e034,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.052
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e17155ea1dadb164fa4672672d34e034, type: 3}
