@@ -202,23 +202,25 @@ public class MayCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching 
-                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
+            PlayerControls enemyPlayerControls = enemy.GetComponent<PlayerControls>();
+            PlayerBehavior enemyPlayerBehavior = enemy.GetComponent<PlayerBehavior>();
+            if (enemyPlayerControls.isCrouching 
+                && !enemyPlayerControls.inCrouchAttack)
             {
-                enemy.GetComponent<PlayerControls>().BlockAttack();
+                enemyPlayerControls.BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
                 Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemy.GetComponent<PlayerBehavior>().PlayerDmg(5);
-                if (enemy.GetComponent<PlayerControls>().isJumping)
+                enemyPlayerBehavior.PlayerDmg(5);
+                if (enemyPlayerControls.isJumping)
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                    enemyPlayerControls.Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
+                    enemyPlayerControls.Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
