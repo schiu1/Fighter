@@ -129,23 +129,27 @@ public class BridgetCombat : PlayerCombat
             {
                 continue;
             }
-            if (enemy.GetComponent<PlayerControls>().isCrouching
-                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
+
+            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
+            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
+
+            if (enemyControls.isCrouching
+                && !enemyControls.inCrouchAttack)
             {
-                enemy.GetComponent<PlayerControls>().BlockAttack();
+                enemyControls.BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
                 Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemy.GetComponent<PlayerBehavior>().PlayerDmg(5);
-                if (enemy.GetComponent<PlayerControls>().isJumping)
+                enemyBehavior.PlayerDmg(5);
+                if (enemyControls.isJumping)
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                    enemyControls.Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
+                    enemyControls.Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
@@ -175,23 +179,26 @@ public class BridgetCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching
-                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
+            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
+            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
+
+            if (enemyControls.isCrouching
+                && !enemyControls.inCrouchAttack)
             {
-                enemy.GetComponent<PlayerControls>().BlockAttack();
+                enemyControls.BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
-                Debug.Log(gameObject.name + "hit: " + enemy.name);
-                enemy.GetComponent<PlayerBehavior>().PlayerDmg(10);
-                if (enemy.GetComponent<PlayerControls>().isJumping)
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemyBehavior.PlayerDmg(10);
+                if (enemyControls.isJumping)
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                    enemyControls.Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
+                    enemyControls.Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Kick");
 
@@ -220,23 +227,26 @@ public class BridgetCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching
-                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
+            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
+            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
+
+            if (enemyControls.isCrouching
+                && !enemyControls.inCrouchAttack)
             {
-                enemy.GetComponent<PlayerControls>().BlockAttack();
+                enemyControls.BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
                 Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemy.GetComponent<PlayerBehavior>().PlayerDmg(15);
-                if (enemy.GetComponent<PlayerControls>().isJumping)
+                enemyBehavior.PlayerDmg(5);
+                if (enemyControls.isJumping)
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                    enemyControls.Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("flinch");
+                    enemyControls.Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
@@ -265,23 +275,26 @@ public class BridgetCombat : PlayerCombat
                 continue;
             }
 
-            if (enemy.GetComponent<PlayerControls>().isCrouching
-                && !enemy.GetComponent<PlayerControls>().inCrouchAttack)
+            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
+            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
+
+            if (enemyControls.isCrouching
+                && !enemyControls.inCrouchAttack)
             {
-                enemy.GetComponent<PlayerControls>().BlockAttack();
+                enemyControls.BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
             }
             else
             {
                 Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemy.GetComponent<PlayerBehavior>().PlayerDmg(20);
-                if (enemy.GetComponent<PlayerControls>().isJumping)
+                enemyBehavior.PlayerDmg(5);
+                if (enemyControls.isJumping)
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("knockdown");
+                    enemyControls.Pushback("knockdown");
                 }
                 else
                 {
-                    enemy.GetComponent<PlayerControls>().Pushback("push");
+                    enemyControls.Pushback("flinch");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 

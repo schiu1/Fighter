@@ -355,6 +355,7 @@ public class MayControls : PlayerControls
     void StopMovement()
     {
         canMove = false;
+        canCrouch = false;
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -373,6 +374,7 @@ public class MayControls : PlayerControls
         }
         */
         canMove = true;
+        canCrouch = true;
         rb2D.isKinematic = false;
     }
 

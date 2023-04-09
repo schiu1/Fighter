@@ -67,10 +67,15 @@ public class MayCombat : PlayerCombat
                             lastAttack = Time.time;
                             if (!anim.GetBool("IsCrouching")) //if standing
                             {
+                                //preventing movement is in the animation
                                 attackCD = 0.5f;
                             }
                             else //if crouching
                             {
+                                //preventing movement has to be done here
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+                                
                                 attackCD = 0.5f;
                             }
                         }
@@ -80,11 +85,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching"))
                             {
                                 attackCD = 0.8f;
                             }
-                            else //if crouching
+                            else
                             {
                                 attackCD = 0.5f;
                             }
@@ -95,11 +100,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching"))
                             {
                                 attackCD = 0.8f;
                             }
-                            else //if crouching
+                            else 
                             {
                                 attackCD = 0.8f;
                             }
@@ -110,11 +115,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching"))
                             {
                                 attackCD = 0.75f;
                             }
-                            else //if crouching
+                            else 
                             {
                                 attackCD = 1f;
                             }
@@ -127,11 +132,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching")) 
                             {
                                 attackCD = 0.5f;
                             }
-                            else //if crouching
+                            else 
                             {
                                 attackCD = 0.5f;
                             }
@@ -142,11 +147,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching"))
                             {
                                 attackCD = 0.8f;
                             }
-                            else //if crouching
+                            else 
                             {
                                 attackCD = 0.5f;
                             }
@@ -157,11 +162,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching")) 
                             {
                                 attackCD = 0.8f;
                             }
-                            else //if crouching
+                            else 
                             {
                                 attackCD = 0.8f;
                             }
@@ -172,11 +177,11 @@ public class MayCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;
-                            if (!anim.GetBool("IsCrouching")) //if standing
+                            if (!anim.GetBool("IsCrouching")) 
                             {
                                 attackCD = 0.75f;
                             }
-                            else //if crouching
+                            else 
                             {
                                 attackCD = 1f;
                             }
