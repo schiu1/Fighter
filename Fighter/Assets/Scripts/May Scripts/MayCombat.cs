@@ -91,6 +91,9 @@ public class MayCombat : PlayerCombat
                             }
                             else
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 0.5f;
                             }
                         }
@@ -106,6 +109,9 @@ public class MayCombat : PlayerCombat
                             }
                             else 
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 0.8f;
                             }
                         }
@@ -121,6 +127,9 @@ public class MayCombat : PlayerCombat
                             }
                             else 
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 1f;
                             }
                         }              
@@ -138,6 +147,9 @@ public class MayCombat : PlayerCombat
                             }
                             else 
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 0.5f;
                             }
                         }
@@ -153,6 +165,9 @@ public class MayCombat : PlayerCombat
                             }
                             else 
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 0.5f;
                             }
                         }
@@ -168,6 +183,9 @@ public class MayCombat : PlayerCombat
                             }
                             else 
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 0.8f;
                             }
                         }
@@ -183,6 +201,9 @@ public class MayCombat : PlayerCombat
                             }
                             else 
                             {
+                                p1Controls.canMove = false;
+                                p1Controls.canCrouch = false;
+
                                 attackCD = 1f;
                             }
                         }
