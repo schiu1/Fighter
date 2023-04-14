@@ -46,7 +46,7 @@ public class BridgetCombat : PlayerCombat
 
             if (canAttack)
             {
-                if((controls.isJumping == false) && (attackCD == 0) && (controls.isCrouching == false))
+                if((controls.isJumping == false) && (attackCD == 0))
                 {
                     if (Player1)
                     {
