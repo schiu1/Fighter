@@ -56,7 +56,16 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
-                            attackCD = 0.5f; //will be different
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 0.5f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 0.5f; //will be different
+                            }
                         }
                         if (Input.GetButtonDown("P1_Kick"))
                         {
@@ -64,7 +73,16 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
-                            attackCD = 0.8f; //will be different
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 0.8f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 0.8f; //will be different
+                            }
                         }
                         if (Input.GetButtonDown("P1_Slash"))
                         {
@@ -72,7 +90,16 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
-                            attackCD = 0.8f; //will be different
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 0.8f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 0.8f; //will be different
+                            }
                         }
                         if (Input.GetButtonDown("P1_HeavySlash"))
                         {
@@ -80,7 +107,16 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;
-                            attackCD = 1.2f; //will be different
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 1.2f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 1.2f; //will be different
+                            }
                         }
                     }
                     else if (!Player1)
@@ -90,28 +126,64 @@ public class BridgetCombat : PlayerCombat
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
-                            attackCD = 0.5f;
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 0.5f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 0.5f; //will be different
+                            }
                         }
                         if (Input.GetButtonDown("P2_Kick"))
                         {
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
-                            attackCD = 0.8f;
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 0.8f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 0.8f; //will be different
+                            }
                         }
                         if (Input.GetButtonDown("P2_Slash"))
                         {
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
-                            attackCD = 0.8f;
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 0.8f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 0.8f; //will be different
+                            }
                         }
                         if (Input.GetButtonDown("P2_HeavySlash"))
                         {
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;
-                            attackCD = 1.2f;
+                            if (!anim.GetBool("IsCrouching"))
+                            {
+                                attackCD = 1.2f;
+                            }
+                            else
+                            {
+                                controls.canMove = false;
+                                controls.canCrouch = false;
+                                attackCD = 1.2f; //will be different
+                            }
                         }
                     }
                 }
