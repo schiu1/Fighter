@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] protected Transform cSlashAttackPoint = null;
     [SerializeField] protected Vector2 cSlashAttackRange = Vector2.zero;
 
-    [Header("Heavy Slash")]
+    [Header("Crouch Heavy")]
     [SerializeField] protected Transform cHeavyAttackPoint = null;
     [SerializeField] protected Vector2 cHeavyAttackRange = Vector2.zero;
 
