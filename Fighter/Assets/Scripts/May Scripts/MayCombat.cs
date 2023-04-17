@@ -7,6 +7,9 @@ public class MayCombat : PlayerCombat
 {
     MayControls p1Controls;
     bool Player1;
+    Dictionary<string, Transform> attackPointList = new Dictionary<string, Transform>();
+    Dictionary<string, Vector2> attackRangeList = new Dictionary<string, Vector2>();
+    Dictionary<string, int> attackDmgList = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,33 @@ public class MayCombat : PlayerCombat
 
         attacking = false;
         canAttack = false;
+
+        attackPointList.Add("punch", punchAttackPoint);
+        attackPointList.Add("kick", kickAttackPoint);
+        attackPointList.Add("slash", slashAttackPoint);
+        attackPointList.Add("heavy", heavyAttackPoint);
+        attackPointList.Add("cPunch", cPunchAttackPoint);
+        attackPointList.Add("cKick", cKickAttackPoint);
+        attackPointList.Add("cSlash", cSlashAttackPoint);
+        attackPointList.Add("cHeavy", cHeavyAttackPoint);
+
+        attackRangeList.Add("punch", punchAttackRange);
+        attackRangeList.Add("kick", kickAttackRange);
+        attackRangeList.Add("slash", slashAttackRange);
+        attackRangeList.Add("heavy", heavyAttackRange);
+        attackRangeList.Add("cPunch", cPunchAttackRange);
+        attackRangeList.Add("cKick", cKickAttackRange);
+        attackRangeList.Add("cSlash", cSlashAttackRange);
+        attackRangeList.Add("cHeavy", cHeavyAttackRange);
+
+        attackDmgList.Add("punch", 5);
+        attackDmgList.Add("kick", 10);
+        attackDmgList.Add("slash", 15);
+        attackDmgList.Add("heavy", 20);
+        attackDmgList.Add("cPunch", 5);
+        attackDmgList.Add("cKick", 10);
+        attackDmgList.Add("cSlash", 15);
+        attackDmgList.Add("cHeavy", 20);
     }
 
     /*
@@ -211,6 +241,11 @@ public class MayCombat : PlayerCombat
                 }
             }
         }
+
+    }
+
+    void attack(string type)
+    {
 
     }
 
