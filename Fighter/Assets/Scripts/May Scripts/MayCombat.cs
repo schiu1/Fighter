@@ -7,9 +7,12 @@ public class MayCombat : PlayerCombat
 {
     MayControls p1Controls;
     bool Player1;
+    /*
     Dictionary<string, Transform> attackPointList = new Dictionary<string, Transform>();
     Dictionary<string, Vector2> attackRangeList = new Dictionary<string, Vector2>();
     Dictionary<string, int> attackDmgList = new Dictionary<string, int>();
+    */
+    Dictionary<string, Attack> attackList = new Dictionary<string, Attack>();
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,7 @@ public class MayCombat : PlayerCombat
 
         attacking = false;
         canAttack = false;
-
+        /*
         attackPointList.Add("punch", punchAttackPoint);
         attackPointList.Add("kick", kickAttackPoint);
         attackPointList.Add("slash", slashAttackPoint);
@@ -54,6 +57,22 @@ public class MayCombat : PlayerCombat
         attackDmgList.Add("cKick", 10);
         attackDmgList.Add("cSlash", 15);
         attackDmgList.Add("cHeavy", 20);
+        */
+
+        attackList.Add("punch", new Attack() //make this for every kind of attack
+        {
+            AttackPoint = punchAttackPoint.position,
+            AttackRange = punchAttackRange,
+            AttackDamage = 5,
+            PushType = "flinch",
+            SoundType = "punch"
+        });
+
+        Debug.Log(attackList["punch"].AttackPoint);
+        Debug.Log(attackList["punch"].AttackRange);
+        Debug.Log(attackList["punch"].AttackDamage);
+        Debug.Log(attackList["punch"].PushType);
+        Debug.Log(attackList["punch"].SoundType);
     }
 
     /*
@@ -246,7 +265,52 @@ public class MayCombat : PlayerCombat
 
     void attack(string type)
     {
+        Vector3 attPoint = attackList[type].AttackPoint;
+        Vector2 attRange = attackList[type].AttackRange;
+        int attDmg = attackList[type].AttackDamage;
+        string pushType = attackList[type].PushType;
+        string soundType = attackList[type].SoundType;
 
+        // v change this v
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(attPoint, attRange, 0, enemyLayers);
+
+        foreach(Collider2D enemy in enemies)
+        {
+            if (enemy.GetType() == typeof(BoxCollider2D))
+            {
+                continue;
+            }
+
+            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
+            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
+
+            if (enemyControls.isCrouching && !enemyControls.inCrouchAttack)
+            {
+                enemyControls.BlockAttack();
+                AudioManager.audioManager.PlaySound("BlockAttack");
+            }
+            else
+            {
+                Debug.Log(gameObject.name + " hit: " + enemy.name);
+                enemyBehavior.PlayerDmg(attDmg); 
+                if (enemyControls.isJumping)
+                {
+                    enemyControls.Pushback("knockdown");
+                }
+                else
+                {
+                    enemyControls.Pushback(pushType); 
+                }
+                AudioManager.audioManager.PlaySound(soundType); 
+
+                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
+                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
+                {
+                    Time.timeScale = 0;
+                    StartCoroutine(Hitstop(0.1f));
+                }
+            }
+        }
     }
 
     //put these methods in attack anim as events
