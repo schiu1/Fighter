@@ -65,14 +65,32 @@ public class MayCombat : PlayerCombat
             AttackRange = punchAttackRange,
             AttackDamage = 5,
             PushType = "flinch",
-            SoundType = "punch"
+            SoundType = "Punch"
         });
-
-        Debug.Log(attackList["punch"].AttackPoint);
-        Debug.Log(attackList["punch"].AttackRange);
-        Debug.Log(attackList["punch"].AttackDamage);
-        Debug.Log(attackList["punch"].PushType);
-        Debug.Log(attackList["punch"].SoundType);
+        attackList.Add("kick", new Attack()
+        {
+            AttackPoint = kickAttackPoint.position,
+            AttackRange = kickAttackRange,
+            AttackDamage = 10,
+            PushType = "flinch",
+            SoundType = "Kick"
+        });
+        attackList.Add("slash", new Attack()
+        {
+            AttackPoint = slashAttackPoint.position,
+            AttackRange = slashAttackRange,
+            AttackDamage = 15,
+            PushType = "flinch",
+            SoundType = "Slash"
+        });
+        attackList.Add("heavy", new Attack()
+        {
+            AttackPoint = heavyAttackPoint.position,
+            AttackRange = heavyAttackRange,
+            AttackDamage = 20,
+            PushType = "push",
+            SoundType = "HeavySlash"
+        });
     }
 
     /*
@@ -270,7 +288,14 @@ public class MayCombat : PlayerCombat
         int attDmg = attackList[type].AttackDamage;
         string pushType = attackList[type].PushType;
         string soundType = attackList[type].SoundType;
-
+        
+        Debug.Log(attPoint);
+        Debug.Log(attRange);
+        Debug.Log(attDmg);
+        Debug.Log(pushType);
+        Debug.Log(soundType);
+        
+        Debug.Log(enemyLayers.value);
         // v change this v
         Collider2D[] enemies = Physics2D.OverlapBoxAll(attPoint, attRange, 0, enemyLayers);
 
@@ -312,7 +337,7 @@ public class MayCombat : PlayerCombat
             }
         }
     }
-
+    /*
     //put these methods in attack anim as events
     void punch()
     {
@@ -507,10 +532,11 @@ public class MayCombat : PlayerCombat
             GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
             Destroy(s, .5f);
         }
-    }
+    }*/
 
     void CPunch()
     {
+        Debug.Log(enemyLayers.value);
         //get enemies in range of attack
         Collider2D[] enemies = Physics2D.OverlapBoxAll(cPunchAttackPoint.position, cPunchAttackRange, 0, enemyLayers);
 
