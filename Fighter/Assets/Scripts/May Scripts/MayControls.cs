@@ -193,6 +193,7 @@ public class MayControls : PlayerControls
                     }
                 }
             }
+            Debug.Log(canCrouch);
             if (canCrouch && Player1)
             {
                 if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && combat.attacking == false)
@@ -355,7 +356,7 @@ public class MayControls : PlayerControls
     void StopMovement()
     {
         canMove = false;
-        canCrouch = false;
+        //canCrouch = false; why was this here still??
         rb2D.isKinematic = true;
         rb2D.velocity = Vector2.zero;
         moveHorizontal = 0f;
@@ -374,7 +375,7 @@ public class MayControls : PlayerControls
         }
         */
         canMove = true;
-        canCrouch = true;
+        //canCrouch = true;
         rb2D.isKinematic = false;
     }
 

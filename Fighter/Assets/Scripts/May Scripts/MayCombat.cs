@@ -7,11 +7,7 @@ public class MayCombat : PlayerCombat
 {
     MayControls p1Controls;
     bool Player1;
-    /*
-    Dictionary<string, Transform> attackPointList = new Dictionary<string, Transform>();
-    Dictionary<string, Vector2> attackRangeList = new Dictionary<string, Vector2>();
-    Dictionary<string, int> attackDmgList = new Dictionary<string, int>();
-    */
+
     Dictionary<string, Attack> attackList = new Dictionary<string, Attack>();
 
     // Start is called before the first frame update
@@ -30,34 +26,6 @@ public class MayCombat : PlayerCombat
 
         attacking = false;
         canAttack = false;
-        /*
-        attackPointList.Add("punch", punchAttackPoint);
-        attackPointList.Add("kick", kickAttackPoint);
-        attackPointList.Add("slash", slashAttackPoint);
-        attackPointList.Add("heavy", heavyAttackPoint);
-        attackPointList.Add("cPunch", cPunchAttackPoint);
-        attackPointList.Add("cKick", cKickAttackPoint);
-        attackPointList.Add("cSlash", cSlashAttackPoint);
-        attackPointList.Add("cHeavy", cHeavyAttackPoint);
-
-        attackRangeList.Add("punch", punchAttackRange);
-        attackRangeList.Add("kick", kickAttackRange);
-        attackRangeList.Add("slash", slashAttackRange);
-        attackRangeList.Add("heavy", heavyAttackRange);
-        attackRangeList.Add("cPunch", cPunchAttackRange);
-        attackRangeList.Add("cKick", cKickAttackRange);
-        attackRangeList.Add("cSlash", cSlashAttackRange);
-        attackRangeList.Add("cHeavy", cHeavyAttackRange);
-
-        attackDmgList.Add("punch", 5);
-        attackDmgList.Add("kick", 10);
-        attackDmgList.Add("slash", 15);
-        attackDmgList.Add("heavy", 20);
-        attackDmgList.Add("cPunch", 5);
-        attackDmgList.Add("cKick", 10);
-        attackDmgList.Add("cSlash", 15);
-        attackDmgList.Add("cHeavy", 20);
-        */
 
         attackList.Add("punch", new Attack() //make this for every kind of attack
         {
@@ -106,6 +74,39 @@ public class MayCombat : PlayerCombat
     // Update is called once per frame
     void Update()
     {
+        attackList["punch"] = new Attack() //make this for every kind of attack
+        {
+            AttackPoint = punchAttackPoint.position,
+            AttackRange = punchAttackRange,
+            AttackDamage = 5,
+            PushType = "flinch",
+            SoundType = "Punch"
+        };
+        attackList["kick"] = new Attack()
+        {
+            AttackPoint = kickAttackPoint.position,
+            AttackRange = kickAttackRange,
+            AttackDamage = 10,
+            PushType = "flinch",
+            SoundType = "Kick"
+        };
+        attackList["slash"] = new Attack()
+        {
+            AttackPoint = slashAttackPoint.position,
+            AttackRange = slashAttackRange,
+            AttackDamage = 15,
+            PushType = "flinch",
+            SoundType = "Slash"
+        };
+        attackList["heavy"] = new Attack()
+        {
+            AttackPoint = heavyAttackPoint.position,
+            AttackRange = heavyAttackRange,
+            AttackDamage = 20,
+            PushType = "push",
+            SoundType = "HeavySlash"
+        };
+
         if (!GameManager.gameManager.isPaused)
         {
             //checks CD of p1Attacking

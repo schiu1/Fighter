@@ -366,7 +366,7 @@ public class BridgetCombat : PlayerCombat
                 }
                 else
                 {
-                    enemyControls.Pushback("flinch");
+                    enemyControls.Pushback("push");
                 }
                 AudioManager.audioManager.PlaySound("Punch");
 
