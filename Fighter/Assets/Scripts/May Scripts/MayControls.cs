@@ -193,7 +193,6 @@ public class MayControls : PlayerControls
                     }
                 }
             }
-            Debug.Log(canCrouch);
             if (canCrouch && Player1)
             {
                 if (Input.GetButton("P1_Crouch") && isJumping == false && isCrouching == false && combat.attacking == false)
