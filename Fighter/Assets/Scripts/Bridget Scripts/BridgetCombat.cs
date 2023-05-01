@@ -7,6 +7,8 @@ public class BridgetCombat : PlayerCombat
     BridgetControls controls;
     bool Player1;
 
+    Dictionary<string, Attack> attackList = new Dictionary<string, Attack>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +25,85 @@ public class BridgetCombat : PlayerCombat
 
         attacking = false;
         canAttack = false;
+
+        attackList.Add("punch", new Attack()
+        {
+            AttackPoint = punchAttackPoint.position,
+            AttackRange = punchAttackRange,
+            AttackDamage = 5,
+            PushType = "flinch",
+            SoundType = "Punch"
+        });
+        attackList.Add("kick", new Attack()
+        {
+            AttackPoint = kickAttackPoint.position,
+            AttackRange = kickAttackRange,
+            AttackDamage = 10,
+            PushType = "flinch",
+            SoundType = "Kick"
+        });
+        attackList.Add("slash", new Attack()
+        {
+            AttackPoint = slashAttackPoint.position,
+            AttackRange = slashAttackRange,
+            AttackDamage = 15,
+            PushType = "flinch",
+            SoundType = "Slash"
+        });
+        attackList.Add("heavy", new Attack()
+        {
+            AttackPoint = heavyAttackPoint.position,
+            AttackRange = heavyAttackRange,
+            AttackDamage = 20,
+            PushType = "push",
+            SoundType = "HeavySlash"
+        });
+        attackList.Add("cPunch", new Attack()
+        {
+            AttackPoint = cPunchAttackPoint.position,
+            AttackRange = cPunchAttackRange,
+            AttackDamage = 5,
+            PushType = "flinch",
+            SoundType = "Punch"
+        });
+        attackList.Add("cKick", new Attack()
+        {
+            AttackPoint = cKickAttackPoint.position,
+            AttackRange = cKickAttackRange,
+            AttackDamage = 10,
+            PushType = "flinch",
+            SoundType = "Kick"
+        });
+        attackList.Add("cSlash", new Attack()
+        {
+            AttackPoint = cSlashAttackPoint.position,
+            AttackRange = cSlashAttackRange,
+            AttackDamage = 15,
+            PushType = "flinch",
+            SoundType = "Slash"
+        });
+        attackList.Add("cHeavy", new Attack()
+        {
+            AttackPoint = cHeavyAttackPoint.position,
+            AttackRange = cHeavyAttackRange,
+            AttackDamage = 20,
+            PushType = "push",
+            SoundType = "HeavySlash"
+        });
     }
 
     // Update is called once per frame
     void Update()
     {
+        attackList["punch"].AttackPoint = punchAttackPoint.position;
+        attackList["kick"].AttackPoint = kickAttackPoint.position;
+        attackList["slash"].AttackPoint = slashAttackPoint.position;
+        attackList["heavy"].AttackPoint = heavyAttackPoint.position;
+        attackList["cPunch"].AttackPoint = cPunchAttackPoint.position;
+        attackList["cKick"].AttackPoint = cKickAttackPoint.position;
+        attackList["cSlash"].AttackPoint = cSlashAttackPoint.position;
+        attackList["cHeavy"].AttackPoint = cHeavyAttackPoint.position;
+
         if (!GameManager.gameManager.isPaused)
         {
             //check CD of attacking
@@ -191,58 +267,16 @@ public class BridgetCombat : PlayerCombat
         }
     }
 
-    void Punch()
+    void attack(string type)
     {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(punchAttackPoint.position, punchAttackRange, 0, enemyLayers);
-        
-        foreach(Collider2D enemy in enemies)
-        {
-            if(enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
+        Vector3 attPoint = attackList[type].AttackPoint;
+        Vector2 attRange = attackList[type].AttackRange;
+        int attDmg = attackList[type].AttackDamage;
+        string pushType = attackList[type].PushType;
+        string soundType = attackList[type].SoundType;
 
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(5);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("flinch");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0) 
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.1f));
-                }
-            }
-
-            //to spawn particle effect
-            Vector2 collisionPoint = enemy.ClosestPoint(punchAttackPoint.position);
-            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void Kick()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(kickAttackPoint.position, kickAttackRange, 0, enemyLayers);
+        // v change this v
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(attPoint, attRange, 0, enemyLayers);
 
         foreach (Collider2D enemy in enemies)
         {
@@ -254,8 +288,7 @@ public class BridgetCombat : PlayerCombat
             PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
             PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
 
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
+            if (enemyControls.isCrouching && !enemyControls.inCrouchAttack)
             {
                 enemyControls.BlockAttack();
                 AudioManager.audioManager.PlaySound("BlockAttack");
@@ -263,16 +296,16 @@ public class BridgetCombat : PlayerCombat
             else
             {
                 Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(10);
+                enemyBehavior.PlayerDmg(attDmg);
                 if (enemyControls.isJumping)
                 {
                     enemyControls.Pushback("knockdown");
                 }
                 else
                 {
-                    enemyControls.Pushback("flinch");
+                    enemyControls.Pushback(pushType);
                 }
-                AudioManager.audioManager.PlaySound("Kick");
+                AudioManager.audioManager.PlaySound(soundType);
 
                 if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
                     || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
@@ -281,298 +314,6 @@ public class BridgetCombat : PlayerCombat
                     StartCoroutine(Hitstop(0.1f));
                 }
             }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(kickAttackPoint.position);
-            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void Slash()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(slashAttackPoint.position, slashAttackRange, 0, enemyLayers);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
-
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(15);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("flinch");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.15f));
-                }
-            }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(slashAttackPoint.position);
-            GameObject s = Instantiate(punchEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 0)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void HeavySlash()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(heavyAttackPoint.position, heavyAttackRange, 0, enemyLayers);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
-
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(20);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("push");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.2f));
-                }
-            }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void CPunch()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(cPunchAttackPoint.position, cPunchAttackRange, 0, enemyLayers);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
-
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(5);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("flinch");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.2f));
-                }
-            }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void CKick()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(cKickAttackPoint.position, cKickAttackRange, 0, enemyLayers);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
-
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(10);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("flinch");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.2f));
-                }
-            }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void CSlash()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(cSlashAttackPoint.position, cSlashAttackRange, 0, enemyLayers);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
-
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(15);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("flinch");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.2f));
-                }
-            }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            Destroy(s, .5f);
-        }
-    }
-
-    void CHeavySlash()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(cHeavyAttackPoint.position, cHeavyAttackRange, 0, enemyLayers);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.GetType() == typeof(BoxCollider2D))
-            {
-                continue;
-            }
-
-            PlayerControls enemyControls = enemy.GetComponent<PlayerControls>();
-            PlayerBehavior enemyBehavior = enemy.GetComponent<PlayerBehavior>();
-
-            if (enemyControls.isCrouching
-                && !enemyControls.inCrouchAttack)
-            {
-                enemyControls.BlockAttack();
-                AudioManager.audioManager.PlaySound("BlockAttack");
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " hit: " + enemy.name);
-                enemyBehavior.PlayerDmg(20);
-                if (enemyControls.isJumping)
-                {
-                    enemyControls.Pushback("knockdown");
-                }
-                else
-                {
-                    enemyControls.Pushback("flinch");
-                }
-                AudioManager.audioManager.PlaySound("Punch");
-
-                if ((Player1 && GameManager.gameManager._p2Health.Health > 0)
-                    || (!Player1 && GameManager.gameManager._p1Health.Health > 0))
-                {
-                    Time.timeScale = 0;
-                    StartCoroutine(Hitstop(0.2f));
-                }
-            }
-
-            Vector2 collisionPoint = enemy.ClosestPoint(heavyAttackPoint.position);
-            GameObject s = Instantiate(slashEffect, collisionPoint, Quaternion.Euler(new Vector3(0, 0, 90f)));
-            Destroy(s, .5f);
         }
     }
 }
