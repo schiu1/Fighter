@@ -15,10 +15,12 @@ public class SelectButton : MonoBehaviour
      */
     FighterSelect p1Fighter;
     FighterSelect p2Fighter;
+    /*
     [SerializeField]
     GameObject[] FighterList1 = null;
     [SerializeField]
     GameObject[] FighterList2 = null;
+    */
     SceneLoaderScript crossfade;
 
     // Start is called before the first frame update

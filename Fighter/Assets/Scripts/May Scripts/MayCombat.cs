@@ -303,6 +303,7 @@ public class MayCombat : PlayerCombat
 
         foreach (Collider2D enemy in enemies)
         {
+            Debug.Log(enemy.name);
             if (enemy.GetType() == typeof(BoxCollider2D))
             {
                 continue;

@@ -22,6 +22,7 @@ public class MayControls : PlayerControls
             {
                 if(GameManager.gameManager.p2Name == o.name)
                 {
+                    Debug.Log("found");
                     enemyPlayer = o;
                     break;
                 }
@@ -35,6 +36,7 @@ public class MayControls : PlayerControls
             {
                 if(GameManager.gameManager.p1Name == o.name)
                 {
+                    Debug.Log("found");
                     enemyPlayer = o;
                     break;
                 }
@@ -402,6 +404,7 @@ public class MayControls : PlayerControls
             {
                 airDash = 0;
             }
+            Debug.Log("may: "+enemyPlayer.name);
             Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), false);
         }
     }
