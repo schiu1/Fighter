@@ -24,6 +24,7 @@ public class FighterAssign : MonoBehaviour
                 LayerMask layer = c.GetComponent<PlayerCombat>().GetLayerMask();
                 Debug.Log(LayerMask.LayerToName(layer));
                 c.layer = LayerMask.NameToLayer("Player1"); //set own layer
+                c.tag = "Player1";
                 break;
             }
             else if(fighter.name == chosenPlayer2 && gameObject.name == "Player2")
@@ -35,6 +36,7 @@ public class FighterAssign : MonoBehaviour
                 LayerMask layer = c.GetComponent<PlayerCombat>().GetLayerMask();
                 Debug.Log(LayerMask.LayerToName(layer));
                 c.layer = LayerMask.NameToLayer("Player2"); //set own layer
+                c.tag = "Player2";
                 break;
             }
         }

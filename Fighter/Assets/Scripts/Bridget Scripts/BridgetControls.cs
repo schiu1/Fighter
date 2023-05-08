@@ -44,7 +44,7 @@ public class BridgetControls : PlayerControls
         {
             foreach(GameObject o in GameObject.FindGameObjectsWithTag("Player2"))
             {
-                if(GameManager.gameManager.p2Name == o.name)
+                if((GameManager.gameManager.p2Name + "(Clone)") == o.name)
                 {
                     Debug.Log("found");
                     enemyPlayer = o;
@@ -54,10 +54,10 @@ public class BridgetControls : PlayerControls
         }
         else if (!Player1)
         {
-            Debug.Log(GameObject.FindGameObjectsWithTag("Player1").Length);
+            Debug.Log(GameObject.FindGameObjectsWithTag("Player1")[0]);
             foreach (GameObject o in GameObject.FindGameObjectsWithTag("Player1"))
             {
-                if (GameManager.gameManager.p1Name == o.name)
+                if ((GameManager.gameManager.p1Name + "(Clone)") == o.name)
                 {
                     Debug.Log("found");
                     enemyPlayer = o;
