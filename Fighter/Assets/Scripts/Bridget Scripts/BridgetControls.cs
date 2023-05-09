@@ -46,7 +46,6 @@ public class BridgetControls : PlayerControls
             {
                 if((GameManager.gameManager.p2Name + "(Clone)") == o.name)
                 {
-                    Debug.Log("found");
                     enemyPlayer = o;
                     break;
                 }
@@ -54,12 +53,10 @@ public class BridgetControls : PlayerControls
         }
         else if (!Player1)
         {
-            Debug.Log(GameObject.FindGameObjectsWithTag("Player1")[0]);
             foreach (GameObject o in GameObject.FindGameObjectsWithTag("Player1"))
             {
                 if ((GameManager.gameManager.p1Name + "(Clone)") == o.name)
                 {
-                    Debug.Log("found");
                     enemyPlayer = o;
                     break;
                 }
@@ -377,7 +374,6 @@ public class BridgetControls : PlayerControls
             {
                 airDash = 0;
             }
-            Debug.Log("bridget: " + enemyPlayer.name);
             Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), false);
         }
     }

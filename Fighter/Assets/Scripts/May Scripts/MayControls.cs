@@ -18,14 +18,10 @@ public class MayControls : PlayerControls
         {
             Player1 = true;
             facingRight = true;
-            Debug.Log(GameObject.FindGameObjectsWithTag("Player2")[0]);
             foreach (GameObject o in GameObject.FindGameObjectsWithTag("Player2"))
             {
-                Debug.Log(o.name);
-                Debug.Log(GameManager.gameManager.p2Name + "(Clone)");
                 if((GameManager.gameManager.p2Name + "(Clone)") == o.name)
                 {
-                    Debug.Log("found");
                     enemyPlayer = o;
                     break;
                 }
@@ -39,7 +35,6 @@ public class MayControls : PlayerControls
             {
                 if((GameManager.gameManager.p1Name + "(Clone)") == o.name)
                 {
-                    Debug.Log("found");
                     enemyPlayer = o;
                     break;
                 }
@@ -407,7 +402,6 @@ public class MayControls : PlayerControls
             {
                 airDash = 0;
             }
-            Debug.Log("may: "+enemyPlayer.name);
             Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), enemyPlayer.GetComponent<CapsuleCollider2D>(), false);
         }
     }

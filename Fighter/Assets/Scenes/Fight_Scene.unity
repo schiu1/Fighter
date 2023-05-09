@@ -845,6 +845,9 @@ MonoBehaviour:
   timedOut: 0
   isPaused: 0
   getSceneLoader: 0
+  fighterList:
+  - {fileID: 4141270869253050183, guid: e17155ea1dadb164fa4672672d34e034, type: 3}
+  - {fileID: 3290569558417604359, guid: 37a50a602385512469efdebcf3d116c2, type: 3}
 --- !u!4 &235433715
 Transform:
   m_ObjectHideFlags: 0
@@ -1230,7 +1233,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.385172, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

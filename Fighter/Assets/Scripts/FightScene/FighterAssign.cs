@@ -17,26 +17,20 @@ public class FighterAssign : MonoBehaviour
 
             if (fighter.name == chosenPlayer1 && gameObject.name == "Player1")
             {
-                //fighter.SetActive(true);
-                var c = Instantiate(fighters[PlayerPrefs.GetInt("player1")], new Vector3(-3, 0, 0), Quaternion.identity, gameObject.transform);
-                c.GetComponent<SpriteRenderer>().flipX = true;
-                c.GetComponent<PlayerCombat>().SetLayerMask(LayerMask.NameToLayer("Player2")); //set enemylayers
-                LayerMask layer = c.GetComponent<PlayerCombat>().GetLayerMask();
-                Debug.Log(LayerMask.LayerToName(layer));
+                var c = Instantiate(fighters[PlayerPrefs.GetInt("player1")], new Vector3(-3, 0, 0), Quaternion.identity, gameObject.transform); //spawn fighter
+                c.GetComponent<SpriteRenderer>().flipX = true; //make them face enemy
+                c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player2")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player1"); //set own layer
-                c.tag = "Player1";
+                c.tag = "Player1"; //change Tag
                 break;
             }
             else if(fighter.name == chosenPlayer2 && gameObject.name == "Player2")
             {
-                //fighter.SetActive(true);
-                var c = Instantiate(fighters[PlayerPrefs.GetInt("player2")], new Vector3(3, 0, 0), Quaternion.identity, gameObject.transform);
-                c.GetComponent<SpriteRenderer>().flipX = false;
-                c.GetComponent<PlayerCombat>().SetLayerMask(LayerMask.NameToLayer("Player1")); //set enemylayers
-                LayerMask layer = c.GetComponent<PlayerCombat>().GetLayerMask();
-                Debug.Log(LayerMask.LayerToName(layer));
+                var c = Instantiate(fighters[PlayerPrefs.GetInt("player2")], new Vector3(3, 0, 0), Quaternion.identity, gameObject.transform); //spawn fighter
+                c.GetComponent<SpriteRenderer>().flipX = false; //make them face enemy
+                c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player1")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player2"); //set own layer
-                c.tag = "Player2";
+                c.tag = "Player2"; //change Tag
                 break;
             }
         }
