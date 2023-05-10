@@ -301,9 +301,14 @@ public class MayCombat : PlayerCombat
         // v change this v
         Collider2D[] enemies = Physics2D.OverlapBoxAll(attPoint, attRange, 0, enemyLayers);
 
+        Debug.Log(enemyLayers.value);
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Debug.Log(enemies[i].ToString());
+        }
+
         foreach (Collider2D enemy in enemies)
         {
-            Debug.Log(enemy.name);
             if (enemy.GetType() == typeof(BoxCollider2D))
             {
                 Debug.Log("its not what we want");
