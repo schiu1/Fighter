@@ -306,6 +306,7 @@ public class MayCombat : PlayerCombat
             Debug.Log(enemy.name);
             if (enemy.GetType() == typeof(BoxCollider2D))
             {
+                Debug.Log("its not what we want");
                 continue;
             }
 

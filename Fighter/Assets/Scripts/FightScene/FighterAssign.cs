@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class FighterAssign : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class FighterAssign : MonoBehaviour
         {
             var chosenPlayer1 = fighters[PlayerPrefs.GetInt("player1")].name;
             var chosenPlayer2 = fighters[PlayerPrefs.GetInt("player2")].name;
-
+            var targetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
+     
             if (fighter.name == chosenPlayer1 && gameObject.name == "Player1")
             {
                 var c = Instantiate(fighters[PlayerPrefs.GetInt("player1")], new Vector3(-3, 0, 0), Quaternion.identity, gameObject.transform); //spawn fighter
@@ -22,6 +24,19 @@ public class FighterAssign : MonoBehaviour
                 c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player2")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player1"); //set own layer
                 c.tag = "Player1"; //change Tag
+
+                Cinemachine.CinemachineTargetGroup.Target target; //assign to TargetGroup1 for vcam
+                target.target = c.transform;
+                target.weight = 1;
+                target.radius = 0;
+                for (int i = 0; i < targetGroup.m_Targets.Length; i++)
+                {
+                    if(targetGroup.m_Targets[i].target == null)
+                    {
+                        targetGroup.m_Targets.SetValue(target, i);
+                        break;
+                    }
+                }
                 break;
             }
             else if(fighter.name == chosenPlayer2 && gameObject.name == "Player2")
@@ -31,6 +46,19 @@ public class FighterAssign : MonoBehaviour
                 c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player1")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player2"); //set own layer
                 c.tag = "Player2"; //change Tag
+
+                Cinemachine.CinemachineTargetGroup.Target target; //assign to TargetGroup1 for vcam
+                target.target = c.transform;
+                target.weight = 1;
+                target.radius = 0;
+                for (int i = 0; i < targetGroup.m_Targets.Length; i++)
+                {
+                    if (targetGroup.m_Targets[i].target == null)
+                    {
+                        targetGroup.m_Targets.SetValue(target, i);
+                        break;
+                    }
+                }
                 break;
             }
         }
