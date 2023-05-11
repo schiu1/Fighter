@@ -95,6 +95,6 @@ public class PlayerCombat : MonoBehaviour
     }
     public void SetEnemyLayers(int i)
     {
-        enemyLayers = i;
+        enemyLayers = 1 << i;
     }
 }
