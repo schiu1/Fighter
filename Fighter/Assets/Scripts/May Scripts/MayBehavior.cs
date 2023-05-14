@@ -23,10 +23,12 @@ public class MayBehavior : PlayerBehavior
         if(gameObject.transform.parent.name == "Player1")
         {
             health = GameManager.gameManager._p1Health;
+            _healthbar = GameObject.Find("P1_HB_Fill").GetComponent<Healthbar>();
         }
         else
         {
             health = GameManager.gameManager._p2Health;
+            _healthbar = GameObject.Find("P2_HB_Fill").GetComponent<Healthbar>();
         }
         anim = gameObject.GetComponent<Animator>();
         controls = gameObject.GetComponent<MayControls>();
