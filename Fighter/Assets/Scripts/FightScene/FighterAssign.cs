@@ -46,6 +46,7 @@ public class FighterAssign : MonoBehaviour
                 c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player1")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player2"); //set own layer
                 c.tag = "Player2"; //change Tag
+                c.GetComponent<HitboxAligner>().FlipHitboxes(); //flip hitboxes
 
                 Cinemachine.CinemachineTargetGroup.Target target; //assign to TargetGroup1 for vcam
                 target.target = c.transform;

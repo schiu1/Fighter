@@ -11,15 +11,13 @@ public class HitboxAligner : MonoBehaviour
     [SerializeField]
     float differential = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public void FlipHitboxes()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach( Transform child in gameObject.transform)
+        {
+            Debug.Log("old: " + child.position.x);
+            Debug.Log("new: " + -child.position.x + differential);
+            child.position = new Vector3(-child.position.x + differential, child.position.y, 0);
+        }
     }
 }
