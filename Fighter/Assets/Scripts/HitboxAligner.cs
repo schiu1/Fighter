@@ -15,9 +15,10 @@ public class HitboxAligner : MonoBehaviour
     {
         foreach( Transform child in gameObject.transform)
         {
-            Debug.Log("old: " + child.position.x);
-            Debug.Log("new: " + -child.position.x + differential);
-            child.position = new Vector3(-child.position.x + differential, child.position.y, 0);
+            if(child.tag == "Hitbox")
+            {
+                child.localPosition = new Vector3(-child.localPosition.x + differential, child.position.y, 0);
+            }
         }
     }
 }

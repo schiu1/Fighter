@@ -20,10 +20,10 @@ public class FighterAssign : MonoBehaviour
             if (fighter.name == chosenPlayer1 && gameObject.name == "Player1")
             {
                 var c = Instantiate(fighters[PlayerPrefs.GetInt("player1")], new Vector3(-3, 0, 0), Quaternion.identity, gameObject.transform); //spawn fighter
-                c.GetComponent<SpriteRenderer>().flipX = true; //make them face enemy
                 c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player2")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player1"); //set own layer
                 c.tag = "Player1"; //change Tag
+                c.GetComponent<SpriteRenderer>().flipX = true; //make them face enemy
 
                 Cinemachine.CinemachineTargetGroup.Target target; //assign to TargetGroup1 for vcam
                 target.target = c.transform;
@@ -42,10 +42,10 @@ public class FighterAssign : MonoBehaviour
             else if(fighter.name == chosenPlayer2 && gameObject.name == "Player2")
             {
                 var c = Instantiate(fighters[PlayerPrefs.GetInt("player2")], new Vector3(3, 0, 0), Quaternion.identity, gameObject.transform); //spawn fighter
-                c.GetComponent<SpriteRenderer>().flipX = false; //make them face enemy
                 c.GetComponent<PlayerCombat>().SetEnemyLayers(LayerMask.NameToLayer("Player1")); //set enemylayers
                 c.layer = LayerMask.NameToLayer("Player2"); //set own layer
                 c.tag = "Player2"; //change Tag
+                c.GetComponent<SpriteRenderer>().flipX = false; //flip sprite
                 c.GetComponent<HitboxAligner>().FlipHitboxes(); //flip hitboxes
 
                 Cinemachine.CinemachineTargetGroup.Target target; //assign to TargetGroup1 for vcam
