@@ -8,8 +8,6 @@ public class HitboxAligner : MonoBehaviour
     //for bridget it is .18
     //check if player1 or player2 
     //make it a method and call method in PlayerAssign
-    [SerializeField]
-    float differential = 0;
 
     public void FlipHitboxes()
     {
@@ -17,8 +15,14 @@ public class HitboxAligner : MonoBehaviour
         {
             if(child.tag == "Hitbox")
             {
-                child.localPosition = new Vector3(-child.localPosition.x + differential, child.position.y, 0);
+                child.localPosition = new Vector3(-child.localPosition.x, child.localPosition.y, 0);
             }
         }
+        
+        var hurtbox = gameObject.GetComponent<CapsuleCollider2D>();
+        var groundCollider = gameObject.GetComponent<BoxCollider2D>();
+        hurtbox.offset = new Vector2(-hurtbox.offset.x, hurtbox.offset.y);
+        groundCollider.offset = new Vector3(-groundCollider.offset.x, groundCollider.offset.y);
+        
     }
 }
