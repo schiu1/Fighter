@@ -15,10 +15,12 @@ public class SelectButton : MonoBehaviour
      */
     FighterSelect p1Fighter;
     FighterSelect p2Fighter;
+    /*
     [SerializeField]
     GameObject[] FighterList1 = null;
     [SerializeField]
     GameObject[] FighterList2 = null;
+    */
     SceneLoaderScript crossfade;
 
     // Start is called before the first frame update
@@ -34,8 +36,10 @@ public class SelectButton : MonoBehaviour
         int p1Index = p1Fighter.currentFighter;
         int p2Index = p2Fighter.currentFighter;
         //SetInt of index here
-        PlayerPrefs.SetString("player1", FighterList1[p1Index].gameObject.name);
-        PlayerPrefs.SetString("player2", FighterList2[p2Index].gameObject.name);
+        //PlayerPrefs.SetString("player1", FighterList1[p1Index].gameObject.name);
+        //PlayerPrefs.SetString("player2", FighterList2[p2Index].gameObject.name);
+        PlayerPrefs.SetInt("player1", p1Index);
+        PlayerPrefs.SetInt("player2", p2Index);
         crossfade.LoadLevel("Fight_Scene");
     }
 }

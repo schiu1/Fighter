@@ -18,9 +18,9 @@ public class MayControls : PlayerControls
         {
             Player1 = true;
             facingRight = true;
-            foreach(GameObject o in GameObject.FindGameObjectsWithTag("Player2"))
+            foreach (GameObject o in GameObject.FindGameObjectsWithTag("Player2"))
             {
-                if(GameManager.gameManager.p2Name == o.name)
+                if((GameManager.gameManager.p2Name + "(Clone)") == o.name)
                 {
                     enemyPlayer = o;
                     break;
@@ -33,7 +33,7 @@ public class MayControls : PlayerControls
             facingRight = false;
             foreach(GameObject o in GameObject.FindGameObjectsWithTag("Player1"))
             {
-                if(GameManager.gameManager.p1Name == o.name)
+                if((GameManager.gameManager.p1Name + "(Clone)") == o.name)
                 {
                     enemyPlayer = o;
                     break;

@@ -15,11 +15,13 @@ public class Pirate : MonoBehaviour
         //call Physics2D.IgnoreCollision on their capsulecollider    
         if (GameManager.gameManager._p1Health.Health > GameManager.gameManager._p2Health.Health)
         {
-            ignoredPlayer = GameObject.Find(GameManager.gameManager.p2Name);
+            ignoredPlayer = GameObject.Find(GameManager.gameManager.p2Name + "(Clone)");
+            Debug.Log(ignoredPlayer.name);
         }
         else if (GameManager.gameManager._p1Health.Health < GameManager.gameManager._p2Health.Health)
         {
-            ignoredPlayer = GameObject.Find(GameManager.gameManager.p1Name);
+            ignoredPlayer = GameObject.Find(GameManager.gameManager.p1Name + "(Clone)");
+            Debug.Log(ignoredPlayer.name);
         }
         Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), ignoredPlayer.GetComponent<CapsuleCollider2D>());
 
@@ -46,7 +48,7 @@ public class Pirate : MonoBehaviour
             Destroy(gameObject);
             foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player1"))
             {
-                if (obj.name == GameManager.gameManager.p1Name)
+                if (obj.name == GameManager.gameManager.p1Name + "(Clone)")
                 {
                     obj.GetComponent<MayControls>().WinAnimSpin();
                     break;
@@ -61,7 +63,7 @@ public class Pirate : MonoBehaviour
             Destroy(gameObject);
             foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player2"))
             {
-                if(obj.name == GameManager.gameManager.p2Name)
+                if(obj.name == GameManager.gameManager.p2Name + "(Clone)")
                 {
                     obj.GetComponent<MayControls>().WinAnimSpin();
                     break;

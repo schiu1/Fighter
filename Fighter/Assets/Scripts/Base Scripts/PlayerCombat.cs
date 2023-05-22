@@ -88,4 +88,13 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireCube(cHeavyAttackPoint.position, cHeavyAttackRange);
         Gizmos.DrawWireCube(cKickAttackPoint.position, cKickAttackRange);
     }
+
+    public LayerMask GetEnemyLayers()
+    {
+        return enemyLayers;
+    }
+    public void SetEnemyLayers(int i)
+    {
+        enemyLayers = 1 << i;
+    }
 }

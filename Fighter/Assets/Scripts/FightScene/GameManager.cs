@@ -11,34 +11,45 @@ public class GameManager : MonoBehaviour
     //player1 and player2
     public UnitHealth _p1Health = new UnitHealth(100, 100);
     public UnitHealth _p2Health = new UnitHealth(100, 100);
-
+    [HideInInspector]
     public string p1Name;
+    [HideInInspector]
     public string p2Name;
 
+    [HideInInspector]
     public int p1Score = 0;
+    [HideInInspector]
     public int p2Score = 0;
 
+    [HideInInspector]
     public int p1Wins = 0;
+    [HideInInspector]
     public int p2Wins = 0;
 
+    [HideInInspector]
     public int round = 1;
 
+    [HideInInspector]
     public bool timedOut = false;
 
+    [HideInInspector]
     public bool isPaused = false;
 
     SceneLoaderScript sceneLoader;
+    [HideInInspector]
     public bool getSceneLoader;
+
+    public GameObject[] fighterList;
 
     void Awake()
     {
         sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoaderScript>();
         getSceneLoader = false;
 
-        p1Name = PlayerPrefs.GetString("player1");
-        p2Name = PlayerPrefs.GetString("player2");
-        Debug.Log("player1 is: "+PlayerPrefs.GetString("player1")); //for testing
-        Debug.Log("player2 is: " + PlayerPrefs.GetString("player2"));
+        p1Name = fighterList[PlayerPrefs.GetInt("player1")].name;
+        p2Name = fighterList[PlayerPrefs.GetInt("player2")].name;
+        Debug.Log("player1 is: "+ p1Name); //for testing
+        Debug.Log("player2 is: " + p2Name);
 
         if (gameManager != null && gameManager != this)
         {

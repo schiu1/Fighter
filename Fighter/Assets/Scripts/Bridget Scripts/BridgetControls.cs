@@ -39,23 +39,12 @@ public class BridgetControls : PlayerControls
         animator = gameObject.GetComponent<Animator>();
         capCollider = gameObject.GetComponent<CapsuleCollider2D>();
         combat = gameObject.GetComponent<BridgetCombat>();
-        /*
-        if (Player1)
-        {
-            enemyPlayer = GameObject.Find(GameManager.gameManager.p2Name);
-            Debug.Log("p2: "+enemyPlayer.name);
-        }
-        else if (!Player1)
-        {
-            enemyPlayer = GameObject.Find(GameManager.gameManager.p1Name);
-            Debug.Log("p1: "+enemyPlayer.name);
-        }
-        */
+
         if (Player1)
         {
             foreach(GameObject o in GameObject.FindGameObjectsWithTag("Player2"))
             {
-                if(GameManager.gameManager.p2Name == o.name)
+                if((GameManager.gameManager.p2Name + "(Clone)") == o.name)
                 {
                     enemyPlayer = o;
                     break;
@@ -66,7 +55,7 @@ public class BridgetControls : PlayerControls
         {
             foreach (GameObject o in GameObject.FindGameObjectsWithTag("Player1"))
             {
-                if (GameManager.gameManager.p1Name == o.name)
+                if ((GameManager.gameManager.p1Name + "(Clone)") == o.name)
                 {
                     enemyPlayer = o;
                     break;

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7328521036184721148}
   - component: {fileID: 4213015645796397801}
   - component: {fileID: -5001030615649315947}
+  - component: {fileID: 8722619239342701236}
   m_Layer: 8
   m_Name: Bridget
   m_TagString: Player1
@@ -248,6 +249,19 @@ MonoBehaviour:
   _healthbar: {fileID: 0}
   hitEffect: {fileID: 8754987701745503227, guid: 42573a638904c76489355c073d980c61,
     type: 3}
+--- !u!114 &8722619239342701236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290569558417604359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec5ff5856b8fc44a72ea23e7115c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  differential: 0.18
 --- !u!1 &3503819310572184193
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +273,7 @@ GameObject:
   - component: {fileID: 2664127239562875215}
   m_Layer: 0
   m_Name: Bridget_Punch_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,7 +303,7 @@ GameObject:
   - component: {fileID: 1146314585602565009}
   m_Layer: 8
   m_Name: Bridget_Kick_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,7 +333,7 @@ GameObject:
   - component: {fileID: 3945831057304980390}
   m_Layer: 8
   m_Name: Bridget_CKick_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +363,7 @@ GameObject:
   - component: {fileID: 8286486240909866791}
   m_Layer: 8
   m_Name: Bridget_CPunch_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,7 +393,7 @@ GameObject:
   - component: {fileID: 8625707047815319731}
   m_Layer: 8
   m_Name: Bridget_CHeavy_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -409,7 +423,7 @@ GameObject:
   - component: {fileID: 8967433742256130700}
   m_Layer: 8
   m_Name: Bridget_Heavy_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,7 +453,7 @@ GameObject:
   - component: {fileID: 2716863149936914351}
   m_Layer: 8
   m_Name: Bridget_Slash_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -469,7 +483,7 @@ GameObject:
   - component: {fileID: 9180714397579514431}
   m_Layer: 8
   m_Name: Bridget_CSlash_HB
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

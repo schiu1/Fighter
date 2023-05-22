@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 156199905277004252}
   m_Layer: 0
   m_Name: CKick_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 90245683321092655}
   m_Layer: 0
   m_Name: CSlash_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 4141270869253050239}
   - component: {fileID: 4141270869253050238}
   - component: {fileID: 4141270869253050237}
+  - component: {fileID: 1470054911942738471}
   m_Layer: 8
   m_Name: May
   m_TagString: Player1
@@ -325,6 +326,18 @@ MonoBehaviour:
   _healthbar: {fileID: 0}
   hitEffect: {fileID: 8754987701745503227, guid: 42573a638904c76489355c073d980c61,
     type: 3}
+--- !u!114 &1470054911942738471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4141270869253050183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec5ff5856b8fc44a72ea23e7115c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4141270869869868493
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +349,7 @@ GameObject:
   - component: {fileID: 4141270869869868492}
   m_Layer: 0
   m_Name: Punch_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -366,7 +379,7 @@ GameObject:
   - component: {fileID: 4141270869947125317}
   m_Layer: 0
   m_Name: Heavy_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,7 +409,7 @@ GameObject:
   - component: {fileID: 4141270870034890693}
   m_Layer: 0
   m_Name: Kick_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -611,7 +624,7 @@ GameObject:
   - component: {fileID: 4141270871128235956}
   m_Layer: 0
   m_Name: Slash_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -641,7 +654,7 @@ GameObject:
   - component: {fileID: 7907214003752224602}
   m_Layer: 0
   m_Name: CHeavy_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -671,7 +684,7 @@ GameObject:
   - component: {fileID: 3565864447623730362}
   m_Layer: 8
   m_Name: CPunch_Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
