@@ -128,7 +128,6 @@ public class BridgetCombat : PlayerCombat
                     {
                         if (Input.GetButtonDown("P1_Punch"))
                         {
-                            Debug.Log("punch");
                             attacking = true;
                             anim.SetTrigger("Punch");
                             lastAttack = Time.time;
@@ -145,7 +144,6 @@ public class BridgetCombat : PlayerCombat
                         }
                         if (Input.GetButtonDown("P1_Kick"))
                         {
-                            Debug.Log("kick");
                             attacking = true;
                             anim.SetTrigger("Kick");
                             lastAttack = Time.time;
@@ -162,7 +160,6 @@ public class BridgetCombat : PlayerCombat
                         }
                         if (Input.GetButtonDown("P1_Slash"))
                         {
-                            Debug.Log("slash");
                             attacking = true;
                             anim.SetTrigger("Slash");
                             lastAttack = Time.time;
@@ -179,7 +176,6 @@ public class BridgetCombat : PlayerCombat
                         }
                         if (Input.GetButtonDown("P1_HeavySlash"))
                         {
-                            Debug.Log("heavy");
                             attacking = true;
                             anim.SetTrigger("Heavy");
                             lastAttack = Time.time;

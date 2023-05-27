@@ -272,7 +272,6 @@ public class MayControls : PlayerControls
         }
         else if (pushType == "push")
         {
-            Debug.Log(gameObject.transform.position.x+"-"+enemyPlayer.transform.position.x);
             canMove = false;
             canCrouch = false;
             moveHorizontal = 0;

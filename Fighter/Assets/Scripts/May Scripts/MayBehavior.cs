@@ -54,21 +54,6 @@ public class MayBehavior : PlayerBehavior
                 combat.canAttack = true;
             }
 
-            /*
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                PlayerDmg(10);
-            
-                Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                PlayerHeal(10);
-                Debug.Log("player1: " + GameManager.gameManager._p1Health.Health);
-            }
-            */
-
             if(health.Health <= 0)
             {
                 Die();
