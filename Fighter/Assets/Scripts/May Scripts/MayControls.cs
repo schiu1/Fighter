@@ -416,3 +416,13 @@ public class MayControls : PlayerControls
         }
     }
 }
+
+/* think of how to make players face each other
+ * call a function that is called in Update called FlipCheck
+ * have a bool saying whether lookAt is true or false
+ * if true, get position of both players,
+ * and if distance from player to enemy is -, make face left if not already facing left
+ * if distance is +, make face right if not already facing right
+ * movement should not flip anymore
+ */
+
